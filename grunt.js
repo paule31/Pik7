@@ -16,16 +16,25 @@ stylus: {
   }
 },
 
-coffeescript: {
-  src: {
-    files: [
-      'src/**/*.coffee'
-    ],
+
+coffee: {
+  compile: {
     options: {
       bare: true
-    }
+    },
+    files: (function(){
+      var files = {};
+      var path = 'src/**/*.coffee';
+      var sources = grunt.file.expandFiles(path);
+      sources.forEach(function(source){
+        var destination = source.substring(0, source.length - 6) + 'js';
+        files[destination] = source;
+      });
+      return files;
+    })()
   }
 },
+
 
 server: {
   port: 1337,
@@ -57,7 +66,7 @@ requirejs: {
 },
 
 cleanupjs: {
-  src: '<config:coffeescript.src.files>'
+  src: 'src/**/*.coffee'
 }
 
 });
@@ -65,7 +74,7 @@ cleanupjs: {
 grunt.loadTasks('src/build/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('default',      'stylus coffeescript server qunit requirejs cleanupjs');
+grunt.registerTask('default',      'stylus coffee server qunit requirejs cleanupjs');
 
 
 };
