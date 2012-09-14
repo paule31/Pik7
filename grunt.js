@@ -65,16 +65,21 @@ requirejs: {
   }
 },
 
-cleanupjs: {
-  src: 'src/**/*.coffee'
-}
+clean: (function(){
+  var path = 'src/**/*.coffee';
+  var files = grunt.file.expandFiles(path);
+  return files.map(function(source){
+    return source.substring(0, source.length - 6) + 'js';
+  });
+})()
 
 });
 
 grunt.loadTasks('src/build/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('default',      'stylus coffee server qunit requirejs cleanupjs');
+grunt.registerTask('default', 'stylus coffee server qunit requirejs clean');
+grunt.registerTask('dev',     'stylus coffee server qunit requirejs');
 
 
 };
