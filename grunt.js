@@ -1,5 +1,7 @@
 module.exports = function(grunt){
 
+"use strict";
+
 grunt.initConfig({
 
 stylus: {
@@ -41,6 +43,7 @@ server: {
   base: '.'
 },
 
+
 qunit: {
   all: (function(){
     var files = grunt.file.expandFiles('src/script/test/*.html');
@@ -49,6 +52,7 @@ qunit: {
     });
   })()
 },
+
 
 requirejs: {
   compile: {
@@ -60,26 +64,30 @@ requirejs: {
       },
       name: 'pik7',
       out: 'core/pik7.js',
-      optimize: 'none'
+      optimize: (function(){
+        if(grunt.cli.tasks[0] !== 'dev'){
+          return 'uglify';
+        }
+        else {
+          return 'none';
+        }
+      })()
     }
   }
 },
 
-clean: (function(){
-  var path = 'src/**/*.coffee';
-  var files = grunt.file.expandFiles(path);
-  return files.map(function(source){
-    return source.substring(0, source.length - 6) + 'js';
-  });
-})()
+
+clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/test/*.js']
+
 
 });
 
-grunt.loadTasks('src/build/tasks');
+
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('default', 'stylus coffee server qunit requirejs clean');
+
 grunt.registerTask('dev',     'stylus coffee server qunit requirejs');
+grunt.registerTask('default', 'stylus coffee server qunit requirejs clean');
 
 
 };
