@@ -1,0 +1,120 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8">
+<script>
+var require = {
+  baseUrl: '../../',
+  paths: {
+    'lib/emitter': 'lib/emitter',
+    'jquery': 'lib/vendor/jquery-1.7.2.min'
+  }
+}
+</script>
+<script src="../../../../core/require.js"></script>
+
+
+<p>File:
+<input type="text" id="file"> <input type="button" id="fileSend" value="Set">
+
+<p>Slide:
+<input type="number" id="slide">
+<input type="button" id="slidePrev" value="&laquo;">
+<input type="button" id="slideNext" value="&raquo;">
+
+<p>Hidden:
+<select id="hiddenSelect">
+	<option></option>
+	<option value="true">Hidden</option>
+	<option value="false">Visible</option>
+</select>
+<input type="button" id="hideToggle" value="Toggle">
+Status: <span id="hidden"></span>
+
+<p>
+<input type="button" id="Reset" value="Reset" style="font-weight:bold">
+
+<datalist>
+	<option value="foo/bar.html">
+	<option value="bar/foo.html">
+</datalist>
+
+
+<script>
+require(['../../../script/lib/controller.js'], function(Controller){
+
+  var defaults = {
+    file: 'foo/bar.html',
+    slide: 0,
+    hidden: false,
+    numSlides: 42
+  };
+
+  var onFile = function(file){
+    $('#file').val(file);
+    console.log('File:', file);
+  };
+  var onSlide = function(slide){
+    $('#slide').val(slide);
+    console.log('Slide:', slide);
+  };
+  var onHidden = function(state){
+    $('#hiddenSelect').val(state.toString());
+    $('#hidden').text(state.toString());
+    console.log('Hidden:', state);
+  };
+
+  var controller = new Controller(defaults);
+  controller.initialUpdate();
+  controllerInit();
+
+  function controllerInit(){
+    onFile(controller.getFile());
+    onSlide(controller.getSlide());
+    onHidden(controller.getHidden());
+    controller.on('file', onFile);
+    controller.on('slide', onSlide);
+    controller.on('hidden', onHidden);
+  };
+
+  $('#fileSend').click(function(){
+    var file = $('#file').val();
+    console.log(file);
+    controller.openFile(file);
+  });
+
+  $('#slide').change(function(){
+    slide = $('#slide').val();
+    controller.goTo(slide);
+  });
+
+  $('#slideNext').click(function(){
+    controller.goNext();
+  });
+
+  $('#slidePrev').click(function(){
+    controller.goPrev();
+  });
+
+  $('#hideToggle').click(function(){
+    controller.toggleHidden();
+  });
+
+  $('#slide').change(function(){
+    slide = $('#slide').val();
+    controller.goTo(slide);
+  });
+
+  $('#hiddenSelect').change(function(){
+    var state = /^true$/i.test($(this).val());
+    controller.setHidden(state);
+  });
+
+  $('#Reset').click(function(){
+    controller.offAll();
+    controller = new Controller(defaults);
+    controller.initialUpdate();
+    controllerInit();
+  });
+
+})
+</script>

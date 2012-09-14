@@ -1,0 +1,31 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8">
+<script>
+var require = {
+  baseUrl: '../../',
+  paths: {
+    'lib/emitter': 'lib/emitter',
+    'jquery': 'lib/vendor/jquery-1.7.2.min'
+  }
+}
+</script>
+<script src="../../../../core/require.js"></script>
+
+
+:)
+
+
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+
+
+<script>
+require(['../../../script/lib/presentation.js'], function(Presentation){
+	window.testPresentation = new Presentation();
+})
+</script>

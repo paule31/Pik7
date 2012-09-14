@@ -1,0 +1,49 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8">
+
+
+<script src="../lib/vendor/jquery-1.7.2.min.js"></script>
+<script src="../lib/vendor/qunit/qunit.js"></script>
+<link rel="stylesheet" href="../lib/vendor/qunit/qunit.css">
+<script>
+// PhantomJS' "webkit" appears to be Netscape 4 at heart
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function (oThis) {
+    if (typeof this !== "function") {
+      // closest thing possible to the ECMAScript 5 internal IsCallable function
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");
+    }
+
+    var aArgs = Array.prototype.slice.call(arguments, 1),
+        fToBind = this,
+        fNOP = function () {},
+        fBound = function () {
+          return fToBind.apply(this instanceof fNOP
+                                 ? this
+                                 : oThis,
+                               aArgs.concat(Array.prototype.slice.call(arguments)));
+        };
+
+    fNOP.prototype = this.prototype;
+    fBound.prototype = new fNOP();
+
+    return fBound;
+  };
+}
+
+var require = {
+  paths: {
+    'lib/emitter': '../lib/emitter'
+  }
+}
+</script>
+<script src="../../../core/require.js" data-main="hashTest.js"></script>
+
+
+<h1 id="qunit-header">Hash library</h1>
+<h2 id="qunit-banner"></h2>
+<div id="qunit-testrunner-toolbar"></div>
+<h2 id="qunit-userAgent"></h2>
+<ol id="qunit-tests"></ol>
+<div id="qunit-fixture"></div>
