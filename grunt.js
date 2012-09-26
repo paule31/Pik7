@@ -7,7 +7,7 @@ grunt.initConfig({
 stylus: {
   compile: {
     options: {
-      compress: true,
+      compress: (grunt.cli.tasks.indexOf('dev') !== -1) ? false : true,
       paths: [
         require('nib').path
       ]
@@ -17,7 +17,6 @@ stylus: {
     }
   }
 },
-
 
 coffee: {
   compile: {
@@ -37,12 +36,10 @@ coffee: {
   }
 },
 
-
 server: {
   port: 1337,
   base: '.'
 },
-
 
 qunit: {
   all: (function(){
@@ -53,6 +50,15 @@ qunit: {
   })()
 },
 
+docco: {
+  src: {
+    dest: 'src/script',
+    files: [
+      '*.coffee',
+      'lib/*.coffee'
+    ]
+  }
+},
 
 requirejs: {
   compile: {
@@ -64,30 +70,19 @@ requirejs: {
       },
       name: 'pik7',
       out: 'core/pik7.js',
-      optimize: (function(){
-        if(grunt.cli.tasks[0] !== 'dev'){
-          return 'uglify';
-        }
-        else {
-          return 'none';
-        }
-      })()
+      optimize: (grunt.cli.tasks.indexOf('dev') !== -1) ? 'none' : 'uglify'
     }
   }
 },
 
-
 clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/test/*.js']
-
 
 });
 
-
+grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-
-grunt.registerTask('dev',     'stylus coffee server qunit requirejs');
-grunt.registerTask('default', 'stylus coffee server qunit requirejs clean');
-
+grunt.registerTask('dev',     'stylus coffee server qunit docco requirejs');
+grunt.registerTask('default', 'stylus coffee server qunit docco requirejs clean');
 
 };

@@ -1,0 +1,48 @@
+<!DOCTYPE html>  <html> <head>   <title>emitter.coffee</title>   <meta http-equiv="content-type" content="text/html; charset=UTF-8">   <link rel="stylesheet" media="all" href="docco.css" /> </head> <body>   <div id="container">     <div id="background"></div>            <div id="jump_to">         Jump To &hellip;         <div id="jump_wrapper">           <div id="jump_page">                                           <a class="source" href="frame.html">                 frame.coffee               </a>                                           <a class="source" href="controller.html">                 controller.coffee               </a>                                           <a class="source" href="controls.html">                 controls.coffee               </a>                                           <a class="source" href="emitter.html">                 emitter.coffee               </a>                                           <a class="source" href="frame.html">                 frame.coffee               </a>                                           <a class="source" href="hash.html">                 hash.coffee               </a>                                           <a class="source" href="presentation.html">                 presentation.coffee               </a>                                           <a class="source" href="smartEmitter.html">                 smartEmitter.coffee               </a>                                           <a class="source" href="state.html">                 state.coffee               </a>                                           <a class="source" href="sync.html">                 sync.coffee               </a>                                           <a class="source" href="pik7.html">                 pik7.coffee               </a>                                           <a class="source" href="presentation.html">                 presentation.coffee               </a>                        </div>         </div>       </div>          <table cellpadding="0" cellspacing="0">       <thead>         <tr>           <th class="docs">             <h1>               emitter.coffee             </h1>           </th>           <th class="code">           </th>         </tr>       </thead>       <tbody>                               <tr id="section-1">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-1">&#182;</a>               </div>               <p>Very basic event emitter. Initialize with the topics that can be subscribed to, add
+events using <code>on('topic', cb)</code> and trigger events with <code>trigger('topic', arg1, arg2...)</code></p>             </td>             <td class="code">               <div class="highlight"><pre><span class="nx">define</span> <span class="o">-&gt;</span>
+  <span class="s1">&#39;use strict&#39;</span>
+
+  <span class="k">class</span> <span class="nx">Emitter</span>
+
+    <span class="nv">constructor: </span><span class="nf">(args...) -&gt;</span>
+      <span class="vi">@topics = </span><span class="p">{}</span>
+      <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span> <span class="k">for</span> <span class="nx">topic</span> <span class="k">in</span> <span class="nx">args</span>
+
+    <span class="kc">on</span><span class="o">:</span> <span class="nf">(topic, callback) -&gt;</span>
+      <span class="k">if</span> <span class="k">typeof</span> <span class="nx">callback</span> <span class="o">!=</span> <span class="s1">&#39;function&#39;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t add callback to #{topic}, #{callback} is not a function&quot;</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">topic</span> <span class="o">not</span> <span class="k">of</span> <span class="nx">@topics</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t add callback, #{topic} is not a topic&quot;</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">callback</span> <span class="k">in</span> <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t add callback, already subscribed to #{topic}&quot;</span>
+      <span class="k">else</span>
+        <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">].</span><span class="nx">push</span> <span class="nx">callback</span>
+
+    <span class="kc">off</span><span class="o">:</span> <span class="nf">(topic, callback) -&gt;</span>
+      <span class="k">if</span> <span class="k">typeof</span> <span class="nx">callback</span> <span class="o">!=</span> <span class="s1">&#39;function&#39;</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t remove callback from #{topic}, #{callback} is not a function&quot;</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">topic</span> <span class="o">not</span> <span class="k">of</span> <span class="nx">@topics</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t remove callback, no such topic: #{topic}&quot;</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">callback</span> <span class="o">not</span> <span class="k">in</span> <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t remove callback, not subscribed to #{topic}&quot;</span>
+      <span class="k">else</span>
+        <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">].</span><span class="nx">splice</span> <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">].</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">callback</span><span class="p">),</span> <span class="mi">1</span>
+
+    <span class="nv">offAll: </span><span class="nf">(topic) -&gt;</span>
+      <span class="nv">removeAllCallbacks = </span><span class="nf">(list, target) -&gt;</span>
+        <span class="k">if</span> <span class="nx">target</span> <span class="k">of</span> <span class="nx">list</span>
+          <span class="nx">list</span><span class="p">[</span><span class="nx">target</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">else</span>
+          <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t remove callbacks from non-existant topic #{target}&quot;</span>
+      <span class="k">if</span> <span class="nx">topic</span><span class="o">?</span>
+        <span class="nx">removeAllCallbacks</span><span class="p">(</span><span class="nx">@topics</span><span class="p">,</span> <span class="nx">topic</span><span class="p">)</span>
+      <span class="k">else</span>
+        <span class="nx">removeAllCallbacks</span><span class="p">(</span><span class="nx">@topics</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="k">for</span> <span class="nx">target</span> <span class="k">of</span> <span class="nx">@topics</span>
+
+    <span class="nv">trigger: </span><span class="nf">(topic, args...) -&gt;</span>
+      <span class="k">if</span> <span class="nx">topic</span> <span class="o">not</span> <span class="k">of</span> <span class="nx">@topics</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span> <span class="s2">&quot;Can&#39;t trigger event, no such topic: #{topic}&quot;</span>
+      <span class="k">else</span>
+        <span class="nx">callback</span><span class="p">.</span><span class="nx">apply</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">args</span> <span class="k">for</span> <span class="nx">callback</span> <span class="k">in</span> <span class="nx">@topics</span><span class="p">[</span><span class="nx">topic</span><span class="p">]</span>
+
+</pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 
