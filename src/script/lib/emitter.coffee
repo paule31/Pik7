@@ -30,17 +30,16 @@ define ->
       else
         @topics[topic].splice @topics[topic].indexOf(callback), 1
 
-    _removeAllCallbacks = (list, target) ->
-      if target of list
-        list[target] = []
-      else
-        throw new Error "Can't remove callbacks from non-existant topic #{target}"
-
     offAll: (topic) ->
+      removeAllCallbacks = (list, target) ->
+        if target of list
+          list[target] = []
+        else
+          throw new Error "Can't remove callbacks from non-existant topic #{target}"
       if topic?
-        _removeAllCallbacks(@topics, topic)
+        removeAllCallbacks(@topics, topic)
       else
-        _removeAllCallbacks(@topics, target) for target of @topics
+        removeAllCallbacks(@topics, target) for target of @topics
 
     trigger: (topic, args...) ->
       if topic not of @topics

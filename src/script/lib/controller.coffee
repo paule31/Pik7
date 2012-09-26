@@ -18,11 +18,11 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       # Create state
       initialState = @bootstrapState(defaults)
       initialState.numSlides = defaults.numSlides
-      @state = new State initialState
+      @state = new State(initialState)
       # Connect emitters
       @connectHash @hash
       @connectSync @sync
-      @connectControls @controls
+      @connectControls(@controls)
 
     #
     bootstrapState: (defaults) ->
@@ -39,7 +39,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       file = @state.get('file')
       slide = @state.get('slide')
       hidden = @state.get('hidden')
-      @hash.set file, slide, hidden
+      @hash.set(file, slide, hidden)
       @sync.setState { file, slide, hidden }
 
 
