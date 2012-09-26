@@ -1,4 +1,4 @@
-require ['../lib/smartEmitter', 'lib/emitter'], (SmartEmitter, Emitter) -> $(document).ready ->
+require ['lib/smartEmitter', 'lib/emitter', 'jquery'], (SmartEmitter, Emitter) -> $(document).ready ->
   'use strict'
 
   test 'Events triggered by non-subscribing (simple) objects fire', ->

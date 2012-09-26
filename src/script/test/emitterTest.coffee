@@ -1,4 +1,4 @@
-require ['../lib/emitter'], (Emitter) -> $(document).ready ->
+require ['lib/emitter', 'jquery'], (Emitter) -> $(document).ready ->
   'use strict'
 
   test 'Add callbacks', ->

@@ -1,4 +1,4 @@
-require ['../lib/sync'], (Sync) ->
+require ['lib/sync'], (Sync) ->
 
   sync = new Sync
   defaults = {

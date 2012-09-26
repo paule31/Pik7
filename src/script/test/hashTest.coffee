@@ -1,4 +1,4 @@
-require ['../lib/hash'], (Hash) ->
+require ['lib/hash'], (Hash) ->
   'use strict'
 
   hash = new Hash

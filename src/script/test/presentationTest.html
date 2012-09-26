@@ -3,29 +3,16 @@
 <meta charset="utf-8">
 
 
-<script src="../lib/vendor/jquery-1.7.2.min.js"></script>
-<script src="../lib/vendor/qunit/qunit.js"></script>
-<link rel="stylesheet" href="../lib/vendor/qunit/qunit.css">
+<div id="qunit"></div>
+
+
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+<div class="pik-slide"></div>
+
+
+<script src="testRunner/testRunner.js"></script>
 <script>
-var require = {
-  paths: {
-    'lib/emitter': '../lib/emitter',
-    'lib/controls': '../lib/controls',
-    'jquery': '../lib/vendor/jquery-1.7.2.min'
-  }
-}
+runTestsFor('presentationTest', '../');
 </script>
-<script src="../../../core/require.js" data-main="presentationTest.js"></script>
-
-
-<h1 id="qunit-header">Presentation class</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture"></div>
-
-<div class="pik-slide"></div>
-<div class="pik-slide"></div>
-<div class="pik-slide"></div>
-<div class="pik-slide"></div>

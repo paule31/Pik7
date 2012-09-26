@@ -65,8 +65,8 @@ requirejs: {
     options: {
       baseUrl: 'src/script',
       paths: {
-        'jquery': 'lib/vendor/jquery-1.7.2.min',
-        'prefixfree': 'lib/vendor/prefixfree.min'
+        jquery: 'lib/vendor/jquery-1.8.2.min',
+        prefixfree: 'lib/vendor/prefixfree.min'
       },
       name: 'pik7',
       out: 'core/pik7.js',

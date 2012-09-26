@@ -1,4 +1,4 @@
-require ['../lib/state'], (State) ->
+require ['lib/state'], (State) ->
 
   module 'Api'
 

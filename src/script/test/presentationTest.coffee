@@ -1,4 +1,4 @@
-require ['../lib/presentation'], (Presentation) -> $(window).ready ->
+require ['lib/presentation'], (Presentation) -> $(window).ready ->
   'use strict'
 
   test 'Default init procedure', ->

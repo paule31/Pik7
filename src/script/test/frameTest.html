@@ -3,26 +3,13 @@
 <meta charset="utf-8">
 
 
-<script src="../lib/vendor/jquery-1.7.2.min.js"></script>
-<script src="../lib/vendor/qunit/qunit.js"></script>
-<link rel="stylesheet" href="../lib/vendor/qunit/qunit.css">
-<script>
-var require = {
-  paths: {
-    'lib/emitter': '../lib/emitter',
-    'jquery': '../lib/vendor/jquery-1.7.2.min'
-  }
-}
-</script>
-<script src="../../../core/require.js" data-main="frameTest.js"></script>
-
-
-<h1 id="qunit-header">Frame control class</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture"></div>
+<div id="qunit"></div>
 
 
 <iframe id="Testframe"></iframe>
+
+
+<script src="testRunner/testRunner.js"></script>
+<script>
+runTestsFor('frameTest', '../');
+</script>

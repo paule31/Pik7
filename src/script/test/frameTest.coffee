@@ -1,4 +1,4 @@
-require ['../lib/frame'], (Frame) -> $(window).ready ->
+require ['lib/frame', 'jquery'], (Frame) -> $(window).ready ->
   'use strict'
 
   frameEl  = $('#Testframe')

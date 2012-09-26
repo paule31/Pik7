@@ -3,26 +3,14 @@
 <meta charset="utf-8">
 
 
-<script src="../lib/vendor/jquery-1.7.2.min.js"></script>
-<script src="../lib/vendor/qunit/qunit.js"></script>
-<link rel="stylesheet" href="../lib/vendor/qunit/qunit.css">
-<script>
-var require = {
-  paths: {
-    'lib/emitter': '../lib/emitter',
-    'jquery': '../lib/vendor/jquery-1.7.2.min'
-  }
-}
-</script>
-<script src="../../../core/require.js" data-main="controlsTest.js"></script>
+<div id="qunit"></div>
 
-
-<h1 id="qunit-header">Hash library</h1>
-<h2 id="qunit-banner"></h2>
-<div id="qunit-testrunner-toolbar"></div>
-<h2 id="qunit-userAgent"></h2>
-<ol id="qunit-tests"></ol>
-<div id="qunit-fixture"></div>
 
 <input type="text">
 <textarea></textarea>
+
+
+<script src="testRunner/testRunner.js"></script>
+<script>
+runTestsFor('controlsTest', '../');
+</script>
