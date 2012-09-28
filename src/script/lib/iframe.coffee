@@ -7,8 +7,8 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
 
     # Store frame and window references, call `super` and kick off the init procedure
     constructor: (frame) ->
-      if frames.length == 0 then throw new Error 'No frames defined'
       @frame  = $(frame)
+      if @frame.length == 0 then throw new Error "Frame error: frame #{frame} found"
       @window = @frame[0].contentWindow
       super 'load'
       @initFrame()

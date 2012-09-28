@@ -1,11 +1,11 @@
-require ['lib/frame', 'jquery'], (Frame) -> $(window).ready ->
+require ['lib/iframe', 'jquery'], (Iframe) -> $(window).ready ->
   'use strict'
 
   frameEl  = $('#Testframe')
   frameWin = frameEl[0].contentWindow
 
   test 'Init procedure', ->
-    frame = new Frame(frameEl)
+    frame = new Iframe(frameEl)
     stop()
     frame.on 'load', ->
       equal frame.getNumSlides(), frameWin.$('.pik-slide').length
@@ -24,4 +24,4 @@ require ['lib/frame', 'jquery'], (Frame) -> $(window).ready ->
       start()
 
 
-  frameEl.attr 'src', 'frameTest/frameTestFrame.html'
+  frameEl.attr 'src', 'iframeTest/iframeTestFrame.html'

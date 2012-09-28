@@ -64,7 +64,6 @@ require(['../../../script/lib/controller.js'], function(Controller){
   };
 
   var controller = new Controller(defaults);
-  controller.initialUpdate();
   controllerInit();
 
   function controllerInit(){
@@ -112,7 +111,6 @@ require(['../../../script/lib/controller.js'], function(Controller){
   $('#Reset').click(function(){
     controller.offAll();
     controller = new Controller(defaults);
-    controller.initialUpdate();
     controllerInit();
   });
 

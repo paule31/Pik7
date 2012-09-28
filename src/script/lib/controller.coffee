@@ -1,9 +1,11 @@
 # A controller instance connects many emitters and provides an api to control the
 # whole application. It's an umbrealla for:
-# 0. a `State` emitter
-# 1. a `Sync` instance
-# 2. a `Hash` instance
-# 2. any number of `Controls` instances
+
+# 1. a `State` emitter
+# 2. a `Sync` instance
+# 3. a `Hash` instance
+# 4. any number of `Controls` instances
+
 
 define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash, Controls) ->
 
@@ -23,8 +25,11 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @connectHash @hash
       @connectSync @sync
       @connectControls(@controls)
+      # Run the initial state update
+      @initialUpdate()
 
-    #
+    # Get the startup state from the url and/or the syncer. Fall back to `defauls` if
+    # necessary
     bootstrapState: (defaults) ->
       fromUrl = @hash.parse(window.location.hash) || {}
       fromSync = @sync.getState() || {}
@@ -34,8 +39,8 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         hidden: fromUrl.hidden || fromSync.hidden || defaults.hidden
       }
 
-    #
-    initialUpdate: (file, slide, hidden) ->
+    # After a state has been established, update Hash and Sync once
+    initialUpdate: () ->
       file = @state.get('file')
       slide = @state.get('slide')
       hidden = @state.get('hidden')
@@ -77,22 +82,21 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         # changed one value at a time. This would only work for changes that only
         # touch one of the state's properties - if more properties are changed after
         # one another, it gets nasty as soon more than one window is involved. What
-        # happens is that when we update the state { a:x, b:1 } to { a:y, b:1 } and
-        # then to { a:y, b:2 }, the storage event for { a:y, b:1 } is triggerd on
-        # other windows *after* we set { a:y, b:2 } on our window. So the other
-        # window triggers an event for { a:y, b:1 }, while we are already on
-        # { a:y, b:2 }, so we update and trigger an event, while the other window
-        # recieves { a:y, b:2 }... and we've got ourselfes a nice endless loop.
+        # happens is that when we update the state `{ a:x, b:1 }` to `{ a:y, b:1 }` and
+        # then to `{ a:y, b:2 }`, the storage event for `{ a:y, b:1 }` is triggered on
+        # other windows *after* we set `{ a:y, b:2 }` on our window. So the other
+        # window triggers an event for `{ a:y, b:1 }`, while we are already on
+        # `{ a:y, b:2 }`, so we update and trigger an event, while the other window
+        # recieves `{ a:y, b:2 }` ... and we've got ourselfes a nice endless loop.
         # This can be "fixed" by not actually setting the state to the value that
         # the Sync callback reports, but to the value that's currently in the sync's
-        # storage. This works because storage events always fire only after all
+        # storage. This works because storage events *always* fire only after all
         # changes to the storage are applied, even for multiple changes in sequence.
         # This allows us to fake a bulk update of the state, which fixes the
         # endless loop problem.
         @state.set @sync.getState(), emitter
       # Listen on the state emitter
-      onstatechange = (key, value) =>
-        emitter.set key, value
+      onstatechange = (key, value) => emitter.set key, value
       @state.on 'file', emitter, (value) -> onstatechange 'file', value
       @state.on 'slide', emitter, (value) -> onstatechange 'slide', value
       @state.on 'hidden', emitter, (value) -> onstatechange 'hidden', value
@@ -109,7 +113,6 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
 
     # API
     # ---
-    #
 
     # Expose the state manager's event hooks, but hide the "smart" parts
     # of the SmartEmitter's functionality
