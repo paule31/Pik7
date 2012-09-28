@@ -1,13 +1,17 @@
 require ['lib/state'], (State) ->
 
-  module 'Api'
-
   defaults = {
     file: 'foo/bar.htm'
     slide: 23
     hidden: no
     numSlides: 42
   }
+
+  test 'Throw when attempting to init with incomplete defaults', ->
+    raises -> new State { file: 'asdf', slide: 42, hidden: yes }
+
+  test 'Throw when attempting to init with phoney default values', ->
+    raises -> new State { file: 'asdf', slide: 42, hidden: undefined, numSlides: 1337 }
 
   test 'Init and getters', ->
     state = new State defaults

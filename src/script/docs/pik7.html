@@ -2,9 +2,10 @@
          <span class="s1">&#39;app&#39;</span><span class="p">,</span> <span class="s1">&#39;slides&#39;</span><span class="p">,</span>
          <span class="s1">&#39;jquery&#39;</span><span class="p">,</span> <span class="s1">&#39;prefixfree&#39;</span><span class="p">],</span> <span class="nf">(_almond, App, Slides) -&gt;</span></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <p>If the page looks like an app frame, it's probably just that</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">if</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#Pik-Frame&#39;</span><span class="p">).</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span>
     <span class="nv">app = </span><span class="k">new</span> <span class="nx">App</span> <span class="p">{</span>
-      <span class="nv">file: </span><span class="s1">&#39;presentations/Pik/index.html&#39;</span>
+      <span class="nv">file: </span><span class="s1">&#39;core/welcome.html&#39;</span>
       <span class="nv">slide: </span><span class="mi">0</span>
       <span class="nv">hidden: </span><span class="kc">no</span>
+      <span class="nv">numSlides: </span><span class="mi">1</span>
     <span class="p">}</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span> <span class="nx">app</span></pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>otherwise it's obviously a slide set</p>             </td>             <td class="code">               <div class="highlight"><pre>  <span class="k">else</span>
     <span class="nv">slides = </span><span class="k">new</span> <span class="nx">Slides</span><span class="p">()</span>

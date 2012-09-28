@@ -19,7 +19,6 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @controls = new Controls()
       # Create state
       initialState = @bootstrapState(defaults)
-      initialState.numSlides = defaults.numSlides
       @state = new State(initialState)
       # Connect emitters
       @connectHash @hash
@@ -37,6 +36,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         file: fromUrl.file || fromSync.file || defaults.file
         slide: fromUrl.slide || fromSync.slide || defaults.slide
         hidden: fromUrl.hidden || fromSync.hidden || defaults.hidden
+        numSlides: defaults.numSlides
       }
 
     # After a state has been established, update Hash and Sync once
@@ -97,9 +97,9 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         @state.set @sync.getState(), emitter
       # Listen on the state emitter
       onstatechange = (key, value) => emitter.set key, value
-      @state.on 'file', emitter, (value) -> onstatechange 'file', value
-      @state.on 'slide', emitter, (value) -> onstatechange 'slide', value
-      @state.on 'hidden', emitter, (value) -> onstatechange 'hidden', value
+      @state.on 'file', emitter, (value) -> onstatechange('file', value); console.log(value)
+      @state.on 'slide', emitter, (value) -> onstatechange('slide', value); console.log(value)
+      @state.on 'hidden', emitter, (value) -> onstatechange('hidden', value); console.log(value)
 
     # Connect the contol emitter's events directly to the api methods
     connectControls: (emitter) ->

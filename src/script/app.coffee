@@ -2,13 +2,21 @@ define ['lib/controller', 'lib/iframe'], (Controller, Iframe) ->
 
   return class App
 
-    constructor: (@defaults) ->
-      @iframe = new Iframe('iframe')
-      @controller = new Controller @defaults
-      @iframe.on 'load', => @connectEmitters()
-      @iframe.do('file', @defaults.file)
+    # PROBLEM: nach mehrmaligem Neuladen summieren sich die Controller-Instanzen auf
+    # PROBLEM: Controller bekommt nicht mit, wenn sich die URL des Iframes nach neuladen ändert
 
-    connectEmitters: ->
+    constructor: (defaults) ->
+      @iframe = new Iframe('iframe')
+      @iframe.on 'load', (url) =>
+        @connectEmitters {
+          file: url,
+          slide: 0,
+          hidden: defaults.hidden
+          numSlides: @iframe.window.Pik.numSlides
+        }
+
+    connectEmitters: (defaults) ->
+      @controller = new Controller(defaults)
       iframeControls = @iframe.window.Pik.controls
       # Let the controller listen to the iframe's controls
       iframeControls.on 'next', =>

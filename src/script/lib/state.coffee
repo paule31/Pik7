@@ -9,7 +9,7 @@ define ['../lib/smartEmitter'], (SmartEmitter) ->
     constructor: (defaults) ->
       super 'file', 'slide', 'hidden'
       required = ['file', 'slide', 'hidden', 'numSlides']
-      throw new Error "Missing #{val} value in state defaults" for idx, val of required when val not of defaults
+      throw new Error "Missing #{val} value in state defaults (actual value: #{defaults[val]})" for val in required when val not of defaults || !defaults[val]?
       @addState defaults
 
     # Setup state events, pre-fill the state with the supplied defaults
