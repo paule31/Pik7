@@ -13,7 +13,6 @@ element (<code>@nonTargets</code>)</p>             </td>             <td class="
 
     <span class="nv">stopEvent: </span><span class="nf">(evt) -&gt;</span>
       <span class="nx">evt</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">()</span>
-      <span class="nx">evt</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">()</span>
 
     <span class="nv">filterTargets: </span><span class="nf">(evt) -&gt;</span>
       <span class="k">if</span> <span class="nx">evt</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">nodeType</span> <span class="o">!=</span> <span class="mi">1</span> <span class="k">then</span> <span class="k">return</span> <span class="kc">true</span>
@@ -23,12 +22,12 @@ element (<code>@nonTargets</code>)</p>             </td>             <td class="
       <span class="nv">code = </span><span class="nx">evt</span><span class="p">.</span><span class="nx">keyCode</span>
       <span class="k">if</span><span class="p">(</span><span class="nx">code</span> <span class="o">==</span> <span class="mi">37</span> <span class="o">||</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">33</span><span class="p">)</span> <span class="c1"># Left arrow key (previous slide)</span>
         <span class="nx">@trigger</span> <span class="s1">&#39;prev&#39;</span><span class="p">,</span> <span class="nx">evt</span>
-        <span class="nx">@stopEvent</span> <span class="nx">evt</span>
+        <span class="nx">@stopEvent</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span>
       <span class="k">else</span> <span class="k">if</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">39</span> <span class="o">||</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">34</span> <span class="c1"># Right arrow key (next slide)</span>
         <span class="nx">@trigger</span> <span class="s1">&#39;next&#39;</span><span class="p">,</span> <span class="nx">evt</span>
-        <span class="nx">@stopEvent</span> <span class="nx">evt</span>
-      <span class="k">else</span> <span class="k">if</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">116</span> <span class="o">||</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">190</span> <span class="o">||</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">27</span> <span class="c1"># F5 / ESC (hides the presentation)</span>
+        <span class="nx">@stopEvent</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span>
+      <span class="k">else</span> <span class="k">if</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">116</span> <span class="o">||</span> <span class="nx">code</span> <span class="o">==</span> <span class="mi">27</span> <span class="c1"># F5 / ESC (hides the presentation)</span>
         <span class="nx">@trigger</span> <span class="s1">&#39;toggleHidden&#39;</span><span class="p">,</span> <span class="nx">evt</span>
-        <span class="nx">@stopEvent</span> <span class="nx">evt</span>
+        <span class="nx">@stopEvent</span><span class="p">(</span><span class="nx">evt</span><span class="p">)</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

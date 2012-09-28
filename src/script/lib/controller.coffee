@@ -12,7 +12,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
   return class Controller
 
     # Create state object using `defaults`, create and connect emitters
-    constructor: (defaults, initialTriggers) ->
+    constructor: (defaults) ->
       # Create emitters
       @hash = new Hash()
       @sync = new Sync()

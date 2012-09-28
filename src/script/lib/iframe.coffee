@@ -10,13 +10,13 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
       @frame  = $(frame)
       if @frame.length == 0 then throw new Error "Iframe error: frame #{frame} found"
       @window = @frame[0].contentWindow
-      super 'load'
+      super('load')
       @initFrame()
 
     # Dispatch load events in the frame to self
-    initFrame: () ->
+    initFrame: ->
       @frame.load =>
-        @trigger 'load', @window.location.href if @window.Pik?
+        @trigger('load', @window.location.href) if @window.Pik?
 
     # Trigger `action` with `arg` on the frames `Pik` object
     do: (action, arg) ->
@@ -24,8 +24,8 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
         @window.location.href = arg
       else if @window.Pik?
         if action == 'slide'
-          @window.Pik.goTo arg
+          @window.Pik.goTo(arg)
         if action == 'hidden'
-          @window.Pik.setHidden arg
+          @window.Pik.setHidden(arg)
 
     getNumSlides: -> return @window.Pik.numSlides if @window.Pik?

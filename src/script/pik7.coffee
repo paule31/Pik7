@@ -4,10 +4,14 @@ require ['lib/vendor/almond',
 
   # If the page looks like an app frame, it's probably just that
   if $('#Pik-Frame').length > 0
-    app = new App()
+    app = new App {
+      file: 'presentations/Pik/index.html'
+      slide: 0
+      hidden: no
+    }
     console.log app
 
 
   # otherwise it's obviously a slide set
   else
-    console.log 'Präsi!'
+    slides = new Slides()

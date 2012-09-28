@@ -13,12 +13,12 @@ require ['lib/controls'], (Controls) -> $(window).ready ->
   keys = {
     'next': [39, 34]
     'prev': [37, 33]
-    'toggleHidden': [116, 190, 27]
+    'toggleHidden': [116, 27]
   }
 
   test 'Navigation keys', ->
     controls = new MockControls
-    stop 2
+    stop(keys.toggleHidden.next + keys.toggleHidden.prev)
     controls.on 'next', (evt) ->
       ok evt.keyCode in keys.next
       start()
@@ -30,7 +30,7 @@ require ['lib/controls'], (Controls) -> $(window).ready ->
 
   test 'Hide keys', ->
     controls = new MockControls
-    stop 3
+    stop(keys.toggleHidden.length)
     controls.on 'toggleHidden', (evt) ->
       ok evt.keyCode in keys.toggleHidden
       start()

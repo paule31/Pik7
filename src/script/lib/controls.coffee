@@ -18,7 +18,6 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
 
     stopEvent: (evt) ->
       evt.preventDefault()
-      evt.stopPropagation()
 
     filterTargets: (evt) ->
       if evt.target.nodeType != 1 then return true
@@ -28,10 +27,10 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
       code = evt.keyCode
       if(code == 37 || code == 33) # Left arrow key (previous slide)
         @trigger 'prev', evt
-        @stopEvent evt
+        @stopEvent(evt)
       else if code == 39 || code == 34 # Right arrow key (next slide)
         @trigger 'next', evt
-        @stopEvent evt
-      else if code == 116 || code == 190 || code == 27 # F5 / ESC (hides the presentation)
+        @stopEvent(evt)
+      else if code == 116 || code == 27 # F5 / ESC (hides the presentation)
         @trigger 'toggleHidden', evt
-        @stopEvent evt
+        @stopEvent(evt)
