@@ -4,17 +4,14 @@
 define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
   'use strict'
 
-  # By default, the initCallback does nothing but set the number of slides (usually using
-  # the html class `.pik-slide`) found in the presentation
-  defaultInitCb = ->
-    @numSlides = $('.pik-slide').length
-
   return class Presentation extends Emitter
 
-    constructor: (initCb = defaultInitCb) ->
+    constructor: (initCb) ->
       super 'slide', 'hidden'
-      initCb.call this
-      @createApi()
+      $(window).ready =>
+        @numSlides = $('.pik-slide').length
+        @createApi()
+        initCb.call(this) if initCb?
 
     createApi: ->
       self = this

@@ -1,8 +1,11 @@
-require ['frame', 'presentation', 'jquery', 'prefixfree'], (Frame, Presentation) ->
+require ['lib/vendor/almond',
+         'app', 'presentation',
+         'jquery', 'prefixfree'], (_almond, App, Presentation) ->
 
-  # If the page looks like a frame, it's probably just that
+  # If the page looks like an app frame, it's probably just that
   if $('#Pik-Frame').length > 0
-    console.log 'Frame!'
+    app = new App()
+    console.log app
 
 
   # otherwise it's obviously a presentation

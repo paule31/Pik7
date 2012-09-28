@@ -3,12 +3,12 @@
 define ['lib/emitter', 'jquery'], (Emitter) ->
   'use strict'
 
-  return class Frame extends Emitter
+  return class Iframe extends Emitter
 
     # Store frame and window references, call `super` and kick off the init procedure
     constructor: (frame) ->
       @frame  = $(frame)
-      if @frame.length == 0 then throw new Error "Frame error: frame #{frame} found"
+      if @frame.length == 0 then throw new Error "Iframe error: frame #{frame} found"
       @window = @frame[0].contentWindow
       super 'load'
       @initFrame()
