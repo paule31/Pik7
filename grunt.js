@@ -82,7 +82,7 @@ clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/test/*.js']
 grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('dev',     'stylus coffee server qunit docco requirejs');
-grunt.registerTask('default', 'stylus coffee server qunit docco requirejs clean');
+grunt.registerTask('dev',     'stylus coffee docco server qunit requirejs');
+grunt.registerTask('default', 'stylus coffee docco server qunit requirejs clean');
 
 };

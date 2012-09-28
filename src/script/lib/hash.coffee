@@ -1,28 +1,32 @@
-# Parses URLs and creates hashes
-#
-# Format (visible): #!/path/to/file.html@42
-# Format (hidden):  #!/path/to/file.html@42!hidden
+# Parses URLs and creates hashes for presentation frame windows.
 
 define ['lib/emitter'], (Emitter) ->
   'use strict'
 
   return class Hash extends Emitter
 
+    # The default format format looks like `#!/path/to/file.html@42!hidden` where...
     #
+    # 1. `/path/to/file.html` is the current presentation
+    # 2. `@42` indicates the current slide
+    # 3. the string `!hidden`, if present in the hash, indicates the hidden state
     constructor: (@format = /(?:#!\/?(.*)@([0-9]*)(!hidden)?)/) ->
       super 'change'
       @addEvents()
 
-    #
+    # Adds the `@hashchange` function to the window's `hashchange` event. Called
+    # automatically when constructing a new instance
+    addEvents: ->
+      window.addEventListener 'hashchange', @onchange, false
+
+    # The callback that's added to the window's `hashchange` event when a new Hash
+    # instance created.
     onchange: (evt) =>
       data = @parse evt.newURL
       @trigger 'change', data, evt if data?
 
-    #
-    addEvents: ->
-      window.addEventListener 'hashchange', @onchange, false
-
-    #
+    # Parses a url, returns an object with the state information contained in the url.
+    # Format: `{ String file, Number slide, Boolean hidden }`
     parse: (url) ->
       parsed = @format.exec url
       if parsed
@@ -31,7 +35,8 @@ define ['lib/emitter'], (Emitter) ->
         hidden = if parsed[3] == '!hidden' then true else false
         return { file, slide, hidden }
 
-    #
+    # Creates a new hash (without pound sign) from state information (`file`, `slide`
+    # `hidden`)
     createHash: (file, slide, hidden) ->
       file   = String file
       slide  = Number(slide).toString()
@@ -44,17 +49,18 @@ define ['lib/emitter'], (Emitter) ->
       if hidden == true then hash += '!hidden'
       return hash
 
-    # Do a full hash replacement
-    set: (args...) ->
-      window.location.hash = @createHash args...
+    # Do a full hash replacement from the supplied state information
+    set: (file, slide, hidden) ->
+      window.location.hash = @createHash file, slide, hidden
 
-    # Do a partial hash update
+    # Do a partial hash update from the supplied state information
     update: (key, value, defaults) ->
       parsed = @parse(window.location.hash) || defaults
       parsed[key] = value
       @set parsed.file, parsed.slide, parsed.hidden
 
-    #
+    # Overload the basic emitter's `offAll()` the remove the `hashchange` event from
+    # window along with all the emitter's events.
     offAll: () ->
       window.removeEventListener 'hashchange', @onchange, false
       window.location.hash = ''

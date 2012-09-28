@@ -1,12 +1,12 @@
-#
-#
-#
+# Catch key events (left/right arrow, F5, ESC) and trigger the accoding events (`next`,
+# `prev`, `toggleHidden`)
 
 define ['lib/emitter', 'jquery'], (Emitter) ->
 
   return class Controls extends Emitter
 
-    #
+    # Events are not caught when thier original target is an input or textarea
+    # element (`@nonTargets`)
     constructor: ->
       super 'next', 'prev', 'toggleHidden'
       @nonTargets = ['input', 'textarea']
@@ -20,23 +20,18 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
       evt.preventDefault()
       evt.stopPropagation()
 
-    #
     filterTargets: (evt) ->
       if evt.target.nodeType != 1 then return true
       return evt.target.nodeName.toLowerCase() not in @nonTargets
 
-    #
     dispatch: (evt) ->
       code = evt.keyCode
-      # Left arrow key (previous slide)
-      if(code == 37 || code == 33)
+      if(code == 37 || code == 33) # Left arrow key (previous slide)
         @trigger 'prev', evt
         @stopEvent evt
-      # Right arrow key (next slide)
-      else if code == 39 || code == 34
+      else if code == 39 || code == 34 # Right arrow key (next slide)
         @trigger 'next', evt
         @stopEvent evt
-      # F5 / ESC (hides the presentation)
-      else if code == 116 || code == 190 || code == 27
+      else if code == 116 || code == 190 || code == 27 # F5 / ESC (hides the presentation)
         @trigger 'toggleHidden', evt
         @stopEvent evt

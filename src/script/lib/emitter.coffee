@@ -1,5 +1,10 @@
-# Very basic event emitter. Initialize with the topics that can be subscribed to, add
-# events using `on('topic', cb)` and trigger events with `trigger('topic', arg1, arg2...)`
+# Very basic event emitter.
+#
+# 1. initialize with the topics that can be subscribed to (eg. `new Emitter('foo', 'bar')`)
+# 2. add events using `on('topic', cb)`
+# 3. trigger events with `trigger('topic', arg1, arg2...)` (callbacks are called with `null` for `this`)
+#
+# Events can be removed via `off('topic', cb)` or offAll('topic').
 
 define ->
   'use strict'
