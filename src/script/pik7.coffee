@@ -1,6 +1,6 @@
 require ['lib/vendor/almond',
-         'app', 'presentation',
-         'jquery', 'prefixfree'], (_almond, App, Presentation) ->
+         'app', 'slides',
+         'jquery', 'prefixfree'], (_almond, App, Slides) ->
 
   # If the page looks like an app frame, it's probably just that
   if $('#Pik-Frame').length > 0
@@ -8,6 +8,6 @@ require ['lib/vendor/almond',
     console.log app
 
 
-  # otherwise it's obviously a presentation
+  # otherwise it's obviously a slide set
   else
     console.log 'Präsi!'
