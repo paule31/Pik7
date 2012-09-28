@@ -12,5 +12,5 @@ var runTestsFor = function(file, baseUrl){
   require.paths[file] = 'test/' + file;
   document.write('<script src="../lib/vendor/qunit/qunit-' + qunitVersion + '.js"></script>');
   document.write('<link rel="stylesheet" href="../lib/vendor/qunit/qunit-' + qunitVersion + '.css">');
-  document.write('<script src="../../../core/require.js" data-main="' + file + '"></script>');
+  document.write('<script src="../lib/vendor/require.js" data-main="' + file + '"></script>');
 };
