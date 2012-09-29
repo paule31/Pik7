@@ -2,33 +2,38 @@ define ['lib/controller', 'lib/iframe'], (Controller, Iframe) ->
 
   return class App
 
-    # PROBLEM: nach mehrmaligem Neuladen summieren sich die Controller-Instanzen auf
-    # PROBLEM: Controller bekommt nicht mit, wenn sich die URL des Iframes nach neuladen ändert
+    initialized = no
 
     constructor: (defaults) ->
       @iframe = new Iframe('iframe')
-      @iframe.on 'load', (url) =>
-        @connectEmitters {
-          file: url,
-          slide: 0,
-          hidden: defaults.hidden
-          numSlides: @iframe.window.Pik.numSlides
-        }
+      @controller = new Controller defaults
+      @connectIframe()
+      @init()
 
-    connectEmitters: (defaults) ->
-      @controller = new Controller(defaults)
-      iframeControls = @iframe.window.Pik.controls
-      # Let the controller listen to the iframe's controls
-      iframeControls.on 'next', =>
-        @controller.goNext()
-      iframeControls.on 'prev', =>
-        @controller.goPrev()
-      iframeControls.on 'toggleHidden', =>
-        @controller.toggleHidden()
-      # Let the iframe listen to the controller
-      @controller.on 'file', (file) =>
-        @iframe.do('file', file)
-      @controller.on 'slide', (slide) =>
-        @iframe.do('slide', slide)
-      @controller.on 'hidden', (state) =>
-        @iframe.do('hidden', state)
+    # Delegate control events from the iframe to the controller
+    # Delegate slide and hidden status events from the controller to the presentation
+    connectIframe: ->
+      @iframe.on 'load', =>
+        if initialized then @reset()
+        @iframe.window.Pik.controls.on 'next', @controller.goNext.bind(@controller)
+        @iframe.window.Pik.controls.on 'prev', @controller.goPrev.bind(@controller)
+        @iframe.window.Pik.controls.on 'toggleHidden', @controller.toggleHidden.bind(@controller)
+        @controller.on 'file', @onFile.bind(@)
+        @controller.on 'slide', @onSlide.bind(@)
+        @controller.on 'hidden', @onHidden.bind(@)
+        initialized = yes if not initialized
+
+    init: ->
+      @onFile @controller.getFile()
+      @onSlide @controller.getSlide()
+      @onHidden @controller.getHidden()
+
+    onFile: (file) ->
+      @iframe.do 'file', file
+    onSlide: (slide) ->
+      @iframe.do 'slide', slide
+    onHidden: (state) ->
+      @iframe.do 'hidden', state
+
+    reset: ->
+      console.log('Reset!')
