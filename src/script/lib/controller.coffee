@@ -97,9 +97,9 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         @state.set @sync.getState(), emitter
       # Listen on the state emitter
       onstatechange = (key, value) => emitter.set key, value
-      @state.on 'file', emitter, (value) -> onstatechange('file', value); console.log(value)
-      @state.on 'slide', emitter, (value) -> onstatechange('slide', value); console.log(value)
-      @state.on 'hidden', emitter, (value) -> onstatechange('hidden', value); console.log(value)
+      @state.on 'file', emitter, (value) -> onstatechange('file', value)
+      @state.on 'slide', emitter, (value) -> onstatechange('slide', value)
+      @state.on 'hidden', emitter, (value) -> onstatechange('hidden', value)
 
     # Connect the contol emitter's events directly to the api methods
     connectControls: (emitter) ->

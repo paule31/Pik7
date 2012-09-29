@@ -10,7 +10,7 @@ var require = {
   }
 }
 </script>
-<script src="../../../../core/require.js"></script>
+<script src="../../lib/vendor/require.js"></script>
 
 
 <p>File:
@@ -77,7 +77,6 @@ require(['../../../script/lib/controller.js'], function(Controller){
 
   $('#fileSend').click(function(){
     var file = $('#file').val();
-    console.log(file);
     controller.openFile(file);
   });
 

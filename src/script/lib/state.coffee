@@ -26,17 +26,24 @@ define ['../lib/smartEmitter'], (SmartEmitter) ->
           for key, value of data
             if value != @current[key]
               # Special treatment for the slide number to keep it from going below 0
-              # or above `numSlides` (it's still possible to call `@state.set` with such
-              # slide numbers, but the new value won't be used)
+              # or above `numSlides`. It's still possible to call `@state.set` with such
+              # slide numbers, but the new value won't be used and the 'slide' event
+              # won't be triggered
               if key == 'slide'
                 if value < 0 then value = 0
                 if value >= @current.numSlides then value = @current.numSlides - 1
-              @current[key] = value
-              that.trigger key, caller, value
+                if value != @current[key]
+                  @current[key] = value
+                  that.trigger key, caller, value
+              # There's not additional limit to things other than slides, so the new value
+              # can always be assigned and the event can always be triggered
+              else
+                @current[key] = value
+                that.trigger key, caller, value
       }
 
     set: (data, caller) ->
-      if 'numSlides' of data then throw new Error "Can't modify numSlides after init"
+      if 'numSlides' of data then throw new Error "Can't modify 'numSlides' after init"
       @state.update data, caller
 
     get: (key) -> return @state.current[key]
