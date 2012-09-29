@@ -1,63 +1,85 @@
+# Default app view
+#
+# 1. When the app instance is first created, an `Iframe` instance is created and connected
+# 2. `connectIframe()` triggers `@init()` on first load
+# 3. `connectIframe()` adds an onload event to the iframe, which calls `@connectController()` and `@iframeOnload()`
+# 4. `init()` creates a controller from the default state and redirects the iframe to the controller's selected file
+# 5. as soon as the iframe loads, `@connectController()` and `@iframeOnload()` fire
+# 6. `@connectController()` does many things but mainly connects controller events to actions in the app
+
 define ['lib/controller', 'lib/iframe', 'lib/hash'], (Controller, Iframe, Hash) ->
 
-  # Asdfd
+  # TODO: Nach manuellem browsen folgt Fenster 2 nicht Fenster 1!
 
   return class App
 
     # Different things need to happen when the iframe loads depending on if this is the
-    # first load or a late change of slides, so `initialized` keeps track of this.
-    initialized = no
-
+    # first load or a late change of slides, so `@initialized` keeps track of this.
     constructor: (defaults) ->
+      @initialized = no
       @iframe = new Iframe('iframe')
-      @controller = new Controller(defaults)
-      @connectController()
-      @connectIframe()
-      @init()
+      @connectIframe(defaults)
 
-    # Listen for controller events
+
+    # Connects the iframe to the app. Triggers `@init()` on first load and sets the
+    # onload handler for the iframe
+    connectIframe: (defaults) ->
+      if not @initialized then @init(defaults)
+      @iframe.on 'load', =>
+        @connectController()
+        @iframeOnload()
+
+
+    # Hooked into the iframe's `load` event
+    iframeOnload: ->
+      @iframe.window.Pik.controls.on('next', @controller.goNext.bind(@controller))
+      @iframe.window.Pik.controls.on('prev', @controller.goPrev.bind(@controller))
+      @iframe.window.Pik.controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
+
+
+    # Things to do when the controller reports changes. Also needed for init on first load
+    # of the frame (see `@init`)
+    onFile: (file) -> @iframe.do('file', file) if file != @controller.getFile()
+    onSlide: (slide) -> @iframe.do('slide', slide) if slide != @controller.getSlide()
+    onHidden: (state) -> @iframe.do('hidden', state) if state != @controller.getHidden()
+
+
+    # On first load, create a temporary controller from the supplied defaults. The temporary
+    # controller figures out what the *real* initial state is (apart from the defaults there
+    # are also sync and hash as potential data sources) and triggers the first real load
+    # of the iframe
+    init: (defaults) ->
+      @initialized = yes
+      @controller = new Controller(defaults)
+      @iframe.do('file', @controller.getFile())
+
+
+    # Throws away the old controller and creates a new from from a fresh state
     connectController: ->
+      # Figure out the (short) path to the slides that are loaded into the iframe
+      basePath = Hash::commonPath window.location.href, @iframe.window.location.href
+      slidesPath = @iframe.window.location.href.substring(basePath.length, @iframe.window.location.href.length)
+      # Find out if the current slides are different from the ones that are currently
+      # in the controller state. This happens on manual navigation (e.g. via "browse" link)
+      # and necessitates that the new `slide` and `hidden` values *must* be default-ish
+      # (`0` and `false`) - navigating away from the current slides means a complete reset.
+      newFile = slidesPath != @controller.getFile()
+      state = {
+        file: '/' + slidesPath
+        numSlides: @iframe.window.Pik.numSlides
+        slide: if newFile then 0 else @controller.getSlide()
+        hidden: if newFile then no else @controller.getHidden()
+      }
+      # Kill the old controller, create and connect a new one
+      @disconnectController()
+      @controller = new Controller(state)
       @controller.on('file', @onFile.bind(@))
       @controller.on('slide', @onSlide.bind(@))
       @controller.on('hidden', @onHidden.bind(@))
 
-    # Connects the Iframe's control events to the controller as soon as the prsentation
-    # inside loads. Also triggers a controller reset if this isn't the first presentation
-    # in this session
-    connectIframe: ->
-      @iframe.on 'load', =>
-        if initialized then @reset()
-        @iframe.window.Pik.controls.on('next', @controller.goNext.bind(@controller))
-        @iframe.window.Pik.controls.on('prev', @controller.goPrev.bind(@controller))
-        @iframe.window.Pik.controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
-        initialized = yes if not initialized
 
-    # To trigger the initial load of the iframe, the trigger functions must be called once
-    # with exactly the values that are present in in controller at this time
-    init: ->
-      @onFile @controller.getFile()
-      @onSlide @controller.getSlide()
-      @onHidden @controller.getHidden()
-
-    # Things to do when the controller reports changes. Also needed for init on first load
-    # of the frame (see `@init`)
-    onFile: (file) -> @iframe.do('file', file)
-    onSlide: (slide) -> @iframe.do('slide', slide)
-    onHidden: (state) -> @iframe.do('hidden', state)
-
-    # A "reset" happens each time after a new presentation is loaded into the iframe. It
-    # consists of
-    #
-    # 1. unbinding of all previous controller events
-    # 2. creation of a new controller with a new blank state
-    reset: ->
-      basePath = Hash::commonPath window.location.href, @iframe.window.location.href
-      slidesPath = @iframe.window.location.href.substring(basePath.length, @iframe.window.location.href.length)
-      state = {
-        file: '/' + slidesPath
-        numSlides: @iframe.window.Pik.numSlides
-        slide: 0
-        hidden: no
-      }
-      @controller.offAll()
-      @controller = new Controller(state)
+    # Off the current controller (if present)
+    disconnectController: ->
+      if @controller?
+        @controller.offAll()
+        @controller = null
