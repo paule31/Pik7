@@ -24,7 +24,7 @@ require ['lib/hash'], (Hash) ->
       expectedHash = url.split('#').pop()
       if expectedHash[1] != '/' then expectedHash = '!/' + expectedHash.substr(1) # Ignore slash inconstistencies
       builtHash = hash.createHash.apply null, values
-      equal expectedHash, builtHash
+      equal builtHash, expectedHash
 
   test 'Hashchange event', ->
     stop Object.keys(examples).length
@@ -34,3 +34,9 @@ require ['lib/hash'], (Hash) ->
     for url, expected of examples
       newHash = hash.createHash expected...
       window.location.hash = newHash
+
+  test 'Calculate common path', ->
+    a = 'http://localhost/~peter/Pik7/#!/core/welcome.html@0'
+    b = 'http://localhost/~peter/Pik7/presentations/Reality/'
+    expected = 'http://localhost/~peter/Pik7/'
+    equal Hash::commonPath(a, b), expected

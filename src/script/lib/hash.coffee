@@ -35,6 +35,18 @@ define ['lib/emitter'], (Emitter) ->
         hidden = if parsed[3] == '!hidden' then true else false
         return { file, slide, hidden }
 
+    #Calculate the common path of two urls
+    commonPath: (a, b) ->
+      pos = 0
+      while pos < Math.min(a.length, b.length)
+        if a[pos] != b[pos] then break
+        pos++
+      if pos < 1
+        return a[0] == b[0] && a[0] == '/' ? '/' : ''
+      if a[pos] != '/'
+        pos = a.substring(0, pos).lastIndexOf('/')
+      return a.substring(0, pos + 1)
+
     # Creates a new hash (without pound sign) from state information (`file`, `slide`
     # `hidden`)
     createHash: (file, slide, hidden) ->
