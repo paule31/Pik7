@@ -18,6 +18,10 @@ define ['lib/emitter'], (Emitter) ->
     # *afterwards*. This order allows `__super__.on` to deal with non-function
     # values for `callback` before any properties are added.
     on: (topic, subscriber, callback) ->
+      argsLen = arguments.length
+      if argsLen < 3
+        argsStr = [].join.call(arguments, ', ')
+        throw new Error "Missing arguments for 'on()' - expected 3, got #{argsLen} (#{argsStr})"
       super topic, callback
       callback.__subscriber__ = subscriber if subscriber?
 

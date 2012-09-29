@@ -41,6 +41,16 @@ require ['lib/state'], (State) ->
     state.set { slide: 9000 }
     strictEqual state.get('slide'), defaults.numSlides - 1
 
+  test 'No events for non-changing values', ->
+    state = new State defaults
+    state.on 'slide', null, (num) ->
+      console.log num
+      throw new Error "Slide event fired for already current value #{num}"
+    state.set { file: defaults.file }
+    state.set { slide: defaults.slide }
+    state.set { hidden: defaults.hidden }
+    expect 0
+
   test 'Throw when attempting to change numSlides', ->
     state = new State defaults
     raises -> state.set { numSlides: 1337 }
