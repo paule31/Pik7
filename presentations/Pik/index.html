@@ -20,40 +20,31 @@
 <div class="pikSlide">
 <h2>Features</h2>
 <ul>
-<li>100% HTML5, CSS and JavaScript (<a href="http://mootools.net/">MooTools</a>)
-<li>Multiple presentation views and presenter mode
-<li>Programmable slides
-<li>As fancy or a simple as you want it to be
-</ul>
-</div>
-
-<div class="pikSlide">
-<h2>Why use it?</h2>
-<ul>
-<li>Presenter mode
-<li>Hackable, scriptable presentations
-<li>Easy embedding of web pages, media, youtube videos …
-<li>Great performance in modern browsers even with hundreds of slides
-</ul>
-</div>
-
-<div class="pikSlide">
-<h2>Why not?</h2>
-<ul>
-<li>Requires a modern web browser
-<li>Requires a web server to run from
-<li>Shares all drawbacks common to HTML slides (no GUI to create presentations, no PDF export*, images hard to use)
+<li>Dead simple
+<li>Multiple slide views and presenter mode&nbsp;*
+<li>Rapid navigation between slide sets&nbsp;*
+<li>Good performance in modern browsers even with hundreds of slides&nbsp;*
 </ul>
 <p>
-<small>* PIK6 handles printing somewhat well, so PDF export using Chrome's "print to PDF" function <em>is</em> possible</small>
+<small>* Reasons why I developed Pik7 instead of using some other presentation framework</small>
+</div>
+
+
+<div class="pikSlide">
+<h2>Downsides</h2>
+<ul>
+<li>Requires a modern web browser and web server to run
+<li>No fancyful effects
+<li>Shares all drawbacks common to most HTML slides (e.g. no GUI to create presentations)
+</ul>
 </div>
 
 <div class="pikSlide">
 <h2>Getting started</h2>
 <ol>
-<li>Download Pik6 from <a href="https://github.com/SirPepe/Pik6">Github</a> or <code>git clone git://github.com/SirPepe/Pik6.git</code>
+<li>Download Pik7 from <a href="https://github.com/SirPepe/Pik7">Github</a> or <code>git clone git://github.com/SirPepe/Pik7.git</code>
 <li>Place the files in a directory on your web server
-<li>Open Pik6 in a browser, click the "Browse" link to navigate through the slide sets
+<li>Open Pik7 in a browser, click the "Browse" link to navigate through the slide sets
 </ol>
 </div>
 
@@ -61,9 +52,9 @@
 <h2>Controls</h2>
 <ul>
 <li>Use the left and right arrow keys to navigate through the slides
-<li>On mobile devices you can swipe left and right to navigate
-<li>Move your Mouse to the bottom of the presentation view to reveal the control panel
 <li>The <kbd>F5</kbd> and <kbd>ESC</kbd> keys hide the presentation
+<li>On mobile devices you can swipe left and right to navigate
+<li>The control panel can be found on the bottom right
 </ul>
 </div>
 
@@ -71,9 +62,8 @@
 <h2>Presenter mode</h2>
 <ul>
 <li>Open <code>presenter.html</code> in a new window (use the control panel) to use the presenter mode.
-<li>The presenter mode offers more control elements, displays a timer and lets you see the
-currently displayed slide and which slide comes next
-<li>Requires a browser that supports <a href="http://www.w3.org/TR/workers/">Shared Workers</a> (Chrome 8+ or Opera 11+)
+<li>The presenter mode offers more control elements, displays a timer and a slide overview
+<li>Requires a browser that supports Web Storage (every browser except IE &lt; 8)
 </ul>
 </div>
 
@@ -87,8 +77,12 @@ currently displayed slide and which slide comes next
   &lt;div class=&quot;pikSlide&quot;&gt;Second Slide&lt;/div&gt;
 &lt;/div&gt;</pre>
 <p>
-You can use <code>presentations/Template/index.html</code> as a starting point.
+Use <code>presentations/Template/index.html</code> as a starting point.
 </div>
+
+
+
+
 
 <div class="pikSlide">
 <h2>Notes</h2>

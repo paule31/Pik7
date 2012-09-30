@@ -1,5 +1,35 @@
-@media all{body{font-family:Ubuntu,Arial,sans-serif;line-height:1.55}
-}@media screen{.pik-slide{font-size:.7em}
-}@media print{pre{line-height:1.1}
+@media all{body{font-family:Ubuntu,Arial,sans-serif;line-height:1.6}
+small{font-size:.5em}
+input,output,button,keygen{font-size:inherit}
+.clear{clear:both}
+pre,code{font-family:Monaco,"Bitstream Vera Sans Mono","DejaVu Sans Mono" "Lucida Console",Consolas,Terminal,monospace}
+}@media screen{body{background:#cfcfcf;color:#444}
+#PikSlides .pikSlide{box-sizing:border-box;font-size:.85em;background:#fff;border:1px solid #ccc;box-shadow:0 0 1.5em -.5em #999;width:96%;height:96%;margin:2%;padding:.5em 1.5em;}
+#PikSlides .pikSlide:first-child{text-align:center}
+h1{color:#000;font-size:3.5em;margin-top:.25em;margin-bottom:.25em;}
+h1 span{display:block;font-size:.5em}
+h2{font-size:1.45em;line-height:1.25;font-weight:bold;font-size:1.75em;margin-top:.45em;margin-bottom:0}
+h3{margin:1em 1.5em}
+p,ul,ol,p,pre,table{margin:1.25em 0}
+ul{padding-left:1em}
+ul ul{padding-left:.4em}
+ol > li > ul{padding-left:0;margin-left:4%}
+ul ul,ol ul,ul ol,li{margin-top:.4em;margin-bottom:.4em}
+a{color:#083;text-decoration:none;font-weight:bold;cursor:pointer;}
+a:link,a:visited{border-bottom:.1em solid #083}
+a:visited{border-bottom:.1em dotted #083}
+a:hover,a:active{color:#000;border-bottom:.1em solid transparent}
+a:focus{outline:0;color:#fff;background:#083}
+a.imagelink{border-bottom:none}
+pre,code{font-family:Monaco,"Bitstream Vera Sans Mono","DejaVu Sans Mono" "Lucida Console",Consolas,Terminal,monospace}
+pre{overflow:hidden;line-height:1.45;text-align:left !important;font-size:.8em}
+blockquote,q{font-style:italic}
+q{quotes:"\201E" "\201C" "\201A" "\2018"}
+p.cite{padding-left:1em}
+blockquote + p.cite{margin-top:-.5em}
+code{color:#222;background:#f0f0f0;padding:.1em}
+kbd{font:normal .85em/1 "Lucida Grande",Lucida,Arial,sans-serif;border-radius:.3em;border:none;background:#fafafa;background:linear-gradient(#d2d2d2,#fff);color:#323232;text-shadow:0 0 2px #fff;box-shadow:inset 0 0 1px #fff,inset 0 0 .4em #c8c8c8,0 .1em 0 #828282,0 .11em 0 rgba(0,0,0,0.4),0 .1em .11em rgba(0,0,0,0.9);display:inline-block;line-height:1;padding:.2em .3em}
+}@media print{body{background:#fff;color:#000}
+pre{line-height:1.1}
 mark{text-decoration:underline}
 }
