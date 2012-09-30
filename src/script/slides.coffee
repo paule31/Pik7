@@ -1,4 +1,4 @@
-define ['lib/presentation', 'jquery'], (Presentation) ->
+define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
 
   return class Slides
 
@@ -18,9 +18,10 @@ define ['lib/presentation', 'jquery'], (Presentation) ->
 
     # Link the stylesheet, create the hide layer and store the slides in `@slides`
     setupDom: ->
+      baseUrl = Hash::commonPath(window.location.href, window.parent.location.href)
       $('<link></link>').attr({
         rel: 'stylesheet'
-        href: '../../core/pik7.css'
+        href: "#{baseUrl}core/pik7.css"
       }).appendTo('head')
       $('<div></div>').attr({
         id: 'PikHide'
