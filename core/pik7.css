@@ -1,7 +1,24 @@
+@font-face{font-family:'icons';src:url("icons/icons.eot");src:url("icons/icons.eot?#iefix") format('embedded-opentype'),url("icons/icons.woff") format('woff'),url("icons/icons.ttf") format('truetype'),url("icons/icons.svg#icons") format('svg');font-weight:normal;font-style:normal}
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
 body{line-height:1;color:#000;background:#fff}
 ol,ul{list-style:none}
 table{border-collapse:separate;border-spacing:0;vertical-align:middle}
 caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
 a img{border:none}
-*{box-sizing:border-box}
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+a:focus{outline:1px dotted #666}
+html,body{overflow:hidden;position:relative;height:100%;width:100%;margin:0;padding:0}
+#PikApp iframe{display:block;border:none;height:100%;width:100%;margin:0;padding:0}
+#PikApp #PikControls{background:rgba(255,255,255,0.8);-webkit-border-radius:.5em;border-radius:.5em;font-family:Arial,sans-serif;font-size:18px;position:absolute;bottom:.75em;right:.75em;padding:1em 1.6em .8em 1.6em;opacity:.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter:alpha(opacity=50);-webkit-transition:opacity 400ms;-moz-transition:opacity 400ms;-o-transition:opacity 400ms;-ms-transition:opacity 400ms;transition:opacity 400ms;}
+#PikApp #PikControls:hover{opacity:1;-ms-filter:none;filter:none}
+#PikApp a{font-weight:bold;text-decoration:none;-webkit-transition:color 400ms;-moz-transition:color 400ms;-o-transition:color 400ms;-ms-transition:color 400ms;transition:color 400ms;}
+#PikApp a:not(:last-child){margin-right:1.25em}
+#PikApp a:link,#PikApp a:visited{color:#555}
+#PikApp a:hover{color:#000}
+#PikApp a:active{color:#f00}
+#PikApp [class^='icon']:before{margin-right:.5em;position:relative;top:-1px;font-family:icons;font-style:normal;font-weight:normal;speak:none}
+#PikApp .iconBrowse:before{content:'\2630';}
+#PikApp .iconReload:before{content:'\27f3';}
+#PikApp .iconPrint:before{content:'\e716';}
+#PikApp .iconClone:before{content:'\e736';}
+#PikApp .iconPresenter:before{content:'\e74e';}

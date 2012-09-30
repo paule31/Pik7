@@ -1,26 +1,16 @@
 <!doctype html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<title></title>
-	<link rel="stylesheet" href="core/pik7.css">
-	<script src="core/pik7.js"></script>
-</head>
-<body id="Pik-Frame">
+<meta charset="utf-8">
+<title></title>
+<link rel="stylesheet" href="core/pik7.css">
+<script src="core/pik7.js"></script>
+<body id="PikApp">
 
-<iframe id="Pik-frame" src="about:blank" height="300" width="50%"></iframe>
-<div id="Pik-controls-container">
-	<div id="Pik-controls-inner-container">
-		<div id="Pik-controls-links">
-			<a id="Pik-controls-link-browse" href="presentations" target="Pik-frame">Browse</a>
-			<a href="presenter.html" target="_blank">Presenter</a>
-			<a href="index.html" target="_blank">Clone</a>
-			<a href="#">Reload</a>
-			<a href="#">Print</a>
-			<a href="#">Remote</a>
-			<a id="Pik-controls-link-closecontrols" title="Close controls">×</a>
-		</div>
-	</div>
-</div>
+<iframe id="PikFrame" src="about:blank"></iframe>
 
-</body>
+<p id="PikControls">
+	<a class="iconBrowse" href="presentations" target="PikFrame">Browse</a>
+	<a class="iconPresenter" href="presenter.html" target="_blank">Presenter</a>
+	<a class="iconClone" href="index.html" target="_blank">Clone</a>
+	<a class="iconReload" href="#">Reload</a>
+	<a class="iconPrint" href="#">Print</a>
+</p>
