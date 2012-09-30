@@ -2,11 +2,13 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
 
   return class Slides
 
+
     # Store the slide set and the index for the current, next and previous slide
     slides: null
     curr: 0
     next: 1
     prev: -1
+
 
     constructor: ->
       self = this
@@ -16,16 +18,26 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
         @on 'slide', self.goTo
         @on 'hidden', self.setHidden
 
+
     # Link the stylesheet, create the hide layer and store the slides in `@slides`
     setupDom: ->
       baseUrl = Hash::commonPath(window.location.href, window.parent.location.href)
+      # Base style sheet
       $('<link></link>').attr({
         rel: 'stylesheet'
         href: "#{baseUrl}core/pik7.css"
       }).appendTo('head')
+      # Hide layer
       $('<div></div>').attr({
         id: 'PikHide'
       }).appendTo('body')
+      # Link theme style sheet
+      theme = $('script[data-theme]').data('theme') || 'default'
+      $('<link></link>').attr({
+        rel: 'stylesheet'
+        href: "#{baseUrl}themes/#{theme}.css"
+      }).appendTo('head')
+      # Slide storage
       @slides = $('.pikSlide')
 
 

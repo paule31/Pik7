@@ -13,7 +13,8 @@ stylus: {
       ]
     },
     files: {
-      'core/pik7.css': ['src/style/pik7.styl']
+      'core/pik7.css': ['src/style/pik7.styl'],
+      'themes/default.css': ['src/style/themes/default.styl']
     }
   }
 },
