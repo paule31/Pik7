@@ -9,7 +9,7 @@ define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
     constructor: (initCb) ->
       super 'slide', 'hidden'
       $(window).ready =>
-        @numSlides = $('.pik-slide').length
+        @numSlides = $('.pikSlide').length
         @createApi()
         initCb.call(this) if initCb?
 

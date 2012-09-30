@@ -8,7 +8,7 @@ require ['lib/iframe', 'jquery'], (Iframe) -> $(window).ready ->
     frame = new Iframe(frameEl)
     stop()
     frame.on 'load', ->
-      equal frame.getNumSlides(), frameWin.$('.pik-slide').length
+      equal frame.getNumSlides(), frameWin.$('.pikSlide').length
 
       test 'Commands', ->
         stop(2)

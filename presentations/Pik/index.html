@@ -1,12 +1,12 @@
 <!doctype html>
+<html id="PikSlides">                      <!-- Important - do not remove or rename! -->
+<script src="../../core/pik7.js"></script> <!-- Important - do not remove or rename! -->
 <meta charset="utf-8">
 <title>Pik7 - HTML5 Presentation Framework</title>
 <base target="_blank">
-<script src="../../core/pik7.js"></script> <!-- Important - do not remove or rename! -->
-<body id="Pik-slides">                     <!-- Important - do not remove or rename! -->
 
 
-<div class="pik-slide" id="Start">
+<div class="pikSlide" id="Start">
 <h1>
 	<span>An introduction to</span>
 	PIK7
@@ -17,7 +17,7 @@
 </p>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Features</h2>
 <ul>
 <li>100% HTML5, CSS and JavaScript (<a href="http://mootools.net/">MooTools</a>)
@@ -27,7 +27,7 @@
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Why use it?</h2>
 <ul>
 <li>Presenter mode
@@ -37,7 +37,7 @@
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Why not?</h2>
 <ul>
 <li>Requires a modern web browser
@@ -48,7 +48,7 @@
 <small>* PIK6 handles printing somewhat well, so PDF export using Chrome's "print to PDF" function <em>is</em> possible</small>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Getting started</h2>
 <ol>
 <li>Download Pik6 from <a href="https://github.com/SirPepe/Pik6">Github</a> or <code>git clone git://github.com/SirPepe/Pik6.git</code>
@@ -57,7 +57,7 @@
 </ol>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Controls</h2>
 <ul>
 <li>Use the left and right arrow keys to navigate through the slides
@@ -67,7 +67,7 @@
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Presenter mode</h2>
 <ul>
 <li>Open <code>presenter.html</code> in a new window (use the control panel) to use the presenter mode.
@@ -77,20 +77,20 @@ currently displayed slide and which slide comes next
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Building presentations</h2>
 <pre class="prettyprint">&lt;!-- /presentations/Foo/bar.html --&gt;
 &lt;script src="../../lib/pik.js"&gt;&lt;/script&gt;
 &lt;div id=&quot;Pik-hide&quot;&gt;&lt;/div&gt;
 &lt;div id=&quot;Pik-presentation-container&quot;&gt;
-  &lt;div class=&quot;pik-slide&quot;&gt;First Slide&lt;/div&gt;
-  &lt;div class=&quot;pik-slide&quot;&gt;Second Slide&lt;/div&gt;
+  &lt;div class=&quot;pikSlide&quot;&gt;First Slide&lt;/div&gt;
+  &lt;div class=&quot;pikSlide&quot;&gt;Second Slide&lt;/div&gt;
 &lt;/div&gt;</pre>
 <p>
 You can use <code>presentations/Template/index.html</code> as a starting point.
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Notes</h2>
 <ul>
 <li>Notes can be added using an element with the class <code>pik-notes</code> for each slide
@@ -107,7 +107,7 @@ You can use <code>presentations/Template/index.html</code> as a starting point.
 </div>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Styling presentations</h2>
 <ul>
 <li>Styles (simple CSS files) reside in the <code>styles</code> folder
@@ -122,7 +122,7 @@ You can use <code>presentations/Template/index.html</code> as a starting point.
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Slide transitions</h2>
 <ul>
 <li>Slide visibility is completly managed by css; all slides except the one with the
@@ -132,7 +132,7 @@ class <code>pik-current</code> are invisible by default
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Programming presentations</h2>
 <ul>
 <li>An <code>slideactivate</code> event is fired on the slides when they are shown
@@ -141,7 +141,7 @@ class <code>pik-current</code> are invisible by default
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Simple programming example</h2>
 <pre class="prettyprint">window.addEvent('domready', function(){
     $('Demo').addEvents({
@@ -155,11 +155,11 @@ class <code>pik-current</code> are invisible by default
 });</pre>
 </div>
 
-<div class="pik-slide center noprint" id="Demo">
+<div class="pikSlide center noprint" id="Demo">
 	<div class="center" style="width:640px; height:480px; background:url(loader.gif) center center no-repeat;"></div>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Printing presentations</h2>
 <ul>
 <li>Use the print link in the control panel to print your presentation
@@ -168,7 +168,7 @@ class <code>pik-current</code> are invisible by default
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Plugins</h2>
 <ul>
 <li>Plugins are simple scripts that can be used to add features a presentation
@@ -178,7 +178,7 @@ class <code>pik-current</code> are invisible by default
 </ul>
 </div>
 
-<div class="pik-slide">
+<div class="pikSlide">
 <h2>Links</h2>
 <ul>
 <li><a href="https://github.com/SirPepe/Pik6">Github</a>
@@ -189,7 +189,3 @@ class <code>pik-current</code> are invisible by default
 <li><a href="mailto:peter@peterkroener.de">Contact me</a>
 </ul>
 </div>
-
-
-</body>
-</html>

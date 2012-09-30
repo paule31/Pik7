@@ -1,0 +1,19 @@
+// Slides and hide overlay are invisible by default
+.pikSlide, #PikHide
+  visibility hidden
+  position absolute
+  top 0
+  left 0
+  height 100%
+  width 100%
+
+// Hide overlay styles
+#PikHide
+  background #000
+  z-index 999999999999999999
+
+// Special classes make slides and hide overlay visible */
+.pikSlide.pik-current
+  visibility visible
+#PikHide.pik-active
+  visibility visible

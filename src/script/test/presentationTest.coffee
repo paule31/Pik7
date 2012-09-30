@@ -4,7 +4,7 @@ require ['lib/presentation'], (Presentation) -> $(window).ready ->
   test 'Init procedure', ->
     stop()
     presentation = new Presentation ->
-      equal window.Pik.numSlides, $('.pik-slide').length
+      equal window.Pik.numSlides, $('.pikSlide').length
       start()
 
   test 'API functions trigger events on presentation object', ->
