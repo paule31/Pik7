@@ -7,15 +7,16 @@
 # 5. as soon as the iframe loads, `@connectController()` and `@iframeOnload()` fire
 # 6. `@connectController()` does many things but mainly connects controller events to actions in the app
 
-define ['lib/controller', 'lib/iframe', 'lib/hash'], (Controller, Iframe, Hash) ->
+define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Controller, Iframe, Hash) ->
 
   # TODO: Nach manuellem browsen folgt Fenster 2 nicht Fenster 1!
 
-  return class App
+  return class App extends Emitter
 
     # Different things need to happen when the iframe loads depending on if this is the
     # first load or a late change of slides, so `@initialized` keeps track of this.
     constructor: (defaults) ->
+      super('load')
       @initialized = no
       @iframe = new Iframe('iframe')
       @connectIframe(defaults)
@@ -26,6 +27,7 @@ define ['lib/controller', 'lib/iframe', 'lib/hash'], (Controller, Iframe, Hash) 
     connectIframe: (defaults) ->
       if not @initialized then @init(defaults)
       @iframe.on 'load', =>
+        @trigger('load')
         @connectController()
         @iframeOnload()
 
@@ -35,13 +37,15 @@ define ['lib/controller', 'lib/iframe', 'lib/hash'], (Controller, Iframe, Hash) 
       @iframe.window.Pik.controls.on('next', @controller.goNext.bind(@controller))
       @iframe.window.Pik.controls.on('prev', @controller.goPrev.bind(@controller))
       @iframe.window.Pik.controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
+      @iframe.do('slide', @controller.getSlide())
+      @iframe.do('hidden', @controller.getHidden())
 
 
     # Things to do when the controller reports changes. Also needed for init on first load
     # of the frame (see `@init`)
     onFile: (file) -> @iframe.do('file', file) if file != @controller.getFile()
-    onSlide: (slide) -> @iframe.do('slide', slide) if slide != @controller.getSlide()
-    onHidden: (state) -> @iframe.do('hidden', state) if state != @controller.getHidden()
+    onSlide: (slide) -> @iframe.do('slide', slide)
+    onHidden: (state) -> @iframe.do('hidden', state)
 
 
     # On first load, create a temporary controller from the supplied defaults. The temporary

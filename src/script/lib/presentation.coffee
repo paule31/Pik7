@@ -18,6 +18,6 @@ define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
       window.Pik = {
         numSlides: self.numSlides
         controls: new Controls()
-        goTo: (slide) -> self.trigger 'slide', slide
-        setHidden: (state) -> self.trigger 'hidden', state
+        goTo: (slide) -> self.trigger('slide', slide)
+        setHidden: (state) -> self.trigger('hidden', state)
       }

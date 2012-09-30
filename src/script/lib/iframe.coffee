@@ -28,4 +28,4 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
         if action == 'hidden'
           @window.Pik.setHidden(arg)
 
-    getNumSlides: -> return @window.Pik.numSlides if @window.Pik?
+    getNumSlides: -> @window.Pik.numSlides if @window.Pik?
