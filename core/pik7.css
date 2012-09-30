@@ -1,10 +1,18 @@
-@font-face{font-family:'icons';src:url("icons/icons.eot");src:url("icons/icons.eot?#iefix") format('embedded-opentype'),url("icons/icons.woff") format('woff'),url("icons/icons.ttf") format('truetype'),url("icons/icons.svg#icons") format('svg');font-weight:normal;font-style:normal}
-*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+@media print{body{font-size:18pt !important;color:#000;background:#fff}
+h1,h2,h3,h4,h5,h6{clear:both}
+a{color:#00f}
+.pikSlide{clear:both;zoom:1}
+.pikSlide:before,.pikSlide:after{content:"";display:table}
+.pikSlide:after{clear:both}
+.pikNoprint,.pikNotes,input,textarea,iframe,button{display:none !important;page-break-after:auto !important}
+}@media print and (orientation:landscape){body{font-size:24pt !important}
+.pikSlide{page-break-inside:avoid;page-break-after:always}
+}@media only screen{@font-face{font-family:'icons';src:url("icons/icons.eot");src:url("icons/icons.eot?#iefix") format('embedded-opentype'),url("icons/icons.woff") format('woff'),url("icons/icons.ttf") format('truetype'),url("icons/icons.svg#icons") format('svg');font-weight:normal;font-style:normal}
 html,body{overflow:hidden;position:relative;height:100%;width:100%;margin:0;padding:0}
 #PikApp iframe{display:block;border:none;height:100%;width:100%;margin:0;padding:0}
-#PikApp #PikControls{background:rgba(255,255,255,0.8);-webkit-border-radius:.5em;border-radius:.5em;font-family:Arial,sans-serif;font-size:18px;position:absolute;bottom:.75em;right:.75em;padding:1em 1.6em .8em 1.6em;margin:0;opacity:.5;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=50);filter:alpha(opacity=50);-webkit-transition:opacity 400ms;-moz-transition:opacity 400ms;-o-transition:opacity 400ms;-ms-transition:opacity 400ms;transition:opacity 400ms;}
-#PikApp #PikControls:hover{opacity:1;-ms-filter:none;filter:none}
-#PikApp a{font-weight:bold;text-decoration:none;-webkit-transition:color 400ms;-moz-transition:color 400ms;-o-transition:color 400ms;-ms-transition:color 400ms;transition:color 400ms;}
+#PikApp #PikControls{background:rgba(255,255,255,0.8);border-radius:.5em;font-family:Arial,sans-serif;font-size:18px;position:absolute;bottom:.75em;right:.75em;padding:1em 1.6em .8em 1.6em;margin:0;opacity:.5;transition:opacity 400ms;}
+#PikApp #PikControls:hover{opacity:1}
+#PikApp a{font-weight:bold;text-decoration:none;transition:color 400ms;}
 #PikApp a:not(:last-child){margin-right:1.25em}
 #PikApp a:link,#PikApp a:visited{color:#555}
 #PikApp a:hover{color:#000}
@@ -20,4 +28,4 @@ html,body{overflow:hidden;position:relative;height:100%;width:100%;margin:0;padd
 #PikSlides #PikHide{background:#000;z-index:1000000000000000000}
 #PikSlides .pikSlide.pikCurrent{visibility:visible}
 #PikSlides #PikHide.pikActive{visibility:visible}
-@media print{}
+}

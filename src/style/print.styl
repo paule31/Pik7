@@ -1,0 +1,28 @@
+@media print
+
+  body
+    font-size 18pt !important // Override metrics set by javascript
+    color black
+    background white
+  h1, h2, h3, h4, h5, h6
+    clear both
+  a
+    color blue
+  .pikSlide
+    clear both
+    clearfix()
+
+  // No printing and no page breaks for these guys
+  .pikNoprint, .pikNotes, input, textarea, iframe, button
+    display none !important
+    page-break-after auto !important
+
+// Emulate original slide layout for landscape format
+@media print and (orientation:landscape)
+
+  body
+    font-size 24pt !important // Override metrics set by javascript
+
+  .pikSlide
+    page-break-inside: avoid;
+    page-break-after: always;

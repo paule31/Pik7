@@ -1,14 +1,11 @@
-@import 'common'
+@import 'nib/clearfix'
+@import 'print'
 
-#PikApp
-  @import 'app'
-
-#PikSlides
-  @import 'slides'
-
-#PikPresenterApp
-  @import 'presenterApp'
-
-@media print
+@media only screen
+  @import 'common'
+  #PikApp
+    @import 'app'
   #PikSlides
-    @import 'print'
+    @import 'slides'
+  #PikPresenterApp
+    @import 'presenterApp'
