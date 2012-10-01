@@ -27,7 +27,8 @@ define ['lib/emitter'], (Emitter) ->
         @trigger 'change', state, evt
       window.addEventListener 'storage', @onStorage, false
 
-    # Expected/returned state object format: `{ String file, Number slide, Boolean hidden }`
+    # Expected/returned state object format:
+    # `{ String file, Number slide, Boolean hidden }`
     setState: (state) ->
       values = JSON.stringify state
       return @storageArea.setItem 'pik', values

@@ -34,9 +34,10 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
 
     # Hooked into the iframe's `load` event
     iframeOnload: ->
-      @iframe.window.Pik.controls.on('next', @controller.goNext.bind(@controller))
-      @iframe.window.Pik.controls.on('prev', @controller.goPrev.bind(@controller))
-      @iframe.window.Pik.controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
+      controls = @iframe.window.Pik.controls
+      controls.on('next', @controller.goNext.bind(@controller))
+      controls.on('prev', @controller.goPrev.bind(@controller))
+      controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
       @iframe.do('slide', @controller.getSlide())
       @iframe.do('hidden', @controller.getHidden())
 
@@ -48,10 +49,10 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     onHidden: (state) -> @iframe.do('hidden', state)
 
 
-    # On first load, create a temporary controller from the supplied defaults. The temporary
-    # controller figures out what the *real* initial state is (apart from the defaults there
-    # are also sync and hash as potential data sources) and triggers the first real load
-    # of the iframe
+    # On first load, create a temporary controller from the supplied defaults. The
+    # temporary controller figures out what the *real* initial state is (apart from the
+    # defaults there are also sync and hash as potential data sources) and triggers the
+    # first real load of the iframe
     init: (defaults) ->
       @initialized = yes
       @controller = new Controller(defaults)
@@ -61,12 +62,15 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     # Throws away the old controller and creates a new from from a fresh state
     connectController: ->
       # Figure out the (short) path to the slides that are loaded into the iframe
-      basePath = Hash::commonPath window.location.href, @iframe.window.location.href
-      slidesPath = @iframe.window.location.href.substring(basePath.length, @iframe.window.location.href.length)
+      location = window.location.href
+      iframeLocation = @iframe.window.location.href
+      basePath = Hash::commonPath location, iframeLocation
+      slidesPath = iframeLocation.substring(basePath.length, iframeLocation.length)
       # Find out if the current slides are different from the ones that are currently
-      # in the controller state. This happens on manual navigation (e.g. via "browse" link)
-      # and necessitates that the new `slide` and `hidden` values *must* be default-ish
-      # (`0` and `false`) - navigating away from the current slides means a complete reset.
+      # in the controller state. This happens on manual navigation (e.g. via "browse"
+      # link) and necessitates that the new `slide` and `hidden` values *must* be
+      # default-ish (`0` and `false`) - navigating away from the current slides means a
+      # complete reset.
       newFile = slidesPath != @controller.getFile()
       state = {
         file: '/' + slidesPath

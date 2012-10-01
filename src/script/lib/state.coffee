@@ -1,6 +1,6 @@
 # Creates a state object that's representing (wait for it...) the presentation's state!
 
-define ['../lib/smartEmitter'], (SmartEmitter) ->
+define ['lib/smartEmitter'], (SmartEmitter) ->
 
   return class State extends SmartEmitter
 

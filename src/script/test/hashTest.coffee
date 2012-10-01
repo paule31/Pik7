@@ -4,10 +4,10 @@ require ['lib/hash'], (Hash) ->
   hash = new Hash
 
   examples = {
-    'http://foo.org/index.html#!/index/index.html@1':                ['index/index.html', 1, false]
+    'http://foo.org/index.html#!/index/index.html@1': ['index/index.html', 1, false]
     'localhost://#!presentations/HTML5/05_Formulare.html@37!hidden': ['presentations/HTML5/05_Formulare.html', 37, true]
     'http://www.foo.de/some/dir#!/presentations/Pik6Vorstellung@14': ['presentations/Pik6Vorstellung', 14, false]
-    'file:///home/user/moo.html#!Pik6Vorstellung@11!hidden':         ['Pik6Vorstellung', 11, true]
+    'file:///home/user/moo.html#!Pik6Vorstellung@11!hidden': ['Pik6Vorstellung', 11, true]
   }
 
   test 'Parse URLs', ->
@@ -22,7 +22,8 @@ require ['lib/hash'], (Hash) ->
   test 'Create hashes', ->
     for url, values of examples
       expectedHash = url.split('#').pop()
-      if expectedHash[1] != '/' then expectedHash = '!/' + expectedHash.substr(1) # Ignore slash inconstistencies
+      # Ignore slash inconstistencies
+      if expectedHash[1] != '/' then expectedHash = '!/' + expectedHash.substr(1)
       builtHash = hash.createHash.apply null, values
       equal builtHash, expectedHash
 

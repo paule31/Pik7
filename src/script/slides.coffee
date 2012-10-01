@@ -60,9 +60,9 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
             'height'    : newheight + 'px'
             'font-size' : fontsize  + '%'
             'top'       : topmargin + 'px'
-          };
-        $(window).bind('load', setSizes);
-        $(window).bind('resize', setSizes);
+          }
+        $(window).bind('load', setSizes)
+        $(window).bind('resize', setSizes)
 
 
     # Display the slide `num`

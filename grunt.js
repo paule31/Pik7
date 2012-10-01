@@ -19,6 +19,21 @@ stylus: {
   }
 },
 
+cslint: {
+  app: {
+    files: ['src/script/**/*.coffee'],
+    options: {
+      onErrors: 'warn',
+      config: {
+        max_line_length: {
+          value: 90,
+          level : 'error'
+        }
+      }
+    }
+  }
+},
+
 coffee: {
   compile: {
     options: {
@@ -83,7 +98,7 @@ clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/test/*.js']
 grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('dev',     'stylus coffee docco server qunit requirejs');
-grunt.registerTask('default', 'stylus coffee docco server qunit requirejs clean');
+grunt.registerTask('dev',     'stylus cslint coffee docco server qunit requirejs');
+grunt.registerTask('default', 'stylus cslint coffee docco server qunit requirejs clean');
 
 };
