@@ -8,7 +8,7 @@ pre,code{font-family:Monaco,"Bitstream Vera Sans Mono","DejaVu Sans Mono" "Lucid
 #PikSlides .pikSlide:first-child{text-align:center}
 h1{color:#000;font-size:3.5em;margin-top:.25em;margin-bottom:.25em;}
 h1 span{display:block;font-size:.5em}
-h2{font-size:1.45em;line-height:1.25;font-weight:bold;font-size:1.75em;margin-top:.45em;margin-bottom:0}
+h2{font-size:1.45em;line-height:1.25;font-weight:bold;font-size:1.75em;margin-top:.25em;margin-bottom:0}
 h3{margin:1em 1.5em}
 p,ul,ol,p,pre,table{margin:1.25em 0}
 ul{padding-left:1em}
@@ -22,7 +22,7 @@ a:hover,a:active{color:#000;border-bottom:.1em solid transparent}
 a:focus{outline:0;color:#fff;background:#083}
 a.imagelink{border-bottom:none}
 pre,code{font-family:Monaco,"Bitstream Vera Sans Mono","DejaVu Sans Mono" "Lucida Console",Consolas,Terminal,monospace}
-pre{overflow:hidden;line-height:1.45;text-align:left !important;font-size:.8em}
+pre{overflow:hidden;line-height:1.4;text-align:left !important;font-size:.8em}
 blockquote,q{font-style:italic}
 q{quotes:"\201E" "\201C" "\201A" "\2018"}
 p.cite{padding-left:1em}

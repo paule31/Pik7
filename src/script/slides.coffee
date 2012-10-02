@@ -67,20 +67,25 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
 
     # Display the slide `num`
     goTo: (num) =>
+      $(@slides[@curr]).trigger('pikDeactivate')
       $(@slides[@curr]).removeClass('pikCurrent')
       $(@slides[@next]).removeClass('pikNext')
       $(@slides[@prev]).removeClass('pikPrev')
       @curr = num
       @next = num + 1
       @prev = num - 1
+      $(@slides[@curr]).trigger('pikActivate')
       $(@slides[@curr]).addClass('pikCurrent')
       $(@slides[@next]).addClass('pikNext')
       $(@slides[@prev]).addClass('pikPrev')
+      $(window).trigger('pikSlide', [@curr])
 
 
     # Hide the presentation
     setHidden: (state) ->
       if state
+        $(window).trigger('pikHide', [@curr])
         $('#PikHide').addClass('pikActive')
       else
+        $(window).trigger('pikShow', [@curr])
         $('#PikHide').removeClass('pikActive')

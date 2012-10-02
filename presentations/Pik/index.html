@@ -6,6 +6,17 @@
 <script src="assets/google-code-prettify/prettify.js"></script>
 <link rel="stylesheet" href="assets/google-code-prettify/prettify.css">
 <base target="_blank">
+<style>
+#EventsDemo p.awesome {
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    color: red;
+    transform-origin: 50% 50%;
+    transform: rotate(360deg) scale(2);
+    transition: all 750ms;
+}
+</style>
 <body onload="prettyPrint()">
 
 <div class="pikSlide">
@@ -14,7 +25,7 @@
 	PIK7
 </h1>
 <h2>HTML5 presentation framework</h2>
-<p class="center pik-noprint">
+<p class="center pikNoprint">
 	Press <kbd>&rarr;</kbd> or swipe to the left to learn more
 </p>
 </div>
@@ -86,9 +97,62 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 <ul>
 <li>Change the theme by setting the <code>data-theme</code> attribute on the <code>&lt;script&gt;</code> tag that loads <code>pik7.js</code>
 <li>Example: <code>&lt;script data-theme="themes/template" src="../../core/pik7.js"&gt;&lt;/script&gt;</code>
+<li><a href="http://leaverou.github.com/prefixfree/">prefix-free</a> is included by default
 </ul>
 </div>
 
+<div class="pikSlide">
+<h2>Slide events</h2>
+<ul>
+<li><code>pikActivate</code> fires on a slide when it becomes the current slide, <code>pikDeactivate</code> fires when the slide ist navigated away from
+<li><code>pikSlide</code> fires on <code>window</code> each time slides change, passing the current slide element and it's number
+<li><code>pikHide</code> and <code>pikShow</code> fire on <code>window</code> when the hidden state changes
+</ul>
+</div>
+
+<div class="pikSlide" id="EventsDemo">
+<h2>Events demo</h2>
+<pre><code class="prettyprint language-javascript">$(document).ready(function(){
+  $('#EventsDemo').bind({
+    pikActivate: function(){
+      $(this).find('p').addClass('awesome');
+    },
+    pikDeactivate: function(){
+      $(this).find('p').removeClass('awesome');
+    }
+  });
+});</code></pre>
+<p>Awesome!
+</div>
+<script>
+$(document).ready(function(){
+  $('#EventsDemo').bind({
+    pikActivate: function(){
+      $(this).find('p').addClass('awesome');
+    },
+    pikDeactivate: function(){
+      $(this).find('p').removeClass('awesome');
+    }
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<div class="pikSlide">
+<h2>Special css classes</h2>
+<ul>
+<li><code>pikNoprint</code> prevents an element from being printed
+<li><code>pikNotes</code>
+</ul>
+</div>
 
 
 
@@ -111,21 +175,6 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 		<li>Notes won't be printed
 	</ul>
 </div>
-</div>
-
-<div class="pikSlide">
-<h2>Styling presentations</h2>
-<ul>
-<li>Styles (simple CSS files) reside in the <code>styles</code> folder
-<li>Styles includes in PIK6:
-	<ul>
-		<li><em>Default</em> (used in this presentation)
-		<li><em>Lime</em> (green text, white backgroud)
-		<li><em>Dark</em> (simple white text on a dark backgroud)
-	</ul>
-<li>Use <code>styles/Template/style.css</code> as a starting point for your own style
-<li><a href="http://leaverou.github.com/prefixfree/">-prefix-free</a> (included by default) takes care of all vendor prefixes, so you don't have to.
-</ul>
 </div>
 
 <div class="pikSlide">
