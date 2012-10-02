@@ -3,12 +3,15 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
   return class Slides
 
 
-    # Store the slide set and the index for the current, next and previous slide
-    slides: null
+    # Index for the current, next and previous slide
     curr: 0
     next: 1
     prev: -1
 
+    # Special elements storage
+    slides: null
+    wrapper: null
+    hideLayer: null
 
     constructor: ->
       self = this
@@ -22,13 +25,20 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
     # Link the stylesheet, create the hide layer and store the slides in `@slides`
     setupDom: ->
       baseUrl = Hash::commonPath(window.location.href, window.parent.location.href)
+      # Slide storage
+      @slides = $('.pikSlide')
       # Base style sheet
       $('<link></link>').attr({
         rel: 'stylesheet'
         href: "#{baseUrl}core/pik7.css"
       }).appendTo('head')
+      # Add the wrapper around the slides
+      @wrapper = $('<div></div>').attr({
+        id: 'PikSlideWrapper'
+      })
+      @wrapper.append(@slides).appendTo('body')
       # Hide layer
-      $('<div></div>').attr({
+      @hideLayer = $('<div></div>').attr({
         id: 'PikHide'
       }).appendTo('body')
       # Link theme style sheet
@@ -37,15 +47,13 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
         rel: 'stylesheet'
         href: "#{baseUrl}themes/#{theme}.css"
       }).appendTo('head')
-      # Slide storage
-      @slides = $('.pikSlide')
 
 
     # Maintain a 4:3 aspect ratio, body positions, font and slide size every time the
     #presentation loads or the window is resized.
     setupSizes: ->
-      $(window).ready ->
-        setSizes = ->
+      $(window).ready =>
+        setSizes = =>
           size = {
             x: $('html').width()
             y: $('html').height()
@@ -55,7 +63,7 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
           newheight = if size.x > size.y * ratio then size.y else size.x / ratio
           topmargin = Math.floor((size.y - newheight) / 2)
           fontsize  = (newheight + newwidth) / 6.5
-          $('body').css {
+          @wrapper.css {
             'width'     : newwidth  + 'px'
             'height'    : newheight + 'px'
             'font-size' : fontsize  + '%'

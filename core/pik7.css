@@ -23,7 +23,7 @@ html,body{overflow:hidden;position:relative;height:100%;width:100%;margin:0;padd
 #PikApp .iconPrint:before{content:'\e716';}
 #PikApp .iconClone:before{content:'\e736';}
 #PikApp .iconPresenter:before{content:'\e74e';}
-#PikSlides body{margin-left:auto;margin-right:auto}
+#PikSlides #PikSlideWrapper{margin-left:auto;margin-right:auto;position:relative}
 #PikSlides .pikSlide,#PikSlides #PikHide{visibility:hidden;position:absolute;top:0;left:0;height:100%;width:100%}
 #PikSlides #PikHide{background:#000;z-index:1000000000000000000}
 #PikSlides .pikSlide.pikCurrent{visibility:visible}
