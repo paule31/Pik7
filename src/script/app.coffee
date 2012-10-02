@@ -26,6 +26,7 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     # onload handler for the iframe
     connectIframe: (defaults) ->
       if not @initialized then @init(defaults)
+      # TODO: This doesn't happen on mobile devices
       @iframe.on 'load', =>
         @trigger('load')
         @connectController()

@@ -1,6 +1,6 @@
-require ['lib/vendor/almond',
+require ['polyfill/bind', 'lib/vendor/almond',
          'app', 'slides',
-         'jquery', 'prefixfree'], (_almond, App, Slides) ->
+         'jquery', 'prefixfree'], (_bind, _almond, App, Slides) ->
 
 
 
@@ -28,7 +28,6 @@ require ['lib/vendor/almond',
     $('.printLink').click ->
       file = $('iframe')[0].contentWindow.location.href
       window.open(file)
-
 
 
   # otherwise it's obviously a slide set

@@ -1,5 +1,4 @@
 # Controls one frame from the outside
-
 define ['lib/emitter', 'jquery'], (Emitter) ->
   'use strict'
 
@@ -7,7 +6,7 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
 
     # Store frame and window references, call `super` and kick off the init procedure
     constructor: (frame) ->
-      @frame  = $(frame)
+      @frame = $(frame)
       if @frame.length == 0 then throw new Error "Iframe error: frame #{frame} not found"
       @window = @frame[0].contentWindow
       super('load')
