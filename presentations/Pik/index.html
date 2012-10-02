@@ -3,10 +3,12 @@
 <script src="../../core/pik7.js"></script> <!-- Important - do not remove or rename! -->
 <meta charset="utf-8">
 <title>Pik7 - HTML5 Presentation Framework</title>
+<script src="assets/google-code-prettify/prettify.js"></script>
+<link rel="stylesheet" href="assets/google-code-prettify/prettify.css">
 <base target="_blank">
+<body onload="prettyPrint()">
 
-
-<div class="pikSlide" id="Start">
+<div class="pikSlide">
 <h1>
 	<span>An introduction to</span>
 	PIK7
@@ -69,16 +71,26 @@
 
 <div class="pikSlide">
 <h2>Building presentations</h2>
-<pre class="prettyprint">&lt;!-- /presentations/Foo/bar.html --&gt;
-&lt;script src="../../lib/pik.js"&gt;&lt;/script&gt;
-&lt;div id=&quot;Pik-hide&quot;&gt;&lt;/div&gt;
-&lt;div id=&quot;Pik-presentation-container&quot;&gt;
-  &lt;div class=&quot;pikSlide&quot;&gt;First Slide&lt;/div&gt;
-  &lt;div class=&quot;pikSlide&quot;&gt;Second Slide&lt;/div&gt;
-&lt;/div&gt;</pre>
+<pre><code class="prettyprint language-html">&lt;!-- /presentations/Foo/bar.html --&gt;
+&lt;html id="PikSlides"&gt;
+&lt;script src="../../core/pik7.js"&gt;&lt;/script&gt;
+
+&lt;div class=&quot;pikSlide&quot;&gt;First Slide&lt;/div&gt;
+&lt;div class=&quot;pikSlide&quot;&gt;Second Slide&lt;/div&gt;</code></pre>
 <p>
 Use <code>presentations/Template/index.html</code> as a starting point.
 </div>
+
+<div class="pikSlide">
+<h2>Styling presentations</h2>
+<ul>
+<li>Change the theme by setting the <code>data-theme</code> attribute on the <code>&lt;script&gt;</code> tag that loads <code>pik7.js</code>
+<li>Example: <code>&lt;script data-theme="themes/template" src="../../core/pik7.js"&gt;&lt;/script&gt;</code>
+</ul>
+</div>
+
+
+
 
 
 

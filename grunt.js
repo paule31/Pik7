@@ -14,7 +14,8 @@ stylus: {
     },
     files: {
       'core/pik7.css': ['src/style/pik7.styl'],
-      'themes/default.css': ['src/style/themes/default.styl']
+      'themes/default.css': ['src/style/themes/default.styl'],
+      'themes/template.css': ['src/style/themes/template.styl']
     }
   }
 },
@@ -23,11 +24,10 @@ cslint: {
   app: {
     files: ['src/script/**/*.coffee'],
     options: {
-      onErrors: 'warn',
+      onErrors: 'fail',
       config: {
         max_line_length: {
-          value: 90,
-          level : 'error'
+          level : 'ignore'
         }
       }
     }
