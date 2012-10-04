@@ -45,9 +45,13 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
 
     # Things to do when the controller reports changes. Also needed for init on first load
     # of the frame (see `@init`)
-    onFile: (file) -> @iframe.do('file', file) if file != @controller.getFile()
-    onSlide: (slide) -> @iframe.do('slide', slide)
-    onHidden: (state) -> @iframe.do('hidden', state)
+    onFile: (file) ->
+      if file != @iframe.window.location.href.slice(-file.length)
+        @iframe.do('file', file)
+    onSlide: (slide) ->
+      @iframe.do('slide', slide)
+    onHidden: (state) ->
+      @iframe.do('hidden', state)
 
 
     # On first load, create a temporary controller from the supplied defaults. The

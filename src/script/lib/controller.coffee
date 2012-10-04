@@ -107,10 +107,6 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       emitter.on 'next', => @goNext()
       emitter.on 'toggleHidden', => @toggleHidden()
 
-
-
-
-
     # API
     # ---
 
