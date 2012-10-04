@@ -1,4 +1,6 @@
 // Default app view styles
+$transitionDelay = 400ms
+
 
 iframe
   display block
@@ -8,27 +10,35 @@ iframe
   margin 0
   padding 0
 
+
+#PikControlsContainer
+  position absolute
+  bottom 0
+  right 0
+  padding 0.55em
 #PikControls
   background rgba(0, 0, 0, 0.95)
   border-radius 0.5em
   font-family Arial, sans-serif
-  text-align center // For mobile
   line-height 1.25
   font-size 16px
-  position absolute
-  bottom 0.5em
-  right 0.5em
-  margin 0.5em 0 0 0.5em // For mobile
-  padding 1em 1.6em 0.8em 1.6em
+  color #FFF
+  font-weight bold
+  margin 0
+  padding 1.2em 1.6em 0.9em 1.6em
   opacity 0.3
-  transition opacity 400ms
-  &:hover
-    opacity: 1
+  transition opacity $transitionDelay
+#PikControlsContainer:hover #PikControls
+  opacity: 1
+#PikControlsLinks, :hover #PikControlsTitle
+  display none
+:hover #PikControlsLinks, #PikControlsTitle
+  display inline
+
 
 a
-  font-weight bold
   text-decoration none
-  transition color 400ms
+  transition color $transitionDelay
   &:not(:last-child)
     margin-right 1.25em
   &:link, &:visited
@@ -37,7 +47,6 @@ a
     color #FFF
   &:active
     color red
-
 
 
 // Icons for control links
@@ -49,13 +58,17 @@ a
   font-style normal
   font-weight normal
   speak none
-.iconBrowse:before
-  content '\2630' /* '☰' */
+.iconMenu:before
+  content '\2630'  /* '☰' */
+.iconHome:before
+  content '\2302'  /* '⌂' */
+.iconFolder:before
+  content '\1f4c1' /* '📁' */
 .iconReload:before
-  content '\27f3' /* '⟳' */
+  content '\27f3'  /* '⟳' */
 .iconPrint:before
-  content '\e716' /* '' */
+  content '\e716'  /* '' */
 .iconClone:before
-  content '\e736' /* '' */
+  content '\e736'  /* '' */
 .iconPresenter:before
-  content '\e74e' /* '' */
+  content '\e74e'  /* '' */
