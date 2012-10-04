@@ -1,6 +1,6 @@
 @media print
 
-  body
+  #PikSlideWrapper
     font-size 18pt !important // Override metrics set by javascript
     color black
     background white
@@ -17,11 +17,12 @@
     display none !important
     page-break-after auto !important
 
+
 // Emulate original slide layout for landscape format
 @media print and (orientation:landscape)
 
-  body
-    font-size 24pt !important // Override metrics set by javascript
+  #PikSlideWrapper
+    font-size 27pt !important // Override metrics set by javascript
 
   .pikSlide
     page-break-inside: avoid;

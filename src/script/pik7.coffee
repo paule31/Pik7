@@ -26,8 +26,8 @@ require ['polyfill/bind', 'lib/vendor/almond',
 
     # Print link
     $('.printLink').click ->
-      file = $('iframe')[0].contentWindow.location.href
-      window.open(file)
+      printPath = $('iframe')[0].contentWindow.location.href + '#print'
+      window.open(printPath)
 
 
   # otherwise it's obviously a slide set

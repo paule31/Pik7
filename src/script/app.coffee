@@ -8,23 +8,21 @@
 # 6. `@connectController()` does many things but mainly connects controller events to actions in the app
 
 define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Controller, Iframe, Hash) ->
-
-  # TODO: Nach manuellem browsen folgt Fenster 2 nicht Fenster 1!
-
   return class App extends Emitter
+
 
     # Different things need to happen when the iframe loads depending on if this is the
     # first load or a late change of slides, so `@initialized` keeps track of this.
     constructor: (defaults) ->
       super('load')
       @initialized = no
-      @iframe = new Iframe('iframe')
       @connectIframe(defaults)
 
 
     # Connects the iframe to the app. Triggers `@init()` on first load and sets the
     # onload handler for the iframe
     connectIframe: (defaults) ->
+      @iframe = new Iframe('iframe')
       if not @initialized then @init(defaults)
       # TODO: This doesn't happen on mobile devices
       @iframe.on 'load', =>
@@ -46,6 +44,8 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     # Things to do when the controller reports changes. Also needed for init on first load
     # of the frame (see `@init`)
     onFile: (file) ->
+      # Check if the iframe already contains our file before triggering a loop of endless
+      # reloads...
       if file != @iframe.window.location.href.slice(-file.length)
         @iframe.do('file', file)
     onSlide: (slide) ->

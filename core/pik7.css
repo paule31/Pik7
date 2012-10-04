@@ -1,11 +1,11 @@
-@media print{body{font-size:18pt !important;color:#000;background:#fff}
+@media print{#PikSlideWrapper{font-size:18pt !important;color:#000;background:#fff}
 h1,h2,h3,h4,h5,h6{clear:both}
 a{color:#00f}
 .pikSlide{clear:both;zoom:1}
 .pikSlide:before,.pikSlide:after{content:"";display:table}
 .pikSlide:after{clear:both}
 .pikNoprint,.pikNotes,input,textarea,iframe,button{display:none !important;page-break-after:auto !important}
-}@media print and (orientation:landscape){body{font-size:24pt !important}
+}@media print and (orientation:landscape){#PikSlideWrapper{font-size:27pt !important}
 .pikSlide{page-break-inside:avoid;page-break-after:always}
 }@media only screen{@font-face{font-family:'icons';src:url("icons/icons.eot");src:url("icons/icons.eot?#iefix") format('embedded-opentype'),url("icons/icons.woff") format('woff'),url("icons/icons.ttf") format('truetype'),url("icons/icons.svg#icons") format('svg');font-weight:normal;font-style:normal}
 html,body{overflow:hidden;position:relative;height:100%;width:100%;margin:0;padding:0}

@@ -1,5 +1,4 @@
 define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
-
   return class Slides
 
 
@@ -18,19 +17,32 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
       @setupDom()
       @setupSizes()
       @presentation = new Presentation ->
-        @on 'slide', self.goTo
-        @on 'hidden', self.setHidden
+        @on('slide', self.goTo)
+        @on('hidden', self.setHidden)
+        self.print()
+
+
+    # Try to figure out where the base directory is relative to the page
+    getBasePath: ->
+      source = if window.parent != window
+        window.parent.location.href
+      else
+        window.opener.location.href || ''
+      return base = if source
+        Hash::commonPath(window.location.href, source)
+      else
+        '../../'
 
 
     # Link the stylesheet, create the hide layer and store the slides in `@slides`
     setupDom: ->
-      baseUrl = Hash::commonPath(window.location.href, window.parent.location.href)
+      basePath = @getBasePath()
       # Slide storage
       @slides = $('.pikSlide')
       # Base style sheet
       $('<link></link>').attr({
         rel: 'stylesheet'
-        href: "#{baseUrl}core/pik7.css"
+        href: "#{basePath}core/pik7.css"
       }).appendTo('head')
       # Add the wrapper around the slides
       @wrapper = $('<div></div>').attr({
@@ -45,7 +57,7 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
       theme = $('script[data-theme]').data('theme') || 'default'
       $('<link></link>').attr({
         rel: 'stylesheet'
-        href: "#{baseUrl}themes/#{theme}.css"
+        href: "#{basePath}themes/#{theme}.css"
       }).appendTo('head')
 
 
@@ -63,14 +75,19 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
           newheight = if size.x > size.y * ratio then size.y else size.x / ratio
           topmargin = Math.floor((size.y - newheight) / 2)
           fontsize  = (newheight + newwidth) / 6.5
-          @wrapper.css {
+          @wrapper.css({
             'width'     : newwidth  + 'px'
             'height'    : newheight + 'px'
             'font-size' : fontsize  + '%'
             'top'       : topmargin + 'px'
-          }
+          })
         $(window).bind('load', setSizes)
         $(window).bind('resize', setSizes)
+
+
+    # Pop up the print dialog if it look like a good idea
+    print: ->
+      window.print() if window.location.hash == '#print'
 
 
     # Display the slide `num`
