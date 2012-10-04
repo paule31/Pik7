@@ -23,7 +23,7 @@ a:focus{outline:0;color:#fff;background:#083}
 a.imagelink{border-bottom:none}
 pre,code{font-family:Monaco,"Bitstream Vera Sans Mono","DejaVu Sans Mono" "Lucida Console",Consolas,Terminal,monospace}
 pre{overflow:hidden;line-height:1.4;text-align:left !important;font-size:.8em}
-code{background:#f0f0f0;padding:.1em}
+code{background:#ebebeb;padding:.1em}
 pre code{background:none;padding:0}
 blockquote,q{font-style:italic}
 q{quotes:"\201E" "\201C" "\201A" "\2018"}
