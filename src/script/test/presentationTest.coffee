@@ -8,7 +8,7 @@ require ['lib/presentation'], (Presentation) -> $(window).ready ->
       start()
 
   test 'API functions trigger events on presentation object', ->
-    stop 2
+    stop(2)
     presentation = new Presentation ->
       @on 'slide', (slide) ->
         equal slide, 1337
@@ -16,5 +16,5 @@ require ['lib/presentation'], (Presentation) -> $(window).ready ->
       @on 'hidden', (state) ->
         equal state, 'something'
         start()
-      window.Pik.goTo 1337
-      window.Pik.setHidden 'something'
+      window.Pik.goTo(1337)
+      window.Pik.setHidden('something')

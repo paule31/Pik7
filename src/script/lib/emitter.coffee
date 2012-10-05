@@ -7,9 +7,7 @@
 # Events can be removed via `off('topic', cb)` or offAll('topic').
 
 define ->
-  'use strict'
-
-  class Emitter
+  return class Emitter
 
     constructor: (args...) ->
       @topics = {}
@@ -23,7 +21,7 @@ define ->
       else if callback in @topics[topic]
         throw new Error "Can't add callback, already subscribed to '#{topic}'"
       else
-        @topics[topic].push callback
+        @topics[topic].push(callback)
 
     off: (topic, callback) ->
       if typeof callback != 'function'
@@ -33,7 +31,7 @@ define ->
       else if callback not in @topics[topic]
         throw new Error "Can't remove callback, not subscribed to '#{topic}'"
       else
-        @topics[topic].splice @topics[topic].indexOf(callback), 1
+        @topics[topic].splice(@topics[topic].indexOf(callback), 1)
 
     offAll: (topic) ->
       removeAllCallbacks = (list, target) ->
@@ -50,4 +48,4 @@ define ->
       if topic not of @topics
         throw new Error "Can't trigger event, no such topic: '#{topic}'"
       else
-        callback.apply null, args for callback in @topics[topic]
+        callback.apply(null, args) for callback in @topics[topic]

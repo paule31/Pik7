@@ -7,7 +7,7 @@ require ['lib/controls'], (Controls) -> $(window).ready ->
       super()
     addKeyEvents: ->
       $(window).keydown (evt, testCode) =>
-        if @filterTargets evt then @dispatch { keyCode: testCode }
+        if @filterKeyTargets evt then @dispatchKeyEvent { keyCode: testCode }
     stopEvent: ->
 
   keys = {

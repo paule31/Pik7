@@ -1,8 +1,6 @@
 # Parses URLs and creates hashes for presentation frame windows.
 
 define ['lib/emitter'], (Emitter) ->
-  'use strict'
-
   return class Hash extends Emitter
 
     # The default format format looks like `#!/path/to/file.html@42!hidden` where...

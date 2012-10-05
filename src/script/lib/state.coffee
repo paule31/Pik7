@@ -1,7 +1,6 @@
 # Creates a state object that's representing (wait for it...) the presentation's state!
 
 define ['lib/smartEmitter'], (SmartEmitter) ->
-
   return class State extends SmartEmitter
 
     # `defaults` is a state object that must also contain the `numSlides` a property for

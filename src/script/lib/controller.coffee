@@ -8,7 +8,6 @@
 
 
 define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash, Controls) ->
-
   return class Controller
 
     # Create state object using `defaults`, create and connect emitters
@@ -21,13 +20,13 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       initialState = @bootstrapState(defaults)
       @state = new State(initialState)
       # Connect emitters
-      @connectHash @hash
-      @connectSync @sync
+      @connectHash(@hash)
+      @connectSync(@sync)
       @connectControls(@controls)
       # Run the initial state update
       @initialUpdate()
 
-    # Get the startup state from the url and/or the syncer. Fall back to `defauls` if
+    # Get the startup state from the url and/or the syncer. Fall back to `defaults` if
     # necessary
     bootstrapState: (defaults) ->
       fromUrl = @hash.parse(window.location.hash) || {}
@@ -50,20 +49,21 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
 
     # Connect Emitters
     # ----------------
-    # 0. Emitter lauschen auf dem Manager
-    # 1. Emitter lösen state.update aus
-    # 2. state.update löst ggf. (falls es wirklich ein Update war) auf dem Manager aus
-    # Explizite Objekt-Übergabe erleichtet später das Verbinden weiterer Emitter (z.B. für Controls aus dem Frame)
+    # 1. Emitters listen for events on the controller
+    # 2. Emitters trigger `@state.update()`
+    # 3. `@state.update()` triggers the controller, if the update did really set new values
+    # Passing emitters as arguments simplifies connecting emitters from elsewhere (eg.
+    # the frames' controls instances)
 
-    # 0. Listen for hash changes and update the state accordingly
-    # 1. When an event fires on the state, update the hash using `stateCb`
+    # 1. Listen for hash changes and update the state accordingly
+    # 2. When an event fires on the state, update the hash using `stateCb`
     connectHash: (emitter) ->
       # Listen on the hash emitter
       emitter.on 'change', (data) =>
-        @state.set data, emitter
+        @state.set(data, emitter)
       # Listen on the state emitter
       onstatechange = (key, value) =>
-        emitter.update key, value, { # `update` sollte `setState` heißen, wie bei Sync
+        emitter.update key, value, { # `update` should better be called `setState` heißen, link in Sync
           file: @state.get('file')
           slide: @state.get('slide')
           hidden: @state.get('hidden')
@@ -72,8 +72,8 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @state.on 'slide', emitter, onstatechange.bind(this, 'slide')
       @state.on 'hidden', emitter, onstatechange.bind(this, 'hidden')
 
-    # 0. Listen on the emitter's change event and update the state accordingly
-    # 1. When an event fires on the state, update the sync storage using `set()`
+    # 1. Listen on the emitter's change event and update the state accordingly
+    # 2. When an event fires on the state, update the sync storage using `set()`
     connectSync: (emitter) ->
       # Listen on the sync emitter
       emitter.on 'change', (state) =>
@@ -111,41 +111,32 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
     # ---
 
     # Expose the state manager's event hooks, but hide the "smart" parts
-    # of the SmartEmitter's functionality
+    # of the SmartEmitter's functionality by using `null` for caller/subscriber objects
     on: (args...) ->
-      args.splice 1, 0, null # add `null` as the `subscriber` object
-      @state.on args...
+      args.splice(1, 0, null) # add `null` as the `subscriber` object
+      @state.on(args...)
     trigger: (args...) ->
-      args.splice 1, 0, null # add `null` as the `caller` object
-      @state.trigger args...
+      args.splice(1, 0, null) # add `null` as the `caller` object
+      @state.trigger(args...)
     off: (args...) ->
-      @state.off args...
+      @state.off(args...)
     offAll: (args...) ->
-      @state.offAll args...
-      @hash.offAll args...
-      @sync.offAll args...
-      @controls.offAll args...
+      @state.offAll(args...)
+      @hash.offAll(args...)
+      @sync.offAll(args...)
+      @controls.offAll(args...)
 
     # Get and set the current file
-    getFile: ->
-      return @state.get 'file'
-    openFile: (newFile) ->
-      @state.set { file: newFile }
+    getFile: -> @state.get('file')
+    openFile: (newFile) -> @state.set { file: newFile }
 
     # Get and navigate the slides
-    getSlide: ->
-      return @state.get 'slide'
-    goTo: (num) ->
-      @state.set { slide: Number num }
-    goNext: ->
-      @goTo(@getSlide() + 1)
-    goPrev: ->
-      @goTo(@getSlide() - 1)
+    getSlide: -> @state.get('slide')
+    goTo: (num) -> @state.set { slide: Number num }
+    goNext: -> @goTo(@getSlide() + 1)
+    goPrev: -> @goTo(@getSlide() - 1)
 
     # Get, set and toggle the hidden state
-    getHidden: ->
-      return @state.get 'hidden'
-    setHidden: (state) ->
-      @state.set { hidden: state }
-    toggleHidden: ->
-      @setHidden !@getHidden()
+    getHidden: -> @state.get('hidden')
+    setHidden: (state) -> @state.set { hidden: state }
+    toggleHidden: -> @setHidden(!@getHidden())

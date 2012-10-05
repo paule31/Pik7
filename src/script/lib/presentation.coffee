@@ -2,12 +2,10 @@
 # is used to recieve commands from the outside and to relay control commands.
 
 define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
-  'use strict'
-
   return class Presentation extends Emitter
 
     constructor: (initCb) ->
-      super 'slide', 'hidden'
+      super('slide', 'hidden')
       $(window).ready =>
         @numSlides = $('.pikSlide').length
         @createApi()

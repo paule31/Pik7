@@ -12,7 +12,7 @@ define ['lib/emitter'], (Emitter) ->
     return false for val, idx in a when val != b[idx]
     return true
 
-  class SmartEmitter extends Emitter
+  return class SmartEmitter extends Emitter
 
     # Add the callbacks to the topics and add the `__subscriber__` property
     # *afterwards*. This order allows `__super__.on` to deal with non-function

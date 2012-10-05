@@ -2,35 +2,33 @@
 # `prev`, `toggleHidden`)
 
 define ['lib/emitter', 'jquery'], (Emitter) ->
-
   return class Controls extends Emitter
 
-    # Events are not caught when thier original target is an input or textarea
-    # element (`@nonTargets`)
+    # Events are not caught when thier original target is an input or textarea element
+    nonTargets: ['input', 'textarea']
+
     constructor: ->
-      super 'next', 'prev', 'toggleHidden'
-      @nonTargets = ['input', 'textarea']
+      super('next', 'prev', 'toggleHidden')
       @addKeyEvents()
 
     addKeyEvents: ->
       $(window).keydown (evt) =>
-        if @filterTargets evt then @dispatch evt
+        if @filterKeyTargets(evt) then @dispatchKeyEvent(evt)
 
-    stopEvent: (evt) ->
-      evt.preventDefault()
+    stopEvent: (evt) -> evt.preventDefault()
 
-    filterTargets: (evt) ->
+    filterKeyTargets: (evt) ->
       if evt.target.nodeType != 1 then return true
       return evt.target.nodeName.toLowerCase() not in @nonTargets
 
-    dispatch: (evt) ->
+    dispatchKeyEvent: (evt) ->
       code = evt.keyCode
-      if(code == 37 || code == 33) # Left arrow key (previous slide)
-        @trigger 'prev', evt
+      if(code == 37 || code == 33) # Left arrow key and pgdn (previous slide)
+        @trigger('prev', evt)
         @stopEvent(evt)
-      else if code == 39 || code == 34 # Right arrow key (next slide)
-        @trigger 'next', evt
+      else if code == 39 || code == 34 # Right arrow key and pgup (next slide)
+        @trigger('next', evt)
         @stopEvent(evt)
       else if code == 116 || code == 27 # F5 / ESC (hides the presentation)
-        @trigger 'toggleHidden', evt
+        @trigger('toggleHidden', evt)
         @stopEvent(evt)

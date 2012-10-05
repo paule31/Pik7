@@ -1,7 +1,5 @@
 # Controls one frame from the outside
 define ['lib/emitter', 'jquery'], (Emitter) ->
-  'use strict'
-
   return class Iframe extends Emitter
 
     # Store frame and window references, call `super` and kick off the init procedure

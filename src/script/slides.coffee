@@ -1,7 +1,6 @@
 define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
   return class Slides
 
-
     # Index for the current, next and previous slide
     curr: 0
     next: 1
@@ -81,7 +80,6 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
           x: $('html').width()
           y: $('html').height()
         }
-        console.log(size.x, size.y)
         ratio = 4 / 3
         newwidth  = if size.x > size.y * ratio then size.y * ratio else size.x
         newheight = if size.x > size.y * ratio then size.y else size.x / ratio
