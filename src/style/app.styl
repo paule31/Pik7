@@ -15,7 +15,7 @@ iframe
   position absolute
   bottom 0
   right 0
-  padding 0.55em
+  padding 0.85em 0.55em 0.85em 1em
 #PikControls
   background rgba(0, 0, 0, 0.95)
   border-radius 0.5em
@@ -41,6 +41,8 @@ a
   transition color $transitionDelay
   &:not(:last-child)
     margin-right 1.25em
+  &:first-child
+    margin-right 0.55em // Special treatment for home link
   &:link, &:visited
     color #AAA
   &:hover
@@ -54,21 +56,9 @@ a
   margin-right 0.5em
   position relative
   top -1px
-  font-family icons
-  font-style normal
-  font-weight normal
-  speak none
-.iconMenu:before
-  content '\2630'  /* '☰' */
-.iconHome:before
-  content '\2302'  /* '⌂' */
-.iconFolder:before
-  content '\1f4c1' /* '📁' */
-.iconReload:before
-  content '\27f3'  /* '⟳' */
-.iconPrint:before
-  content '\e716'  /* '' */
-.iconClone:before
-  content '\e736'  /* '' */
-.iconPresenter:before
-  content '\e74e'  /* '' */
+
+// Actual icons are defined im common.styl
+
+// Fix margin for the menu title
+#PikControlsTitle:before
+  margin 0

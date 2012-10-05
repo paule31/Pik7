@@ -1,0 +1,69 @@
+{
+  "name": "icons",
+  "glyphs": [
+    {
+      "uid": "2cfb3f2b46b34a1790aec0aa846297b6",
+      "orig_css": "th-list",
+      "orig_code": 9776,
+      "css": "th-list",
+      "code": 9776,
+      "src": "entypo"
+    },
+    {
+      "uid": "513ac180ff85bd275f2b736720cbbf5e",
+      "orig_css": "home",
+      "orig_code": 8962,
+      "css": "home",
+      "code": 8962,
+      "src": "entypo"
+    },
+    {
+      "uid": "28f124a10127a47b9d9472699193d75a",
+      "orig_css": "print",
+      "orig_code": 59158,
+      "css": "print",
+      "code": 59158,
+      "src": "entypo"
+    },
+    {
+      "uid": "922ab2cb66943a83de969990289ef1dc",
+      "orig_css": "docs",
+      "orig_code": 59190,
+      "css": "docs",
+      "code": 59190,
+      "src": "entypo"
+    },
+    {
+      "uid": "0ccb084ddeeae372673793ed0b45bb4a",
+      "orig_css": "folder",
+      "orig_code": 128193,
+      "css": "folder",
+      "code": 128193,
+      "src": "entypo"
+    },
+    {
+      "uid": "744a71fe4b5ab7c4f4b7cd598e9bf75a",
+      "orig_css": "window",
+      "orig_code": 59214,
+      "css": "window",
+      "code": 59214,
+      "src": "entypo"
+    },
+    {
+      "uid": "bb46b15cb78cc4cc05d3d715d522ac4d",
+      "orig_css": "cw",
+      "orig_code": 10227,
+      "css": "cw",
+      "code": 10227,
+      "src": "entypo"
+    },
+    {
+      "uid": "25fc99a30fecc4021fdcae5fff5ba9ac",
+      "orig_css": "eye",
+      "orig_code": 59146,
+      "css": "eye",
+      "code": 59146,
+      "src": "entypo"
+    }
+  ]
+}

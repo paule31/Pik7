@@ -4,20 +4,17 @@
 <title></title>
 <link rel="stylesheet" href="core/pik7.css">
 <script src="core/pik7.js"></script>
-<body id="PikApp">
+<body id="PikPresenterApp">
 
 <iframe name="Slides" id="PikFrame" src="about:blank"></iframe>
+<iframe id="PikFramePreview" src="about:blank"></iframe>
 
 <div id="PikControlsContainer">
 	<p id="PikControls">
-		<span class="iconMenu" id="PikControlsTitle"></span>
+		<select id="PikControlsSelect"></select>
 		<span id="PikControlsLinks">
-			<a class="iconHome" href="core/welcome.html" target="Slides"></a>
+			<a class="iconView" href="index.html" target="_blank">Open Viewer</a>
 			<a class="iconFolder" href="presentations" target="Slides">Browse</a>
-			<a class="iconPresenter" href="presenter.html" target="_blank">Presenter</a>
-			<a class="iconClone" href="index.html" target="_blank">Clone</a>
-			<a class="iconReload reloadLink" href="#">Reload</a>
-			<a class="iconPrint printLink" href="#">Print</a>
 		</span>
 	</p>
 </div>
