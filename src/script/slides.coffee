@@ -13,12 +13,12 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
 
     constructor: ->
       self = this
-      @setupDom()
-      @setupSizes()
       @presentation = new Presentation ->
+        self.setupDom()
+        self.setupSizes()
         @on('slide', self.goTo)
         @on('hidden', self.setHidden)
-        # Trigger ready state *after* setting up the slide and hidden events tp prevent
+        # Trigger ready state *after* setting up the slide and hidden events to prevent
         # hours of bug seaching...
         if window != window.parent then window.parent.Pik.app.trigger('ready')
         self.print()
