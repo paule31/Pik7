@@ -15,30 +15,28 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     # first load or a late change of slides, so `@initialized` keeps track of this.
     constructor: (defaults) ->
       super('load')
+      window.Pik = app: new Emitter('ready')
       @initialized = no
       @connectIframe(defaults)
 
 
-    # Connects the iframe to the app. Triggers `@init()` on first load and sets the
-    # onload handler for the iframe
+    # Connects the iframe to the app. Triggers `@init()` on first load and listens for
+    # load notifications from the slides.
     connectIframe: (defaults) ->
       @iframe = new Iframe('iframe')
       if not @initialized then @init(defaults)
-      # TODO: This doesn't happen on mobile devices
-      @iframe.on 'load', =>
+      # This would normally be a job for the iframe object's load emitter, but since
+      # browsers don't fire load events for iframes reliably, the slides have to publish
+      # their load event to the app manually via `window.parent.Pik.app.trigger('load')`
+      window.Pik.app.on 'ready', =>
         @trigger('load')
         @connectController()
-        @iframeOnload()
-
-
-    # Hooked into the iframe's `load` event
-    iframeOnload: ->
-      controls = @iframe.window.Pik.controls
-      controls.on('next', @controller.goNext.bind(@controller))
-      controls.on('prev', @controller.goPrev.bind(@controller))
-      controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
-      @iframe.do('slide', @controller.getSlide())
-      @iframe.do('hidden', @controller.getHidden())
+        controls = @iframe.window.Pik.controls
+        controls.on('next', @controller.goNext.bind(@controller))
+        controls.on('prev', @controller.goPrev.bind(@controller))
+        controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
+        @iframe.do('slide', @controller.getSlide())
+        @iframe.do('hidden', @controller.getHidden())
 
 
     # Things to do when the controller reports changes. Also needed for init on first load
