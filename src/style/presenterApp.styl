@@ -1,0 +1,25 @@
+#PikPresenterApp
+
+  $wide  = "screen and (min-aspect-ratio:7/5)"
+  $small = "screen and (max-aspect-ratio:7/5)"
+
+  iframe
+    display block
+    border none
+    margin 0
+    box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
+    background pink
+
+
+  // Narrow layout
+  @media $small
+
+    body
+      background red !important
+
+
+  // Widescreen layout
+  @media $wide
+
+    body
+      background green !important

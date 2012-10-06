@@ -1,25 +1,29 @@
-#PikSlideWrapper
-  margin-left auto
-  margin-right auto
-  position relative
-  height 100%
+@media only screen
 
-// Slides and hide overlay are invisible by default
-.pikSlide, #PikHide
-  visibility hidden
-  position absolute
-  top 0
-  left 0
-  height 100%
-  width 100%
+  #PikSlides
 
-// Hide overlay styles
-#PikHide
-  background #000
-  z-index 999999999999999999
+    #PikSlideWrapper
+      margin-left auto
+      margin-right auto
+      position relative
+      height 100%
 
-// Special classes make slides and hide overlay visible */
-.pikSlide.pikCurrent
-  visibility visible
-#PikHide.pikActive
-  visibility visible
+    // Slides and hide overlay are invisible by default
+    .pikSlide, #PikHide
+      visibility hidden
+      position absolute
+      top 0
+      left 0
+      height 100%
+      width 100%
+
+    // Hide overlay styles
+    #PikHide
+      background #000
+      z-index 999999999999999999
+
+    // Special classes make slides and hide overlay visible */
+    .pikSlide.pikCurrent
+      visibility visible
+    #PikHide.pikActive
+      visibility visible

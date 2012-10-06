@@ -1,20 +1,21 @@
 <!doctype html>
+<html id="PikPresenterApp">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
 <title></title>
 <link rel="stylesheet" href="core/pik7.css">
 <script src="core/pik7.js"></script>
-<body id="PikPresenterApp">
 
 <iframe name="Slides" id="PikFrame" src="about:blank"></iframe>
-<iframe id="PikFramePreview" src="about:blank"></iframe>
-
-<div id="PikControlsContainer">
-	<p id="PikControls">
-		<select id="PikControlsSelect"></select>
-		<span id="PikControlsLinks">
-			<a class="iconView" href="index.html" target="_blank">Open Viewer</a>
-			<a class="iconFolder" href="presentations" target="Slides">Browse</a>
-		</span>
-	</p>
+<div id="PikFramePreviewContainer">
+	<iframe id="PikFramePreview" src="about:blank"></iframe>
+	<div id="PikControlsContainer">
+		<p id="PikControls">
+			<select id="PikControlsSelect"></select>
+			<span id="PikControlsLinks">
+				<a class="iconView" href="index.html" target="_blank">Open Viewer</a>
+				<a class="iconFolder" href="presentations" target="Slides">Browse</a>
+			</span>
+		</p>
+	</div>
 </div>

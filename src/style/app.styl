@@ -1,64 +1,64 @@
-// Default app view styles
-$transitionDelay = 400ms
+#PikApp
+
+  // Default app view styles
+  $transitionDelay = 400ms
+  iframe
+    display block
+    border none
+    height 100%
+    width 100%
+    margin 0
+    padding 0
 
 
-iframe
-  display block
-  border none
-  height 100%
-  width 100%
-  margin 0
-  padding 0
-
-
-#PikControlsContainer
-  position absolute
-  bottom 0
-  right 0
-  padding 0.85em 0.55em 0.85em 1em
-#PikControls
-  background rgba(0, 0, 0, 0.95)
-  border-radius 0.5em
-  font-family Arial, sans-serif
-  line-height 1.25
-  font-size 16px
-  color #FFF
-  font-weight bold
-  margin 0
-  padding 1.2em 1.6em 0.9em 1.6em
-  opacity 0.3
-  transition opacity $transitionDelay
-#PikControlsContainer:hover #PikControls
-  opacity: 1
-#PikControlsLinks, :hover #PikControlsTitle
-  display none
-:hover #PikControlsLinks, #PikControlsTitle
-  display inline
-
-
-a
-  text-decoration none
-  transition color $transitionDelay
-  &:not(:last-child)
-    margin-right 1.25em
-  &:first-child
-    margin-right 0.55em // Special treatment for home link
-  &:link, &:visited
-    color #AAA
-  &:hover
+  #PikControlsContainer
+    position absolute
+    bottom 0
+    right 0
+    padding 0.85em 0.55em 0.85em 1em
+  #PikControls
+    background rgba(0, 0, 0, 0.95)
+    border-radius 0.5em
+    font-family Arial, sans-serif
+    line-height 1.25
+    font-size 16px
     color #FFF
-  &:active
-    color red
+    font-weight bold
+    margin 0
+    padding 1.2em 1.6em 0.9em 1.6em
+    opacity 0.3
+    transition opacity $transitionDelay
+  #PikControlsContainer:hover #PikControls
+    opacity: 1
+  #PikControlsLinks, #PikControlsContainer:hover #PikControlsTitle
+    display none
+  #PikControlsContainer:hover #PikControlsLinks, #PikControlsTitle
+    display inline
 
 
-// Icons for control links
-[class^='icon']:before
-  margin-right 0.5em
-  position relative
-  top -1px
+  a
+    text-decoration none
+    transition color $transitionDelay
+    &:not(:last-child)
+      margin-right 1.25em
+    &:first-child
+      margin-right 0.55em // Special treatment for home link
+    &:link, &:visited
+      color #AAA
+    &:hover
+      color #FFF
+    &:active
+      color red
 
-// Actual icons are defined im common.styl
 
-// Fix margin for the menu title
-#PikControlsTitle:before
-  margin 0
+  // Icons for control links
+  [class^='icon']:before
+    margin-right 0.5em
+    position relative
+    top -1px
+
+  // Actual icons are defined im common.styl
+
+  // Fix margin for the menu title
+  #PikControlsTitle:before
+    margin 0
