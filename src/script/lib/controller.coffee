@@ -10,36 +10,29 @@
 define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash, Controls) ->
   return class Controller
 
-    # Create state object using `defaults`, create and connect emitters
     constructor: (defaults) ->
-      # Create emitters
-      @hash = new Hash()
-      @sync = new Sync()
-      @controls = new Controls()
-      # Create state
-      initialState = @bootstrapState(defaults)
-      @state = new State(initialState)
-      # Connect emitters
+      @createEmitters(defaults)
+      @initialUpdate()
+
+    # Create the four emitters (the state object with a starting state derived from the
+    # defaults, the url and local storage), then connect emitters
+    createEmitters: (defaults) ->
+      [ @hash, @sync, @controls ] = [ new Hash(), new Sync(), new Controls() ]
+      @state = new State do =>
+        fromUrl = @hash.parse(window.location.hash) || {}
+        fromSync = @sync.getState() || {}
+        return {
+          file: fromUrl.file || fromSync.file || defaults.file
+          slide: fromUrl.slide || fromSync.slide || defaults.slide
+          hidden: fromUrl.hidden || fromSync.hidden || defaults.hidden
+          numSlides: defaults.numSlides
+        }
       @connectHash(@hash)
       @connectSync(@sync)
       @connectControls(@controls)
-      # Run the initial state update
-      @initialUpdate()
-
-    # Get the startup state from the url and/or the syncer. Fall back to `defaults` if
-    # necessary
-    bootstrapState: (defaults) ->
-      fromUrl = @hash.parse(window.location.hash) || {}
-      fromSync = @sync.getState() || {}
-      return {
-        file: fromUrl.file || fromSync.file || defaults.file
-        slide: fromUrl.slide || fromSync.slide || defaults.slide
-        hidden: fromUrl.hidden || fromSync.hidden || defaults.hidden
-        numSlides: defaults.numSlides
-      }
 
     # After a state has been established, update Hash and Sync once
-    initialUpdate: () ->
+    initialUpdate: ->
       file = @state.get('file')
       slide = @state.get('slide')
       hidden = @state.get('hidden')
@@ -58,16 +51,16 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
     # 1. Listen for hash changes and update the state accordingly
     # 2. When an event fires on the state, update the hash using `stateCb`
     connectHash: (emitter) ->
-      # Listen on the hash emitter
       emitter.on 'change', (data) =>
         @state.set(data, emitter)
+
       # Listen on the state emitter
       onstatechange = (key, value) =>
-        emitter.update key, value, { # `update` should better be called `setState` heißen, link in Sync
+        emitter.update(key, value, { # `update` should better be called `setState`, like in Sync
           file: @state.get('file')
           slide: @state.get('slide')
           hidden: @state.get('hidden')
-        }
+        })
       @state.on 'file', emitter, onstatechange.bind(this, 'file')
       @state.on 'slide', emitter, onstatechange.bind(this, 'slide')
       @state.on 'hidden', emitter, onstatechange.bind(this, 'hidden')
@@ -94,7 +87,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         # changes to the storage are applied, even for multiple changes in sequence.
         # This allows us to fake a bulk update of the state, which fixes the
         # endless loop problem.
-        @state.set @sync.getState(), emitter
+        @state.set(@sync.getState(), emitter)
       # Listen on the state emitter
       onstatechange = (key, value) => emitter.set(key, value)
       @state.on 'file', emitter, (value) -> onstatechange('file', value)
