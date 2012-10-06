@@ -26,7 +26,7 @@ a{color:#00f}
 #PikSlides .pikSlide.pikCurrent{visibility:visible}
 #PikSlides #PikHide.pikActive{visibility:visible}
 }#PikApp iframe{display:block;border:none;height:100%;width:100%;margin:0;padding:0}
-#PikApp #PikControlsContainer{position:absolute;bottom:0;right:0;padding:.85em .55em .85em 1em}
+#PikApp #PikControlsContainer{position:absolute;bottom:0;right:0;padding:.85em 1.25em 1.25em 2em;margin:0}
 #PikApp #PikControls{background:rgba(0,0,0,0.95);-webkit-border-radius:.5em;border-radius:.5em;font-family:Arial,sans-serif;line-height:1.25;font-size:16px;color:#fff;font-weight:bold;margin:0;padding:1.2em 1.6em .9em 1.6em;opacity:.3;-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=30);filter:alpha(opacity=30);-webkit-transition:opacity 400ms;-moz-transition:opacity 400ms;-o-transition:opacity 400ms;-ms-transition:opacity 400ms;transition:opacity 400ms}
 #PikApp #PikControlsContainer:hover #PikControls{opacity:1;-ms-filter:none;filter:none}
 #PikApp #PikControlsLinks,#PikApp #PikControlsContainer:hover #PikControlsTitle{display:none}

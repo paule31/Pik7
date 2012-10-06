@@ -1,7 +1,6 @@
 require ['lib/polyfill/bind', 'lib/vendor/almond',
-         'app', 'presenterApp', 'slides',
-         'jquery', 'prefixfree'], (_bind, _almond, App, PresenterApp, Slides) ->
-
+         'app', 'presenterApp', 'ui/app', 'ui/presenterApp',
+         'slides', 'jquery', 'prefixfree'], (_bind, _almond, App, PresenterApp, appUi, presenterAppUi, Slides) ->
 
   # Default values for a newly initalized App or PresenterApp
   appDefaults = {
@@ -11,30 +10,16 @@ require ['lib/polyfill/bind', 'lib/vendor/almond',
     numSlides: 1
   }
 
-
-  # If the page looks like an app frame, it's probably just that
+  # Default app view
   if $('#PikApp').length > 0
     app = new App(appDefaults)
+    appUi(app)
 
-    # Change the page title when a new presentation loads
-    app.on 'load', ->
-      presentationTitle = $('iframe')[0].contentWindow.$('title').text()
-      $('title').text(presentationTitle)
-
-    # Reload link
-    $('.reloadLink').click ->
-      $('iframe')[0].contentWindow.location.reload(true)
-
-    # Print link
-    $('.printLink').click ->
-      printPath = $('iframe')[0].contentWindow.location.href + '#print'
-      window.open(printPath)
-
-
-  # ... or might it just be a presenter view?
+  # Presenter view
   else if $('#PikPresenterApp').length > 0
     app = new PresenterApp(appDefaults)
+    presenterAppUi(app)
 
-
-  # Otherwise it's obviously a slide set
-  else new Slides()
+  # Slide set
+  else if $('#PikSlides').length > 0
+    new Slides()
