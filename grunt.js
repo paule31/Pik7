@@ -71,6 +71,7 @@ docco: {
     dest: 'src/script',
     files: [
       '*.coffee',
+      'ui/*.coffee',
       'lib/*.coffee'
     ]
   }
@@ -91,7 +92,7 @@ requirejs: {
   }
 },
 
-clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/test/*.js']
+clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/ui/*.js', 'src/script/test/*.js']
 
 });
 

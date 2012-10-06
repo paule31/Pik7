@@ -22,7 +22,7 @@ define ['lib/emitter'], (Emitter) ->
       if argsLen < 3
         argsStr = [].join.call(arguments, ', ')
         throw new Error "Missing arguments for 'on()' - expected 3, got #{argsLen} (#{argsStr})"
-      super topic, callback
+      super(topic, callback)
       callback.__subscriber__ = subscriber if subscriber?
 
     # Trigger all callbacks for the given topic if the callback's `__subscriber__`
@@ -38,11 +38,11 @@ define ['lib/emitter'], (Emitter) ->
       SmartEmitter.__super__.trigger.apply { topics }, args
 
     # Let this Smart Emitter listen on all events on another Emitter. The other
-    # Emitter must have the exact same topics as the Smart Emitter vor this to work.
+    # Emitter must have the exact same topics as the Smart Emitter for this to work.
     onAll: (other) ->
       ownTopics = Object.keys(@topics)
       otherTopics = Object.keys(other.topics)
-      if not compareArrays ownTopics, otherTopics
+      if not compareArrays(ownTopics, otherTopics)
         throw new Error "Can't connect emitters; incompatible topic lists: [#{ownTopics}] and [#{otherTopics}]"
       self = this
       for topic, callbacks of @topics

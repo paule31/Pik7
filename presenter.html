@@ -15,14 +15,15 @@
 	</div>
 	<div id="PikTimer">
 		<span id="PikTimeElapsed">00:00:00</span>
-		<span id="PikSlideCurrent">00:00:00</span>
+		<span id="PikTimeCurrent">00:00:00</span>
 	</div>
 	<iframe id="PikFramePreview" src="about:blank"></iframe>
 	<div id="PikControlsContainer">
 		<p id="PikControls">
-			<select id="PikControlsSelect"></select>
 			<a class="iconView" href="index.html" target="_blank">Open Viewer</a>
 			<a class="iconFolder" href="presentations" target="Slides">Browse</a>
+			<br>
+			Jump to slide <select id="PikControlsSelect"></select>
 			<br>
 			<label><input id="PikNoEvents" type="checkbox" value="1"> Suppress slide events in presenter</label>
 		</p>

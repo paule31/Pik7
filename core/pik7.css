@@ -39,7 +39,7 @@ a{color:#00f}
 #PikApp a:active{color:#f00}
 #PikApp [class^='icon']:before{margin-right:.5em;position:relative;top:-1px}
 #PikApp #PikControlsTitle:before{margin:0}
-#PikPresenterApp body{font-size:20px;font-family:Arial,sans-serif;line-height:1.25}
+#PikPresenterApp body{font-size:16px;font-family:Arial,sans-serif;line-height:1.25}
 #PikPresenterApp iframe{display:block;border:none;margin:0;-webkit-box-shadow:0 0 3em -.2em rgba(0,0,0,0.5);box-shadow:0 0 3em -.2em rgba(0,0,0,0.5);background:#ffc0cb}
 #PikPresenterApp #PikFrame,#PikPresenterApp #PikFramePreviewContainer{position:absolute;}
 #PikPresenterApp #PikFrame:hover,#PikPresenterApp #PikFramePreviewContainer:hover{z-index:1337}

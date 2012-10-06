@@ -96,7 +96,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
         # endless loop problem.
         @state.set @sync.getState(), emitter
       # Listen on the state emitter
-      onstatechange = (key, value) => emitter.set key, value
+      onstatechange = (key, value) => emitter.set(key, value)
       @state.on 'file', emitter, (value) -> onstatechange('file', value)
       @state.on 'slide', emitter, (value) -> onstatechange('slide', value)
       @state.on 'hidden', emitter, (value) -> onstatechange('hidden', value)
@@ -113,11 +113,13 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
     # Expose the state manager's event hooks, but hide the "smart" parts
     # of the SmartEmitter's functionality by using `null` for caller/subscriber objects
     on: (args...) ->
-      args.splice(1, 0, null) # add `null` as the `subscriber` object
+      args.splice(1, 0, null) if args.length == 2 # add `null` as the `subscriber` object
       @state.on(args...)
+      console.log args
     trigger: (args...) ->
-      args.splice(1, 0, null) # add `null` as the `caller` object
+      args.splice(1, 0, null) if args.length == 2 # add `null` as the `caller` object
       @state.trigger(args...)
+      console.log args
     off: (args...) ->
       @state.off(args...)
     offAll: (args...) ->

@@ -35,8 +35,8 @@ require ['lib/smartEmitter', 'lib/emitter', 'jquery'], (SmartEmitter, Emitter) -
       count = 0
       emitter.on 'foo', emitter, (arg) ->
         count++
-        ok arg in [24, 42]
-        ok count < 3
+        ok(arg in [24, 42])
+        ok(count < 3)
       testObj1.trigger 'foo', 24
       testObj2.trigger 'foo', 42
 

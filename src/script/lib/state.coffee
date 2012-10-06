@@ -6,7 +6,7 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
     # `defaults` is a state object that must also contain the `numSlides` a property for
     # obvious reasons.
     constructor: (defaults) ->
-      super 'file', 'slide', 'hidden'
+      super('file', 'slide', 'hidden')
       required = ['file', 'slide', 'hidden', 'numSlides']
       throw new Error "Missing #{val} value in state defaults (actual value: #{defaults[val]})" for val in required when val not of defaults || !defaults[val]?
       @addState defaults
