@@ -39,7 +39,15 @@ a{color:#00f}
 #PikApp a:active{color:#f00}
 #PikApp [class^='icon']:before{margin-right:.5em;position:relative;top:-1px}
 #PikApp #PikControlsTitle:before{margin:0}
+#PikPresenterApp body{font-size:20px;font-family:Arial,sans-serif;line-height:1.25}
 #PikPresenterApp iframe{display:block;border:none;margin:0;-webkit-box-shadow:0 0 3em -.2em rgba(0,0,0,0.5);box-shadow:0 0 3em -.2em rgba(0,0,0,0.5);background:#ffc0cb}
-@media screen and (max-aspect-ratio:7/5){#PikPresenterApp body{background:#f00 !important}
-}@media screen and (min-aspect-ratio:7/5){#PikPresenterApp body{background:#008000 !important}
-}
+#PikPresenterApp #PikFrame,#PikPresenterApp #PikFramePreviewContainer{position:absolute;}
+#PikPresenterApp #PikFrame:hover,#PikPresenterApp #PikFramePreviewContainer:hover{z-index:1337}
+#PikPresenterApp #PikFrame{height:100%;width:70%}
+#PikPresenterApp #PikFramePreviewContainer{text-align:right;right:0;height:70%;width:45%;}
+#PikPresenterApp #PikFramePreviewContainer iframe{height:100%;width:100%}
+#PikSlideCounter,#PikTimer{display:inline-block;margin:20px 32px}
+#PikSlideCounter{font-weight:bold;font-size:2.5em}
+#PikTimer span{display:block}
+#PikControlsContainer{margin:20px 16px;line-height:2;}
+#PikControlsContainer a,#PikControlsContainer select,#PikControlsContainer label{margin-right:16px;max-width:33%;font-size:inherit}

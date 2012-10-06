@@ -3,23 +3,53 @@
   $wide  = "screen and (min-aspect-ratio:7/5)"
   $small = "screen and (max-aspect-ratio:7/5)"
 
+  body
+    font-size 20px
+    font-family Arial, sans-serif
+    line-height 1.25
+
   iframe
     display block
     border none
     margin 0
     box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
     background pink
+  #PikFrame, #PikFramePreviewContainer
+    position absolute
+    &:hover
+      z-index 1337
+
+  // Regular (widescreen) layout
+  #PikFrame
+    height 100%
+    width 70%
+  #PikFramePreviewContainer
+    text-align right
+    right 0
+    height 70%
+    width 45%
+    iframe
+      height 100%
+      width 100%
 
 
-  // Narrow layout
-  @media $small
+// Timer and slide counter
+#PikSlideCounter, #PikTimer
+  display inline-block
+  margin 20px 32px
+#PikSlideCounter
+  font-weight bold
+  font-size 2.5em
+#PikTimer
+  span
+    display block
 
-    body
-      background red !important
 
-
-  // Widescreen layout
-  @media $wide
-
-    body
-      background green !important
+// Controls
+#PikControlsContainer
+  margin 20px 16px
+  line-height 2
+  a, select, label
+    margin-right 16px
+    max-width 33%
+    font-size inherit

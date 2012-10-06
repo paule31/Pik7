@@ -81,18 +81,17 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
           y: $('html').height()
         }
         ratio = 4 / 3
-        newwidth  = if size.x > size.y * ratio then size.y * ratio else size.x
-        newheight = if size.x > size.y * ratio then size.y else size.x / ratio
+        newwidth  = Math.floor(if size.x > size.y * ratio then size.y * ratio else size.x)
+        newheight = Math.floor(if size.x > size.y * ratio then size.y else size.x / ratio)
         topmargin = Math.floor((size.y - newheight) / 2)
         fontsize  = (newheight + newwidth) / 6.5
         @wrapper.css({
-          'width'     : newwidth  + 'px'
-          'height'    : newheight + 'px'
-          'font-size' : fontsize  + '%'
-          'top'       : topmargin + 'px'
+          'width'     : "#{newwidth}px"
+          'height'    : "#{newheight}px"
+          'font-size' : "#{fontsize}%"
+          'top'       : "#{topmargin}px"
         })
       setSizes() # See the long comment in `@setupDom()` for why this is here
-      $(window).bind('load', setSizes)
       $(window).bind('resize', setSizes)
 
 
