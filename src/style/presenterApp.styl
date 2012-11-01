@@ -1,12 +1,15 @@
 #PikPresenterApp
 
-  $wide  = "screen and (min-aspect-ratio:7/5)"
-  $small = "screen and (max-aspect-ratio:7/5)"
 
   body
-    font-size 16px
     font-family Arial, sans-serif
     line-height 1.25
+    color #000
+  #PikPresenterAppWrapper
+    position relative
+    margin-left auto
+    margin-right auto
+
 
   iframe
     display block
@@ -14,42 +17,56 @@
     margin 0
     box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
     background pink
-  #PikFrame, #PikFramePreviewContainer
     position absolute
     &:hover
       z-index 1337
-
-  // Regular (widescreen) layout
   #PikFrame
-    height 100%
-    width 70%
-  #PikFramePreviewContainer
-    text-align right
+    left 0
+  #PikFramePreview
     right 0
-    height 70%
-    width 45%
-    iframe
-      height 100%
-      width 100%
 
 
-// Timer and slide counter
-#PikSlideCounter, #PikTimer
-  display inline-block
-  margin 20px 32px
-#PikSlideCounter
-  font-weight bold
-  font-size 2.5em
-#PikTimer
-  span
+  // Timer and slide counter
+  #PikCounterContainer
+    font-size 55%
+    text-align:right
+    position absolute
+    top 11%
+    right 0
+  #PikSlideCounter, #PikTimer
     display block
+  #PikSlideCounter
+    font-weight bold
+    font-size 2em
+  #PikTimer
+    span
+      display block
 
 
-// Controls
-#PikControlsContainer
-  margin 20px 16px
-  line-height 2
-  a, select, label
-    margin-right 16px
-    max-width 33%
-    font-size inherit
+  // Controls
+  #PikControlsContainer
+    font-size 35%
+    text-align:right
+    position absolute
+    bottom 11%
+    right 0
+    width 100%
+    p
+      margin 0.75em 0
+    select
+      font-size inherit
+      width 20%
+    a
+      margin-left 0.5em
+      text-decoration none
+      border-bottom-width 0.1em
+      border-bottom-style solid
+      &:link, &:visited
+        color inherit
+        border-bottom-color currentcolor
+      &:hover
+        color inherit
+        border-bottom-color transparent
+      &:active
+        color #C00
+        border-bottom-color transparent

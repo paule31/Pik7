@@ -11,6 +11,7 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
     wrapper: null
     hideLayer: null
 
+
     constructor: ->
       self = this
       @presentation = new Presentation ->
