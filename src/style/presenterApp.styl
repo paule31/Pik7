@@ -11,6 +11,10 @@
     margin-right auto
 
 
+  input, select
+    font-size inherit
+
+
   iframe
     display block
     border none
@@ -55,7 +59,6 @@
     p
       margin 0.75em 0
     select
-      font-size inherit
       width 20%
     a
       margin-left 0.5em
@@ -73,3 +76,35 @@
         border-bottom-color transparent
       &:before
         margin-right 0.25em
+
+  // Advanced Options
+  #PikPresenterOptions
+    font-size 0.425em
+    background #FFF
+    box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
+    display table
+    position absolute
+    z-index 9000
+    width 80%
+    left 10%
+    div
+      display table-cell
+      vertical-align middle
+      padding 1em
+    input[type=number]
+      max-width 20%
+    #PikOptionsClose
+      margin-top 2.5em
+      text-align right
+      input
+        font-weight bold
+  #PikPresenterOptionsOverlay
+    position absolute
+    z-index 8999
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(#000, 0.75)
+  #PikPresenterOptions:not(.open), #PikPresenterOptionsOverlay:not(.open)
+    display none

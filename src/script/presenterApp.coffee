@@ -8,11 +8,15 @@ define ['app', 'lib/forceAspectRatio', 'jquery'], (App, forceAspectRatio, $) ->
 
   return class PresenterApp extends App
 
-
-    constructor: (defaults) ->
+    constructor: (defaults, options) ->
       super(defaults)
+      @setOptions(options)
       @setSizes()
       @startTimers()
+
+
+    #
+    setOptions: (options) ->
 
 
     #
@@ -20,16 +24,18 @@ define ['app', 'lib/forceAspectRatio', 'jquery'], (App, forceAspectRatio, $) ->
       wrapperEnforcer = forceAspectRatio('#PikPresenterAppWrapper', 'html', 1, yes, yes, 'margin-top')
       mainEnforcer = forceAspectRatio('#PikFrame', '#PikPresenterAppWrapper', 0.75)
       prevEnforcer = forceAspectRatio('#PikFramePreview', '#PikPresenterAppWrapper', 0.425)
+      optionsEnforcer = forceAspectRatio('#PikPresenterOptions', '#PikPresenterAppWrapper', 0.7, yes, no)
       ratioEnforcer = ->
         wrapperEnforcer()
         mainEnforcer()
         prevEnforcer()
+        optionsEnforcer()
       ratioEnforcer()
       $(window).bind('resize', ratioEnforcer)
 
 
     #
-    startTimers: ->
+    startTimers: (countdown, limit) ->
       $current = $('#PikTimeCurrent')
       $elapsed = $('#PikTimeElapsed')
       start = Date.now()
@@ -44,4 +50,8 @@ define ['app', 'lib/forceAspectRatio', 'jquery'], (App, forceAspectRatio, $) ->
         $current.html(new Date(now).toLocaleTimeString())
         $elapsed.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
       setInterval(update, 1000)
+
+
+    setupOptionsInterface: ->
+
 

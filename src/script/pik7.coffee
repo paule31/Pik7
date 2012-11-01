@@ -10,6 +10,17 @@ require ['lib/polyfill/bind', 'lib/vendor/almond',
     numSlides: 1
   }
 
+  # Default PresenterApp options
+  presenterAppOptionDefaults = {
+    optionsOpen: no
+    mainFrameContent: 'currentSlide'
+    secondaryFrameContent: 'nextSlide'
+    countdown: no
+    countdownRunning: no
+    countdownAmount: 30
+    countdownWarnAmount: 1
+  }
+
   # Default app view
   if $('#PikApp').length > 0
     app = new App(appDefaults)
@@ -17,7 +28,7 @@ require ['lib/polyfill/bind', 'lib/vendor/almond',
 
   # Presenter view
   else if $('#PikPresenterApp').length > 0
-    app = new PresenterApp(appDefaults)
+    app = new PresenterApp(appDefaults, presenterAppOptionDefaults)
     presenterAppUi(app)
 
   # Slide set

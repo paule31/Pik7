@@ -36,4 +36,43 @@
 			<label><input id="PikNoEvents" type="checkbox" value="1"> Suppress events</label>
 		</p>
 	</div>
+
+	<div id="PikPresenterOptions">
+		<h1>Options</h1>
+		<h2>Layout</h2>
+		<p>
+			<label>
+				Main frame content:
+				<select id="PikOptionsCurrentFrameContent">
+					<option value="current">Current slide</option>
+					<option value="next">Next slide</option>
+					<option value="notes">Notes for current slide</option>
+				</select>
+			</label>
+		</p>
+		<p>
+			<label>
+				Secondary frame content:
+				<select id="PikOptionsSecondaryFrameContent">
+					<option value="current">Current slide</option>
+					<option value="next">Next slide</option>
+					<option value="notes">Notes for current slide</option>
+				</select>
+			</label>
+		</p>
+		<h2>Countdown</h2>
+		<p>
+			<label><input type="checkbox" name="PikOptionsCountdownActivate" value="1"> Show countdown instead of elapsed time</label>
+		</p>
+		<p>
+			<label>Start at <input type="number" name="PikOptionsCountdownAmount" value="30"> minutes</label>,
+			<label>warn at <input type="number" name="PikOptionsCountdownWarn" value="1"> minutes</label>
+		</p>
+		<p id="PikOptionsClose">
+			<input type="button" value="Save and exit">
+		</p>
+	</div>
+
 </div>
+
+<div id="PikPresenterOptionsOverlay"><div>
