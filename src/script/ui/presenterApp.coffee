@@ -2,18 +2,18 @@
 define ['jquery'], -> (app) ->
 
   app.on 'load', ->
-    frame = $('#PikFrame')
-    frameWindow = frame[0].contentWindow
+    frame = $('#PikFrame')[0].contentWindow
+    pik = frame.Pik
 
 
     # Change the page title when a new presentation loads
-    presentationTitle = frameWindow.$('title').text()
+    presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)
 
 
     # Update slide counter
-    $('#PikSlideCount').text(frameWindow.Pik.numSlides)
-    $('#PikSlideCurrent').text(app.controller.getSlide())
+    $('#PikSlideCount').text(frame.Pik.numSlides)
+    $('#PikSlideCurrent').text(app.controller.getSlide() + 1)
     app.controller.on 'slide', (num) ->
       console.log arguments
       $('#PikSlideCurrent').text(num)
