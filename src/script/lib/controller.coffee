@@ -37,7 +37,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       slide = @state.get('slide')
       hidden = @state.get('hidden')
       @hash.set(file, slide, hidden)
-      @sync.setState { file, slide, hidden }
+      @sync.setState({ file, slide, hidden })
 
 
     # Connect Emitters

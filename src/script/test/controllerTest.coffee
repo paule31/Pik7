@@ -1,5 +1,6 @@
 require ['lib/controller', 'lib/polyfill/bind'], (Controller) ->
 
+  c = null
   defaults = {
     file: 'core/welcome.html'
     slide: 0
@@ -9,6 +10,8 @@ require ['lib/controller', 'lib/polyfill/bind'], (Controller) ->
 
   module('Controller', {
     setup: ->
+      c?.offAll()
+      c = null
       window.localStorage.clear()
       window.location.hash = ''
   })
