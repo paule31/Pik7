@@ -108,11 +108,9 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
     on: (args...) ->
       args.splice(1, 0, null) if args.length == 2 # add `null` as the `subscriber` object
       @state.on(args...)
-      console.log args
     trigger: (args...) ->
       args.splice(1, 0, null) if args.length == 2 # add `null` as the `caller` object
       @state.trigger(args...)
-      console.log args
     off: (args...) ->
       @state.off(args...)
     offAll: (args...) ->
