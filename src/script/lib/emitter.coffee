@@ -11,6 +11,8 @@ define ->
 
     constructor: (args...) ->
       @topics = {}
+      if args.length == 0
+        throw new Error "Got empty topic list"
       @topics[topic] = [] for topic in args
 
     on: (topic, callback) ->
