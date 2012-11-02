@@ -101,4 +101,14 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
       $('#PikPresenterOptions').removeClass('open')
       $('#PikPresenterOptionsOverlay').removeClass('open')
 
-    console.log app.options
+    # Main frame selection
+    $mainFrameSelect = $('#PikOptionsMainFrameContent')
+    $mainFrameSelect.val(app.options.get('mainFrameContent'))
+    $mainFrameSelect.change -> app.options.set('mainFrameContent', this.value)
+    app.options.on 'mainFrameContent', (value) -> $mainFrameSelect.val(value)
+
+    # Secondary frame selection
+    $secondaryFrameSelect = $('#PikOptionsSecondaryFrameContent')
+    $secondaryFrameSelect.val(app.options.get('secondaryFrameContent'))
+    $secondaryFrameSelect.change -> app.options.set('secondaryFrameContent', this.value)
+    app.options.on 'secondaryFrameContent', (value) -> $secondaryFrameSelect.val(value)

@@ -1,12 +1,20 @@
 # Presenter view app
 
-define ['lib/iframe', 'app', 'jquery'], (Iframe, App, $) ->
+define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmitter, Iframe, $) ->
 
   return class PresenterApp extends App
 
 
     constructor: (defaults, options) ->
+      @setOptions(options)
       super(defaults)
+
+
+    # Create the options emitter and let the iframes listen for changes on relevant options
+    setOptions: (options) ->
+      @options = new StatefulEmitter(options)
+      @options.on 'mainFrameContent', => @onSlide(@controller.getSlide())
+      @options.on 'secondaryFrameContent', => @onSlide(@controller.getSlide())
 
 
     # In addition to the main iframe connect the secondary frame
@@ -21,17 +29,27 @@ define ['lib/iframe', 'app', 'jquery'], (Iframe, App, $) ->
       @secondaryIframe.do('file', @controller.getFile())
 
 
-    # Have `onReady` to be called twice, once for each frame
+    # Require `onReady()` to be called twice, once for each frame
     onReady: -> PresenterApp::onReady = -> super()
 
 
-    # Overload methods to add the secondary frame
+    # Overload file method to add the secondary frame, but change only if the primary did
     onFile: (file) ->
       if super(file)
         @secondaryIframe.do('file', file)
-    onSlide: (slide) ->
-      super(slide)
-      @secondaryIframe.do('slide', slide)
+
+
+    # Check the options to see what slide to display
+    onSlide: (currentSlide) ->
+      mainSlide = currentSlide
+      if @options.get('mainFrameContent') == 'nextSlide' then mainSlide++
+      super(mainSlide)
+      secondarySlide = currentSlide
+      if @options.get('secondaryFrameContent') == 'nextSlide' then secondarySlide++
+      @secondaryIframe.do('slide', secondarySlide)
+
+
+    # Overload method to add the secondary frame
     onHidden: (state) ->
       super(state)
       @secondaryIframe.do('hidden', state)
