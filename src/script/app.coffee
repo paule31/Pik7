@@ -29,8 +29,11 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
       # browsers don't fire load events for iframes reliably, the slides have to publish
       # their load event to the app manually via `window.parent.Pik.app.trigger('load')`
       window.Pik.app.on 'ready', =>
-        @trigger('load')
         @connectController()
+        # Important: trigger load event *after* @connectControllers() or callbacks that
+        # are added to the app controller on load get thrown away along with the old
+        # controller right after they're added...
+        @trigger('load')
         controls = @iframe.window.Pik.controls
         controls.on('next', @controller.goNext.bind(@controller))
         controls.on('prev', @controller.goPrev.bind(@controller))
@@ -67,7 +70,7 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
       # Figure out the (short) path to the slides that are loaded into the iframe
       location = window.location.href
       iframeLocation = @iframe.window.location.href
-      basePath = Hash::commonPath location, iframeLocation
+      basePath = Hash::commonPath(location, iframeLocation)
       slidesPath = iframeLocation.substring(basePath.length, iframeLocation.length)
       # Find out if the current slides are different from the ones that are currently
       # in the controller state. This happens on manual navigation (e.g. via "browse"
@@ -76,7 +79,7 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
       # complete reset.
       newFile = slidesPath != @controller.getFile()
       state = {
-        file: '/' + slidesPath
+        file: slidesPath
         numSlides: @iframe.window.Pik.numSlides
         slide: if newFile then 0 else @controller.getSlide()
         hidden: if newFile then no else @controller.getHidden()

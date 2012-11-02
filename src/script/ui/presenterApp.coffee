@@ -15,5 +15,4 @@ define ['jquery'], -> (app) ->
     $('#PikSlideCount').text(frame.Pik.numSlides)
     $('#PikSlideCurrent').text(app.controller.getSlide() + 1)
     app.controller.on 'slide', (num) ->
-      console.log arguments
-      $('#PikSlideCurrent').text(num)
+      $('#PikSlideCurrent').text(num + 1)

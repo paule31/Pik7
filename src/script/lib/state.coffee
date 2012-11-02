@@ -9,7 +9,7 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
       super('file', 'slide', 'hidden')
       required = ['file', 'slide', 'hidden', 'numSlides']
       throw new Error "Missing #{val} value in state defaults (actual value: #{defaults[val]})" for val in required when val not of defaults || !defaults[val]?
-      @addState defaults
+      @addState(defaults)
 
     # Setup state events, pre-fill the state with the supplied defaults
     addState: (defaults) ->
@@ -33,16 +33,16 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
                 if value >= @current.numSlides then value = @current.numSlides - 1
                 if value != @current[key]
                   @current[key] = value
-                  that.trigger key, caller, value
+                  that.trigger('slide', caller, value)
               # There's not additional limit to things other than slides, so the new value
               # can always be assigned and the event can always be triggered
               else
                 @current[key] = value
-                that.trigger key, caller, value
+                that.trigger(key, caller, value)
       }
 
     set: (data, caller) ->
       if 'numSlides' of data then throw new Error "Can't modify 'numSlides' after init"
-      @state.update data, caller
+      @state.update(data, caller)
 
     get: (key) -> return @state.current[key]

@@ -54,3 +54,23 @@ require ['lib/smartEmitter', 'lib/emitter', 'jquery'], (SmartEmitter, Emitter) -
       emitter = new SmartEmitter('foo', 'bar')
       testObj = new Emitter('foo', 'baz')
       raises -> emitter.onAll(testObj)
+
+    test 'Allow non-objects (null/undefined) to subscribe', ->
+      stop(2)
+      emitter = new SmartEmitter('bar')
+      emitter.on 'bar', null, (arg) ->
+        start()
+        strictEqual(arg, 42)
+      emitter.on 'bar', undefined, (arg) ->
+        start()
+        strictEqual(arg, 42)
+      emitter.trigger('bar', {}, 42)
+
+    test 'Allow non-objects (null/undefined) to trigger events', ->
+      stop(2)
+      emitter = new SmartEmitter('baz')
+      emitter.on 'baz', {}, (arg) ->
+        start()
+        strictEqual arg, 42
+      emitter.trigger('baz', null, 42)
+      emitter.trigger('baz', undefined, 42)
