@@ -63,13 +63,13 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     app.controller.on 'slide', (num) -> $slideSelect.val(num)
 
 
-    # Suppress Events
+    # Suppress events
     # ---------------
     $('#PikNoEvents').change ->
       if this.checked
-        frame.$('html').addClass('pikNoEvents')
+        f.contentWindow.$('html').addClass('pikNoEvents') for f in $('iframe')
       else
-        frame.$('html').removeClass('pikNoEvents')
+        f.contentWindow.$('html').removeClass('pikNoEvents') for f in $('iframe')
 
 
     # Timers
