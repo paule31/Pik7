@@ -27,19 +27,28 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
       if not @initialized then @init(defaults)
       # This would normally be a job for the iframe object's load emitter, but since
       # browsers don't fire load events for iframes reliably, the slides have to publish
-      # their load event to the app manually via `window.parent.Pik.app.trigger('load')`
-      window.Pik.app.on 'ready', =>
-        @connectController()
-        # Important: trigger load event *after* @connectControllers() or callbacks that
-        # are added to the app controller on load get thrown away along with the old
-        # controller right after they're added...
-        @trigger('load')
-        controls = @iframe.window.Pik.controls
-        controls.on('next', @controller.goNext.bind(@controller))
-        controls.on('prev', @controller.goPrev.bind(@controller))
-        controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
-        @iframe.do('slide', @controller.getSlide())
-        @iframe.do('hidden', @controller.getHidden())
+      # their load event to the app manually via `window.parent.Pik.app.trigger('ready')`
+      window.Pik.app.on 'ready', => @onReady()
+
+
+    # Actions to run after the iframe(s) report that they have loaded.
+    # Important: trigger load event *after* @connectControllers() or callbacks that
+    # are added to the app controller on load get thrown away along with the old
+    # controller right after they're added...
+    onReady: ->
+      @connectController()
+      @connectControls()
+      @trigger('load')
+      @onSlide(@controller.getSlide())
+      @onHidden(@controller.getHidden())
+
+
+    # Connect the iframe's controls to the controller
+    connectControls: ->
+      controls = @iframe.window.Pik.controls
+      controls.on('next', @controller.goNext.bind(@controller))
+      controls.on('prev', @controller.goPrev.bind(@controller))
+      controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
 
 
     # Things to do when the controller reports changes. Also needed for init on first load
@@ -47,8 +56,9 @@ define ['lib/emitter','lib/controller', 'lib/iframe', 'lib/hash'], (Emitter, Con
     onFile: (file) ->
       # Check if the iframe already contains our file before triggering a loop of endless
       # reloads...
-      if file != @iframe.window.location.href.slice(-file.length)
-        @iframe.do('file', file)
+      changeFile = file != @iframe.window.location.href.slice(-file.length)
+      if changeFile then @iframe.do('file', file)
+      return changeFile # Return for use in child classes
     onSlide: (slide) ->
       @iframe.do('slide', slide)
     onHidden: (state) ->
