@@ -1,5 +1,26 @@
 # UI code for the presenter view
-define ['jquery'], ($) -> (app) ->
+define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
+
+  # Interface sizes
+  # ---------------
+
+  # Use a 4/3 aspect ratio throughout the entire prsenter app
+  forceAspectRatio = forceAspectRatio.bind(null, 4/3)
+  wrapperEnforcer = forceAspectRatio('#PikPresenterAppWrapper', 'html', 1, yes, yes, 'margin-top')
+  mainEnforcer = forceAspectRatio('#PikFrame', '#PikPresenterAppWrapper', 0.75)
+  prevEnforcer = forceAspectRatio('#PikFramePreview', '#PikPresenterAppWrapper', 0.425)
+  optionsEnforcer = forceAspectRatio('#PikPresenterOptions', '#PikPresenterAppWrapper', 0.7, yes, no)
+  ratioEnforcer = ->
+    wrapperEnforcer()
+    mainEnforcer()
+    prevEnforcer()
+    optionsEnforcer()
+  ratioEnforcer()
+  $(window).bind('resize', ratioEnforcer)
+
+
+  # Reloadable App UI
+  # -----------------
 
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
@@ -49,3 +70,21 @@ define ['jquery'], ($) -> (app) ->
         frame.$('html').addClass('pikNoEvents')
       else
         frame.$('html').removeClass('pikNoEvents')
+
+
+    # Timers
+    # ------
+    $timerCurrent = $('#PikTimeCurrent')
+    $timerElapsed = $('#PikTimeElapsed')
+    timerStart = Date.now()
+    # Pad a number with a leading zero
+    pad = (x) ->
+      x = x + ''
+      if x.length == 1 then return '0' + x else  return x
+    # Time update function to run each second
+    update = ->
+      now = Date.now()
+      diff = new Date(now - timerStart)
+      $timerCurrent.html(new Date(now).toLocaleTimeString())
+      $timerElapsed.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
+    setInterval(update, 1000)
