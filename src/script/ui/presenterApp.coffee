@@ -1,5 +1,5 @@
 # UI code for the presenter view
-define ['jquery'], -> (app) ->
+define ['jquery'], ($) -> (app) ->
 
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
@@ -16,3 +16,23 @@ define ['jquery'], -> (app) ->
     $('#PikSlideCurrent').text(app.controller.getSlide() + 1)
     app.controller.on 'slide', (num) ->
       $('#PikSlideCurrent').text(num + 1)
+
+
+    # Slide select
+    # ------------
+
+    $slideSelect = $('#PikControlsSelect')
+
+    # Populate slide select
+    pik.slides.each (index, slide) ->
+      text = $(slide).find('h1, h2, h3, h4, h5, h6, p').first().text() || index
+      $('<option />').attr('value', index).text(text).appendTo($slideSelect)
+
+    # Advance the select to the current slide
+    $slideSelect.val(app.controller.getSlide())
+
+    # Listen for changes
+    $slideSelect.change -> app.controller.goTo($(this).val())
+
+    # Keep up with slide changes
+    app.controller.on 'slide', (num) -> $slideSelect.val(num)

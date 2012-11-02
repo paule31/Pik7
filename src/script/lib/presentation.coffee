@@ -14,6 +14,7 @@ define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
     createApi: ->
       self = this
       window.Pik = {
+        slides: $('.pikSlide')
         numSlides: self.numSlides
         controls: new Controls()
         goTo: (slide) -> self.trigger('slide', slide)
