@@ -19,7 +19,7 @@
     display block
     border none
     margin 0
-    box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
+    box-shadow 0 0 2em -0.25em rgba(#000, 0.6)
     background #FFF
     position absolute
     &:hover
@@ -61,6 +61,7 @@
     select
       width 20%
     a
+      cursor pointer
       margin-left 0.5em
       text-decoration none
       border-bottom-width 0.1em
@@ -81,16 +82,13 @@
   #PikPresenterOptions
     font-size 0.425em
     background #FFF
-    box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
+    box-shadow 0 0 2em -0.25em rgba(#000, 0.6)
     display table
     position absolute
     z-index 9000
     width 80%
     left 10%
-    div
-      display table-cell
-      vertical-align middle
-      padding 1em
+    padding 0 1em
     input[type=number]
       max-width 20%
     #PikOptionsClose
@@ -98,6 +96,7 @@
       text-align right
       input
         font-weight bold
+        cursor pointer
   #PikPresenterOptionsOverlay
     position absolute
     z-index 8999

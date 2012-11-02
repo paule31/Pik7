@@ -88,3 +88,17 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
       $timerCurrent.html(new Date(now).toLocaleTimeString())
       $timerElapsed.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
     setInterval(update, 1000)
+
+
+    # Options window
+    # --------------
+
+    # Open and close window
+    $('#PikPresenterOptionsLink').click ->
+      $('#PikPresenterOptions').addClass('open')
+      $('#PikPresenterOptionsOverlay').addClass('open')
+    $('#PikOptionsCloseButton').click ->
+      $('#PikPresenterOptions').removeClass('open')
+      $('#PikPresenterOptionsOverlay').removeClass('open')
+
+    console.log app.options
