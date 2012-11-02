@@ -1,4 +1,4 @@
-define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Presentation, Hash, forceAspectRatio) ->
+define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Presentation, Hash, forceAspectRatio, $) ->
   return class Slides
 
     # Index for the current, next and previous slide
@@ -88,18 +88,18 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
 
     # Display the slide `num`
     goTo: (num) =>
-      $(@slides[@curr]).trigger('pikDeactivate')
+      $(@slides[@curr]).trigger('pikDeactivate') unless $('html').hasClass('pikNoEvents')
       $(@slides[@curr]).removeClass('pikCurrent')
       $(@slides[@next]).removeClass('pikNext')
       $(@slides[@prev]).removeClass('pikPrev')
       @curr = num
       @next = num + 1
       @prev = num - 1
-      $(@slides[@curr]).trigger('pikActivate')
+      $(@slides[@curr]).trigger('pikActivate') unless $('html').hasClass('pikNoEvents')
       $(@slides[@curr]).addClass('pikCurrent')
       $(@slides[@next]).addClass('pikNext')
       $(@slides[@prev]).addClass('pikPrev')
-      $(window).trigger('pikSlide', [@curr])
+      $(window).trigger('pikSlide', [@curr]) unless $('html').hasClass('pikNoEvents')
 
 
     # Hide the presentation

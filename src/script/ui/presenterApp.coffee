@@ -40,3 +40,12 @@ define ['jquery'], ($) -> (app) ->
 
     # Keep up with slide changes
     app.controller.on 'slide', (num) -> $slideSelect.val(num)
+
+
+    # Suppress Events
+    # ---------------
+    $('#PikNoEvents').change ->
+      if this.checked
+        frame.$('html').addClass('pikNoEvents')
+      else
+        frame.$('html').removeClass('pikNoEvents')
