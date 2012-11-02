@@ -6,6 +6,10 @@ define ['jquery'], ($) -> (app) ->
     pik = frame.Pik
 
 
+    # Add a class to the presentation's html element to indicate that it's displayed in the presenter
+    frame.$('html').addClass('pikInPresenter')
+
+
     # Change the page title when a new presentation loads
     presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)
