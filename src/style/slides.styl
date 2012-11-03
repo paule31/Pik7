@@ -28,6 +28,16 @@
     #PikHide.pikActive
       visibility visible
 
+    // Notes are invisible in the normal presentation view
+    .pikNotes
+      display none
+
   // Modifications for presenter display
   #PikSlides.pikInPresenter #PikHide
     opacity 0.6
+  #PikSlides.pikInPresenter .pikNotes
+    display block
+
+  // Only-notes-showing mode for presenter
+  #PikSlides.pikOnlyNotes .pikSlide > :not(.pikNotes)
+    display none

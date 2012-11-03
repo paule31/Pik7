@@ -23,7 +23,6 @@
     box-sizing border-box
     font-size 0.85em
     background #FFF
-    border 1px solid #CCC
     box-shadow 0 0 1.5em -0.5em #999
     width 96%
     height 96%
@@ -31,6 +30,21 @@
     padding 0.5em 1.5em
     &:first-child
       text-align center
+
+    // Centered content
+    &.center
+      display -webkit-flex
+      -webkit-flex-direction column
+      -webkit-justify-content space-around
+      > *
+        margin 0 auto
+
+
+    // Filling background image
+    &.image
+      background-size contain
+      background-repeat no-repeat
+      background-position center center
 
   h1
     color #000
