@@ -1,8 +1,9 @@
-require ['lib/statefulEmitter'], (StatefulEmitter) ->
+window.testKey = 'statefulEmitterTest'
+window.localStorage.removeItem(testKey)
+
+require ['lib/statefulEmitter'], (StatefulEmitter) -> window.onload = ->
 
   'use strict'
-  testKey = 'statefulEmitterTest'
-  window.localStorage.removeItem(testKey)
 
   test 'Initialize with the default values', ->
     e = new StatefulEmitter({ foo: 23 })
@@ -35,7 +36,14 @@ require ['lib/statefulEmitter'], (StatefulEmitter) ->
     e1.set('foo', 42)
     strictEqual(window.localStorage.getItem(testKey), JSON.stringify({ foo: 42}))
 
-  # TODO: Test cross-browsing-context storage event. No idea if it works at all.
+    test 'Cross-browsing-context storage event', ->
+      stop()
+      frame = document.getElementById('Testframe').contentWindow
+      frame.createTestEmitter()
+      frame.testEmitter.on 'foo', (value) ->
+        strictEqual(value, 1337)
+        start()
+      e1.set('foo', 1337)
 
   test 'Fail when creating without state object and/or storage key', ->
     raises -> e = new StatefulEmitter('something')

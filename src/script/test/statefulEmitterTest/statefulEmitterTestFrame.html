@@ -1,0 +1,22 @@
+<!doctype html>
+<title></title>
+<meta charset="utf-8">
+<script>
+var require = {
+  baseUrl: '../../',
+  paths: {
+    'lib/emitter': 'lib/emitter'
+  }
+}
+</script>
+<script src="../../lib/vendor/require.js"></script>
+
+
+
+<script>
+require(['../../../script/lib/statefulEmitter.js'], function(StatefulEmitter){
+	window.createTestEmitter = function(){
+		window.testEmitter = new StatefulEmitter(null, window.parent.testKey);
+	}
+})
+</script>

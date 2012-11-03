@@ -35,8 +35,8 @@ define ['lib/emitter'], (Emitter) ->
       otherState = @readStorage()
       for own key of @state
         if @state[key] != otherState[key]
-          if not @state[key]? || otherState[key]?
-            throw new Error "Incompatible states detected (key #{key})"
+          if !@state[key]? || !otherState[key]?
+            throw new Error "Incompatible states detected (key '#{key}' not found)"
           else
             @trigger(key, otherState[key])
 
