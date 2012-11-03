@@ -13,8 +13,18 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
     # Create the options emitter and let the iframes listen for changes on relevant options
     setOptions: (options) ->
       @options = new StatefulEmitter(options)
-      @options.on 'mainFrameContent', => @onSlide(@controller.getSlide())
-      @options.on 'secondaryFrameContent', => @onSlide(@controller.getSlide())
+      @options.on 'mainFrameContent', (value) =>
+        @switchNotes(@iframe, (value == 'currentNotes'))
+        @onSlide(@controller.getSlide())
+      @options.on 'secondaryFrameContent', =>
+        @switchNotes(@secondaryIframe, (value == 'currentNotes'))
+        @onSlide(@controller.getSlide())
+
+
+    # Switch show-notes-only mode on and off for the passed iframe instance
+    switchNotes: (iframe, status) ->
+      method = if status then 'addClass' else 'removeClass'
+      iframe.window.$('html')[method]('pikOnlyNotes')
 
 
     # In addition to the main iframe connect the secondary frame
