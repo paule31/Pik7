@@ -5,12 +5,40 @@ define ['lib/emitter'], (Emitter) ->
 
 
     # Create an emitter and an interal state from the state object
-    constructor: (stateObj) ->
-      if typeof stateObj != 'object'
-        throw new Error "StatefulEmitter requires an object to create, got #{typeof stateObj}"
-      topics = Object.keys(stateObj)
+    constructor: (stateObj, @storageKey) ->
+      state = @readStorage() || stateObj
+      if not state?
+        throw new Error "Failed to create state, no stored state and no default state found"
+      topics = Object.keys(state)
       super(topics...)
-      @createState(stateObj)
+      @createState(state)
+      @writeStorage()
+      @watchStorage()
+
+
+    # Read write and watch state to local storage
+    readStorage: ->
+      return JSON.parse(window.localStorage.getItem(@storageKey)) if @storageKey?
+    writeStorage: ->
+      window.localStorage.setItem(@storageKey, JSON.stringify(@state)) if @storageKey?
+    watchStorage: ->
+      if @storageKey?
+        watchFn = (evt) =>
+          if evt.storageArea == window.localStorage && evt.key == @storageKey
+            @compareWithStorage()
+        window.addEventListener('storage', watchFn, false)
+
+
+    # Compare current state with local storage and trigger state changes when changes are
+    # detected
+    compareWithStorage: () ->
+      otherState = @readStorage()
+      for own key of @state
+        if @state[key] != otherState[key]
+          if not @state[key]? || otherState[key]?
+            throw new Error "Incompatible states detected (key #{key})"
+          else
+            @trigger(key, otherState[key])
 
 
     # Create the state object and attach events that set values when called
@@ -21,6 +49,7 @@ define ['lib/emitter'], (Emitter) ->
         do (key) =>
           @on key, (val) =>
             @state[key] = val
+            @writeStorage()
 
 
     # Overload trigger to require exactly 2 arguments

@@ -12,7 +12,6 @@ require ['lib/polyfill/bind', 'lib/vendor/almond',
 
   # Default PresenterApp options
   presenterAppOptionDefaults = {
-    optionsOpen: no
     mainFrameContent: 'currentSlide'
     secondaryFrameContent: 'nextSlide'
     countdown: no

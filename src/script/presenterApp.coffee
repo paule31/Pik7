@@ -8,15 +8,18 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
     constructor: (defaults, options) ->
       @setOptions(options)
       super(defaults)
+      @on 'load', =>
+        @switchNotes(@iframe, (@options.get('mainFrameContent') == 'currentNotes'))
+        @switchNotes(@secondaryIframe, (@options.get('secondaryFrameContent') == 'currentNotes'))
 
 
     # Create the options emitter and let the iframes listen for changes on relevant options
     setOptions: (options) ->
-      @options = new StatefulEmitter(options)
+      @options = new StatefulEmitter(options, 'pikOptions')
       @options.on 'mainFrameContent', (value) =>
         @switchNotes(@iframe, (value == 'currentNotes'))
         @onSlide(@controller.getSlide())
-      @options.on 'secondaryFrameContent', =>
+      @options.on 'secondaryFrameContent', (value) =>
         @switchNotes(@secondaryIframe, (value == 'currentNotes'))
         @onSlide(@controller.getSlide())
 
