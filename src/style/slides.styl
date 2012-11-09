@@ -33,7 +33,8 @@
       display none
 
     // ... and styled differently in the presenter
-    &.pikInPresenter .pikNotes
+    &.pikInPresenter:not(.pikOnlyNotes):not(.pikNoNotes) .pikNotes
+      display block
       background rgba(#000, 0.9)
       color #FFF
       font-size 0.6em
@@ -46,12 +47,13 @@
       &:hover
         opacity 0.15
 
-    // Modifications for presenter display
+    // Overlay modifications for presenter display
     &.pikInPresenter #PikHide
       opacity 0.6
-    &.pikInPresenter .pikNotes
-      display block
 
     // Only-notes-showing mode for presenter
-    &.pikOnlyNotes .pikSlide > :not(.pikNotes)
-      display none
+    &.pikOnlyNotes
+      .pikSlide > :not(.pikNotes)
+        display none
+      .pikNotes
+        display block !important

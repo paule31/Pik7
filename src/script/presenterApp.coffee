@@ -9,25 +9,29 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
       @setOptions(options)
       super(defaults)
       @on 'load', =>
-        @switchNotes(@iframe, (@options.get('mainFrameContent') == 'currentNotes'))
-        @switchNotes(@secondaryIframe, (@options.get('secondaryFrameContent') == 'currentNotes'))
+        @switchNotes(@iframe, @options.get('mainFrameContent'))
+        @switchNotes(@secondaryIframe, @options.get('secondaryFrameContent'))
 
 
     # Create the options emitter and let the iframes listen for changes on relevant options
     setOptions: (options) ->
       @options = new StatefulEmitter(options, 'pikOptions')
       @options.on 'mainFrameContent', (value) =>
-        @switchNotes(@iframe, (value == 'currentNotes'))
+        @switchNotes(@iframe, value)
         @onSlide(@controller.getSlide())
       @options.on 'secondaryFrameContent', (value) =>
-        @switchNotes(@secondaryIframe, (value == 'currentNotes'))
+        @switchNotes(@secondaryIframe, value)
         @onSlide(@controller.getSlide())
 
 
-    # Switch show-notes-only mode on and off for the passed iframe instance
-    switchNotes: (iframe, status) ->
-      method = if status then 'addClass' else 'removeClass'
-      iframe.window.$('html')[method]('pikOnlyNotes')
+    # Switch notes modes on and off for the passed iframe instance
+    switchNotes: (iframe, value) ->
+      # Only-notes-state
+      onlyMethod = if value == 'currentNotes' then 'addClass' else 'removeClass'
+      iframe.window.$('html')[onlyMethod]('pikOnlyNotes')
+      # On/Off state
+      onOffMethod = if value.substr(-7) == 'NoNotes' then 'addClass' else 'removeClass'
+      iframe.window.$('html')[onOffMethod]('pikNoNotes')
 
 
     # In addition to the main iframe connect the secondary frame
@@ -55,10 +59,10 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
     # Check the options to see what slide to display
     onSlide: (currentSlide) ->
       mainSlide = currentSlide
-      if @options.get('mainFrameContent') == 'nextSlide' then mainSlide++
+      if @options.get('mainFrameContent') in ['nextSlide', 'nextSlideNoNotes'] then mainSlide++
       super(mainSlide)
       secondarySlide = currentSlide
-      if @options.get('secondaryFrameContent') == 'nextSlide' then secondarySlide++
+      if @options.get('secondaryFrameContent') in ['nextSlide', 'nextSlideNoNotes'] then secondarySlide++
       @secondaryIframe.do('slide', secondarySlide)
 
 
