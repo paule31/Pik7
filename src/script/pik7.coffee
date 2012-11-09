@@ -14,6 +14,7 @@ require ['lib/polyfill/bind', 'lib/vendor/almond',
   presenterAppOptionDefaults = {
     mainFrameContent: 'currentSlide'
     secondaryFrameContent: 'nextSlide'
+    suppressEvents: no
     countdown: no
     countdownRunning: no
     countdownAmount: 30

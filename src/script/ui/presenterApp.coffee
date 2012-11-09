@@ -63,15 +63,6 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     app.controller.on 'slide', (num) -> $slideSelect.val(num)
 
 
-    # Suppress events
-    # ---------------
-    $('#PikNoEvents').change ->
-      if this.checked
-        f.contentWindow.$('html').addClass('pikNoEvents') for f in $('iframe')
-      else
-        f.contentWindow.$('html').removeClass('pikNoEvents') for f in $('iframe')
-
-
     # Timers
     # ------
     $timerCurrent = $('#PikTimeCurrent')
@@ -112,3 +103,15 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     $secondaryFrameSelect.val(app.options.get('secondaryFrameContent'))
     $secondaryFrameSelect.change -> app.options.set('secondaryFrameContent', this.value)
     app.options.on 'secondaryFrameContent', (value) -> $secondaryFrameSelect.val(value)
+
+    # Suppress events
+    $suppressEvents = $('#PikNoEvents')
+    $suppressEvents.prop('checked', app.options.get('suppressEvents'))
+    $suppressEvents.change -> app.options.set('suppressEvents', this.checked)
+    app.options.on 'suppressEvents', (value) ->
+      $suppressEvents.prop('checked', value)
+      if value == yes
+        f.contentWindow.$('html').addClass('pikNoEvents') for f in $('iframe')
+      else
+        f.contentWindow.$('html').removeClass('pikNoEvents') for f in $('iframe')
+    app.options.trigger('suppressEvents', app.options.get('suppressEvents'))
