@@ -27,10 +27,12 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
 
     # Try to figure out where the base directory is relative to the page
     getBasePath: ->
-      source = if window.parent != window
+      source = if window.parent? && window.parent != window
         window.parent.location.href
+      else if window.opener?
+        window.opener.location.href
       else
-        window.opener.location.href || ''
+        ''
       return base = if source
         Hash::commonPath(window.location.href, source)
       else
