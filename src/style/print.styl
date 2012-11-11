@@ -1,3 +1,6 @@
+@page
+  size A4 landscape
+
 @media print
 
   #PikSlideWrapper
@@ -8,9 +11,21 @@
     clear both
   a
     color blue
+    word-wrap break-word
+    &:not(.url)[href^="http"]::after
+      content " (" attr(href) ")"
+      font-size 60%
   .pikSlide
     clear both
     clearfix()
+    width 75% /* Approximate 4:3 aspect ratio */
+    padding-top 1em
+    margin 0 auto
+
+  .pikSlide.center
+    > img:only-child
+      display block
+      margin 0 auto
 
   // No printing and no page breaks for these guys
   .pikNoprint, .pikNotes, input, textarea, iframe, button
@@ -22,8 +37,15 @@
 @media print and (orientation:landscape)
 
   #PikSlideWrapper
-    font-size 27pt !important // Override metrics set by javascript
+    font-size 30pt !important // Override metrics set by javascript
 
   .pikSlide
     page-break-inside: avoid;
     page-break-after: always;
+
+
+// Add extra margins for portrait mode
+@media print and (orientation:portrait)
+
+  .pikSlide
+    margin-bottom 3em
