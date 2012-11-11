@@ -29,9 +29,11 @@
 
 .icon-home:before { content: '\2302'; } /* '⌂' */
 .icon-th-list:before { content: '\2630'; } /* '☰' */
+.icon-cog:before { content: '\2699'; } /* '⚙' */
 .icon-cw:before { content: '\27f3'; } /* '⟳' */
 .icon-eye:before { content: '\e70a'; } /* '' */
 .icon-print:before { content: '\e716'; } /* '' */
 .icon-docs:before { content: '\e736'; } /* '' */
 .icon-window:before { content: '\e74e'; } /* '' */
+.icon-github:before { content: '\f300'; } /* '' */
 .icon-folder:before { content: '📁'; } /* '\1f4c1' */
