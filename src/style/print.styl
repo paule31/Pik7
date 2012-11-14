@@ -9,13 +9,16 @@
     background white
   h1, h2, h3, h4, h5, h6
     clear both
+  input, textarea, iframe
+    -webkit-print-color-adjust exact
   a
     color blue
     word-wrap break-word
     &:not(.url)[href^="http"]::after
       content " (" attr(href) ")"
-      font-size 60%
+      font-size 55%
   .pikSlide
+    position relative
     clear both
     clearfix()
     width 75% /* Approximate 4:3 aspect ratio */
@@ -28,7 +31,7 @@
       margin 0 auto
 
   // No printing and no page breaks for these guys
-  .pikNoprint, .pikNotes, input, textarea, iframe, button
+  .pikNoprint, .pikNotes
     display none !important
     page-break-after auto !important
 
