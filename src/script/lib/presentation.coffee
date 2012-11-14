@@ -19,4 +19,5 @@ define ['lib/emitter', 'lib/controls', 'jquery'], (Emitter, Controls) ->
         controls: new Controls()
         goTo: (slide) -> self.trigger('slide', slide)
         setHidden: (state) -> self.trigger('hidden', state)
+        inPrint: window.location.hash == '#print'
       }
