@@ -22,7 +22,7 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
         # Trigger ready state *after* setting up the slide and hidden events to prevent
         # hours of bug seaching...
         if window != window.parent then window.parent.Pik.app.trigger('ready')
-        self.print()
+        $(window).load -> self.print()
 
 
     # Try to figure out where the base directory is relative to the page
