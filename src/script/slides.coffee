@@ -81,6 +81,12 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
       ratioEnforcer = forceAspectRatio(4 / 3, @wrapper)
       ratioEnforcer() # See the long comment in `@setupDom()` for why this is here
       $(window).bind('resize', ratioEnforcer)
+      # Opera Mobile (and Chrome Mobile?) doesn't fire resize event when the device
+      # orientation changes, so we use media query listeners (works at least for Opera)
+      if window.matchMedia
+        mql = window.matchMedia("(orientation: portrait)")
+        mql.addListener(ratioEnforcer)
+
 
 
     # Pop up the print dialog if it look like a good idea

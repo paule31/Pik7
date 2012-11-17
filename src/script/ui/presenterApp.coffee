@@ -17,6 +17,11 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     optionsEnforcer()
   ratioEnforcer()
   $(window).bind('resize', ratioEnforcer)
+  # Opera Mobile (and Chrome Mobile?) doesn't fire resize event when the device
+  # orientation changes, so we use media query listeners (works at least for Opera)
+  if window.matchMedia
+    mql = window.matchMedia("(orientation: portrait)")
+    mql.addListener(ratioEnforcer)
 
 
   # Reloadable App UI
