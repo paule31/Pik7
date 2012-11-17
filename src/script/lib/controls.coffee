@@ -1,5 +1,5 @@
 # Catch key events (left/right arrow, F5, ESC) and trigger the accoding events (`next`,
-# `prev`, `toggleHidden`)
+# `prev`, `toggleHidden`). Also catches touch events.
 
 define ['lib/emitter', 'jquery'], (Emitter) ->
   return class Controls extends Emitter
@@ -10,10 +10,14 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
     constructor: ->
       super('next', 'prev', 'toggleHidden')
       @addKeyEvents()
+      @addTouchEvents()
 
     addKeyEvents: ->
       $(window).keydown (evt) =>
         if @filterKeyTargets(evt) then @dispatchKeyEvent(evt)
+
+    addTouchEvents: ->
+      $(window).bind 'touchstart', (evt) => @dispatchTouchEvents(evt)
 
     stopEvent: (evt) -> evt.preventDefault()
 
@@ -31,4 +35,12 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
         @stopEvent(evt)
       else if code == 116 || code == 27 # F5 / ESC (hides the presentation)
         @trigger('toggleHidden', evt)
+        @stopEvent(evt)
+
+    dispatchTouchEvents: (evt) ->
+      if evt.originalEvent.touches[0].pageX > window.innerWidth / 2
+        @trigger('next', evt)
+        @stopEvent(evt)
+      else
+        @trigger('prev', evt)
         @stopEvent(evt)
