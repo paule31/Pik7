@@ -92,7 +92,32 @@ requirejs: {
   }
 },
 
-clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/ui/*.js', 'src/script/test/*.js']
+clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/ui/*.js', 'src/script/test/*.js'],
+
+compress: {
+  zip: {
+    files: {
+      'download.zip': [
+        'index.html',
+        'presenter.html',
+        'readme.md',
+        'core/pik7.js',
+        'core/pik7.css',
+        'core/welcome.html',
+        'core/icons/icons.eot',
+        'core/icons/icons.svg',
+        'core/icons/icons.ttf',
+        'core/icons/icons.woff',
+        'core/icons/LICENSE.txt',
+        'core/icons/README.txt',
+        'themes/default.css',
+        'themes/template.css',
+        'presentations/Pik/**/*',
+        'presentations/Template/**/*'
+      ]
+    }
+  }
+}
 
 });
 
@@ -100,6 +125,6 @@ grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
 grunt.registerTask('dev',     'stylus cslint coffee docco server qunit requirejs');
-grunt.registerTask('default', 'stylus cslint coffee docco server qunit requirejs clean');
+grunt.registerTask('default', 'stylus cslint coffee docco server qunit requirejs clean compress');
 
 };
