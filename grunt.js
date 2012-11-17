@@ -96,8 +96,11 @@ clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/ui/*.js', 'src/scr
 
 compress: {
   zip: {
-    files: {
-      'download.zip': [
+    files: (function(){
+      var fs = require('fs');
+      var filename = 'pik7-' + JSON.parse(fs.readFileSync('package.json')).version + '.zip';
+      var files = {};
+      files[filename] = [
         'index.html',
         'presenter.html',
         'readme.md',
@@ -114,8 +117,9 @@ compress: {
         'themes/template.css',
         'presentations/Pik/**/*',
         'presentations/Template/**/*'
-      ]
-    }
+      ];
+      return files;
+    })()
   }
 }
 
