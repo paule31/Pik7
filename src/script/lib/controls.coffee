@@ -4,8 +4,8 @@
 define ['lib/emitter', 'jquery'], (Emitter) ->
   return class Controls extends Emitter
 
-    # Events are not caught when thier original target is an input or textarea element
-    nonTargets: ['input', 'textarea']
+    # Events are not caught when their original target is an interactive element
+    nonTargets: ['a', 'input', 'textarea', 'select', 'button']
 
     constructor: ->
       super('next', 'prev', 'toggleHidden')
@@ -14,14 +14,15 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
 
     addKeyEvents: ->
       $(window).keydown (evt) =>
-        if @filterKeyTargets(evt) then @dispatchKeyEvent(evt)
+        if @filterTargets(evt) then @dispatchKeyEvent(evt)
 
     addTouchEvents: ->
-      $(window).bind 'touchstart', (evt) => @dispatchTouchEvents(evt)
+      $(window).bind 'touchstart', (evt) =>
+        if @filterTargets(evt) then @dispatchTouchEvents(evt)
 
     stopEvent: (evt) -> evt.preventDefault()
 
-    filterKeyTargets: (evt) ->
+    filterTargets: (evt) ->
       if evt.target.nodeType != 1 then return true
       return evt.target.nodeName.toLowerCase() not in @nonTargets
 
