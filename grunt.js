@@ -82,7 +82,7 @@ requirejs: {
     options: {
       baseUrl: 'src/script',
       paths: {
-        jquery: 'lib/vendor/jquery-1.8.2.min',
+        jquery: 'lib/vendor/jquery-1.8.3.min',
         prefixfree: 'lib/vendor/prefixfree.min'
       },
       name: 'pik7',
