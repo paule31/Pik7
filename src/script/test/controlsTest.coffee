@@ -7,7 +7,7 @@ require ['lib/controls'], (Controls) -> $(window).ready ->
       super()
     addKeyEvents: ->
       $(window).keydown (evt, testCode) =>
-        if @filterTargets evt then @dispatchKeyEvent { keyCode: testCode }
+        if @filterTargets(evt) then @dispatchKeyEvent { keyCode: testCode }
     stopEvent: ->
 
   keys = {
@@ -42,7 +42,7 @@ require ['lib/controls'], (Controls) -> $(window).ready ->
     controls.on 'next', (evt) -> triggered = true
     stop()
     setTimeout ->
-      strictEqual triggered, false
+      strictEqual(triggered, false)
       start()
     , 500
     $('.filterTest').each (index, element) ->
