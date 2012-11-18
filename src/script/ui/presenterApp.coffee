@@ -24,8 +24,13 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     mql.addListener(ratioEnforcer)
 
 
+
+
+
   # Reloadable App UI
   # -----------------
+
+  countdownTimerId = null
 
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
@@ -73,50 +78,49 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     $timerCurrent = $('#PikTimeCurrent')
     $timerElapsed = $('#PikTimeElapsed')
     timerStart = Date.now()
-    # Pad a number with a leading zero
-    pad = (x) ->
-      x = x + ''
-      if x.length == 1 then return '0' + x else  return x
-    # Time update function to run each second
+    # Turn a number into a string and pad it with a leading zero f it's a single digit
+    pad = (x) -> if String(x).length == 1 then '0' + x else '' + x
+    # Update the timer every second. Clear any intervals that have been active before
     update = ->
       now = Date.now()
       diff = new Date(now - timerStart)
       $timerCurrent.html(new Date(now).toLocaleTimeString())
       $timerElapsed.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
-    setInterval(update, 1000)
+    if countdownTimerId? then clearInterval(countdownTimerId)
+    countdownTimerId = setInterval(update, 1000)
 
 
-    # Options window
-    # --------------
+  # Options window
+  # --------------
 
-    # Open and close window
-    $('#PikPresenterOptionsLink').click ->
-      $('#PikPresenterOptions').addClass('open')
-      $('#PikPresenterOptionsOverlay').addClass('open')
-    $('#PikOptionsCloseButton').click ->
-      $('#PikPresenterOptions').removeClass('open')
-      $('#PikPresenterOptionsOverlay').removeClass('open')
+  # Open and close window
+  $('#PikPresenterOptionsLink').click ->
+    $('#PikPresenterOptions').addClass('open')
+    $('#PikPresenterOptionsOverlay').addClass('open')
+  $('#PikOptionsCloseButton').click ->
+    $('#PikPresenterOptions').removeClass('open')
+    $('#PikPresenterOptionsOverlay').removeClass('open')
 
-    # Main frame selection
-    $mainFrameSelect = $('#PikOptionsMainFrameContent')
-    $mainFrameSelect.val(app.options.get('mainFrameContent'))
-    $mainFrameSelect.change -> app.options.set('mainFrameContent', this.value)
-    app.options.on 'mainFrameContent', (value) -> $mainFrameSelect.val(value)
+  # Main frame selection
+  $mainFrameSelect = $('#PikOptionsMainFrameContent')
+  $mainFrameSelect.val(app.options.get('mainFrameContent'))
+  $mainFrameSelect.change -> app.options.set('mainFrameContent', this.value)
+  app.options.on 'mainFrameContent', (value) -> $mainFrameSelect.val(value)
 
-    # Secondary frame selection
-    $secondaryFrameSelect = $('#PikOptionsSecondaryFrameContent')
-    $secondaryFrameSelect.val(app.options.get('secondaryFrameContent'))
-    $secondaryFrameSelect.change -> app.options.set('secondaryFrameContent', this.value)
-    app.options.on 'secondaryFrameContent', (value) -> $secondaryFrameSelect.val(value)
+  # Secondary frame selection
+  $secondaryFrameSelect = $('#PikOptionsSecondaryFrameContent')
+  $secondaryFrameSelect.val(app.options.get('secondaryFrameContent'))
+  $secondaryFrameSelect.change -> app.options.set('secondaryFrameContent', this.value)
+  app.options.on 'secondaryFrameContent', (value) -> $secondaryFrameSelect.val(value)
 
-    # Suppress events
-    $suppressEvents = $('#PikNoEvents')
-    $suppressEvents.prop('checked', app.options.get('suppressEvents'))
-    $suppressEvents.change -> app.options.set('suppressEvents', this.checked)
-    app.options.on 'suppressEvents', (value) ->
-      $suppressEvents.prop('checked', value)
-      if value == yes
-        f.contentWindow.$('html').addClass('pikNoEvents') for f in $('iframe')
-      else
-        f.contentWindow.$('html').removeClass('pikNoEvents') for f in $('iframe')
-    app.options.trigger('suppressEvents', app.options.get('suppressEvents'))
+  # Suppress events
+  $suppressEvents = $('#PikNoEvents')
+  $suppressEvents.prop('checked', app.options.get('suppressEvents'))
+  $suppressEvents.change -> app.options.set('suppressEvents', this.checked)
+  app.options.on 'suppressEvents', (value) ->
+    $suppressEvents.prop('checked', value)
+    if value == yes
+      f.contentWindow.$('html').addClass('pikNoEvents') for f in $('iframe')
+    else
+      f.contentWindow.$('html').removeClass('pikNoEvents') for f in $('iframe')
+  app.options.trigger('suppressEvents', app.options.get('suppressEvents'))
