@@ -42,7 +42,8 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
       }
 
     set: (data, caller) ->
-      if 'numSlides' of data then throw new Error "Can't modify 'numSlides' after init"
-      @state.update(data, caller)
+      if data?
+        if 'numSlides' of data then throw new Error "Can't modify 'numSlides' after init"
+        @state.update(data, caller)
 
     get: (key) -> return @state.current[key]
