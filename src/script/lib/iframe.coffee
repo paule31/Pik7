@@ -1,5 +1,5 @@
 # Controls one frame from the outside
-define ['lib/emitter', 'jquery'], (Emitter) ->
+define ['lib/emitter', 'jquery'], (Emitter, $) ->
   return class Iframe extends Emitter
 
     # Store frame and window references, call `super` and kick off the init procedure
@@ -18,7 +18,7 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
     # Trigger `action` with `arg` on the frames `Pik` object
     do: (action, arg) ->
       if action == 'file'
-        @window.location.href = arg
+        @window.location.assign(arg) if arg != @window.location.toString()
       else if @window.Pik?
         if action == 'slide'
           @window.Pik.goTo(arg)

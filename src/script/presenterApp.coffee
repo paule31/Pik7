@@ -46,13 +46,22 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
       @secondaryIframe.do('file', @controller.getFile())
 
 
-    # Require `onReady()` to be called twice, once for each frame
-    onReady: -> PresenterApp::onReady = -> super()
+    # Require `onReady()` to be called twice, once for each frame. Load the second iframe
+    # with the correct file after the first call
+    onReady: do ->
+      fn = ->
+        if @initialized
+          file = @iframe.frame[0].contentWindow.location.href
+          @secondaryIframe.do('file', file)
+        PresenterApp::onReady = ->
+          super()
+          PresenterApp::onReady = fn
 
 
     # Overload file method to add the secondary frame, but change only if the primary did
     onFile: (file) ->
-      if super(file)
+      hasChanged = super(file)
+      if hasChanged
         @secondaryIframe.do('file', file)
 
 
