@@ -1,4 +1,4 @@
-require ['lib/controls'], (Controls) -> $(window).ready ->
+require ['lib/controls'], (Controls) ->
   'use strict'
 
   class MockControls extends Controls

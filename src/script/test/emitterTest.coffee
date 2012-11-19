@@ -1,4 +1,4 @@
-require ['lib/emitter', 'jquery'], (Emitter) -> $(document).ready ->
+require ['lib/emitter', 'jquery'], (Emitter) ->
   'use strict'
 
   test 'Fail to initalize without topics', ->

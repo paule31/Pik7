@@ -1,7 +1,7 @@
 window.testKey = 'statefulEmitterTest'
 window.localStorage.removeItem(testKey)
 
-require ['lib/statefulEmitter'], (StatefulEmitter) -> window.onload = ->
+require ['lib/statefulEmitter'], (StatefulEmitter) ->
 
   'use strict'
 
