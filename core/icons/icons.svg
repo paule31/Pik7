@@ -2,7 +2,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" >
 <svg xmlns="http://www.w3.org/2000/svg">
 <metadata>
-Created by FontForge 20100429 at Sun Nov 11 10:06:21 2012
+Created by FontForge 20100429 at Mon Nov 19 17:38:03 2012
  By root
 Copyright (C) 2012 by original authors @ fontello.com
 </metadata>
@@ -31,6 +31,10 @@ d="M33 0v666h265v-666h-265zM66 33h199v600h-199v-600z" />
  />
     <glyph glyph-name="house" unicode="&#x2302;" horiz-adv-x="930" 
 d="M903 336q15 -15 11 -26.5t-27 -11.5h-84v-310q0 -22 -6 -31t-26 -9h-204v310h-204v-310h-194q-25 0 -33.5 8t-8.5 32v310h-84q-23 0 -27 11.5t11 26.5l400 402q16 16 38 16t38 -16z" />
+    <glyph glyph-name="uni2389" unicode="&#x2389;" horiz-adv-x="560" 
+d="M545 636v-570q0 -66 -90 -66t-90 66v570q0 64 90 64t90 -64zM105 700q90 0 90 -64v-570q0 -66 -90 -66t-90 66v570q0 64 90 64z" />
+    <glyph glyph-name="uni25B6" unicode="&#x25b6;" horiz-adv-x="530" 
+d="M501 376q14 -11 14 -26q0 -13 -14 -24l-428 -266q-25 -16 -41.5 -5.5t-16.5 39.5v514q0 29 16.5 39.5t41.5 -5.5z" />
     <glyph glyph-name="uni2630" unicode="&#x2630;" horiz-adv-x="730" 
 d="M665 400q21 0 35.5 -15t14.5 -35t-15.5 -35t-34.5 -15h-600q-19 0 -34.5 15t-15.5 35t14.5 35t35.5 15h600zM65 500q-19 0 -34.5 15t-15.5 35t14.5 35t35.5 15h600q21 0 35.5 -15t14.5 -35t-15.5 -35t-34.5 -15h-600zM665 200q21 0 35.5 -15t14.5 -35t-15.5 -35
 t-34.5 -15h-600q-19 0 -34.5 15t-15.5 35t14.5 35t35.5 15h600z" />

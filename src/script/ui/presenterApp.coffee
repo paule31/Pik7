@@ -1,6 +1,7 @@
 # UI code for the presenter view
 define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
+
   # Interface sizes
   # ---------------
 
@@ -24,9 +25,6 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     mql.addListener(ratioEnforcer)
 
 
-
-
-
   # Reloadable App UI
   # -----------------
 
@@ -36,15 +34,12 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     frame = $('#PikFrame')[0].contentWindow
     pik = frame.Pik
 
-
     # Add a class to the presentation's html element to indicate that it's displayed in the presenter
     f.contentWindow.$('html').addClass('pikInPresenter') for f in $('iframe')
-
 
     # Change the page title when a new presentation loads
     presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)
-
 
     # Update slide counter
     $('#PikSlideCount').text(frame.Pik.numSlides)
@@ -106,16 +101,12 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
       $self = $(this)
       if $self.hasClass('running')
         clearInterval(countdownTimerId)
-        $self.removeClass('running')
-        $self.addClass('paused')
-        $self.html('Start')
+        $self.toggleClass('running paused')
+        $self.children().first().html('Start')
       else
         countdownTimerId = setInterval(updateCountdown, 1000)
-        $self.removeClass('paused')
-        $self.addClass('running')
-        $self.html('Stop')
-
-
+        $self.toggleClass('running paused')
+        $self.children().first().html('Stop')
 
 
   # Options window

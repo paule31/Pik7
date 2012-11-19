@@ -18,7 +18,7 @@
   width: 1em;
   margin-right: 0.2em;
   text-align: center;
-  opacity: 0.7;
+  opacity: 0.8;
 /* Uncomment for 3D effect */
 /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 /* fix buttons height */
@@ -28,6 +28,8 @@
 }
 
 .icon-home:before { content: '\2302'; } /* '⌂' */
+.icon-pause:before { content: '\2389'; } /* '⎉' */
+.icon-play:before { content: '\25b6'; } /* '▶' */
 .icon-th-list:before { content: '\2630'; } /* '☰' */
 .icon-cog:before { content: '\2699'; } /* '⚙' */
 .icon-cw:before { content: '\27f3'; } /* '⟳' */
