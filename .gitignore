@@ -4,3 +4,4 @@ core/pik7.css
 core/pik7.js
 themes/*.css
 *.zip
+server.js

@@ -52,6 +52,14 @@ coffee: {
   }
 },
 
+copy: {
+  all: {
+    files: {
+      'server.js': 'src/script/server/server.js'
+    }
+  }
+},
+
 server: {
   port: 1337,
   base: '.'
@@ -92,7 +100,13 @@ requirejs: {
   }
 },
 
-clean: ['src/script/*.js', 'src/script/lib/*.js', 'src/script/ui/*.js', 'src/script/test/*.js'],
+clean: [
+  'src/script/*.js',
+  'src/script/server/*.js',
+  'src/script/lib/*.js',
+  'src/script/ui/*.js',
+  'src/script/test/*.js'
+],
 
 compress: {
   zip: {
@@ -104,6 +118,7 @@ compress: {
         'index.html',
         'presenter.html',
         'readme.md',
+        'server.js',
         'core/pik7.js',
         'core/pik7.css',
         'core/welcome.html',
@@ -128,7 +143,7 @@ compress: {
 grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('dev',     'stylus cslint coffee docco server qunit requirejs');
-grunt.registerTask('default', 'stylus cslint coffee docco server qunit requirejs clean compress');
+grunt.registerTask('dev',     'stylus cslint coffee copy docco server qunit requirejs');
+grunt.registerTask('default', 'stylus cslint coffee copy docco server qunit requirejs clean compress');
 
 };
