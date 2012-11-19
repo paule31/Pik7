@@ -18,7 +18,7 @@ define ['lib/emitter', 'jquery'], (Emitter, $) ->
     # Trigger `action` with `arg` on the frames `Pik` object
     do: (action, arg) ->
       if action == 'file'
-        @window.location.assign(arg) if arg != @window.location.toString()
+        @window.location.href = arg if arg != @window.location.toString()
       else if @window.Pik?
         if action == 'slide'
           @window.Pik.goTo(arg)
