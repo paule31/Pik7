@@ -17,7 +17,7 @@
     "docco": "0.4.x",
     "grunt-contrib": "0.2.0",
     "nib": "0.8.x",
-    "stylus": "0.29.x",
+    "stylus": "0.30.x",
 	"node-static": "0.6.x"
   }
 }
