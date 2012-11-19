@@ -76,18 +76,46 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     # Timers
     # ------
     $timerCurrent = $('#PikTimeCurrent')
-    $timerElapsed = $('#PikTimeElapsed')
+    $timerCountdown = $('#PikTimeCountdown')
     timerStart = Date.now()
+
     # Turn a number into a string and pad it with a leading zero f it's a single digit
     pad = (x) -> if String(x).length == 1 then '0' + x else '' + x
-    # Update the timer every second. Clear any intervals that have been active before
-    update = ->
+
+    # Countdown timer
+    countdownStep = 1
+    updateCountdown = do ->
+      ticks = 0
+      return ->
+        ticks += countdownStep
+        diff = new Date(ticks * 1000)
+        $timerCountdown.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
+    if countdownTimerId? then clearInterval(countdownTimerId)
+    countdownTimerId = setInterval(updateCountdown, 1000)
+
+    # Current time display
+    updateTime = ->
       now = Date.now()
       diff = new Date(now - timerStart)
       $timerCurrent.html(new Date(now).toLocaleTimeString())
-      $timerElapsed.html(pad(diff.getHours() - 1) + ':' + pad(diff.getMinutes()) + ':' + pad(diff.getSeconds()))
-    if countdownTimerId? then clearInterval(countdownTimerId)
-    countdownTimerId = setInterval(update, 1000)
+    setInterval(updateTime, 1000)
+
+    # Countdown timer controls
+    $('#PikCountdownControl').click (evt) ->
+      evt.preventDefault()
+      $self = $(this)
+      if $self.hasClass('running')
+        clearInterval(countdownTimerId)
+        $self.removeClass('running')
+        $self.addClass('paused')
+        $self.html('Start')
+      else
+        countdownTimerId = setInterval(updateCountdown, 1000)
+        $self.removeClass('paused')
+        $self.addClass('running')
+        $self.html('Stop')
+
+
 
 
   # Options window
