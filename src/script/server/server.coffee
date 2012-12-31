@@ -1,5 +1,6 @@
 # Super-rudimentaray web server. Can serve static pages and list the contents of certain
-# directories (e.g. /presentations)
+# directories (e.g. /presentations). Could in the future be expanded to enable realtime
+# communication between clients.
 
 fs = require('fs')
 path = require('path')
