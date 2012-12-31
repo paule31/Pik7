@@ -7,7 +7,7 @@ grunt.initConfig({
 stylus: {
   compile: {
     options: {
-      compress: (grunt.cli.tasks.indexOf('dev') !== -1) ? false : true,
+      compress: true,
       paths: [
         require('nib').path
       ]
@@ -95,7 +95,7 @@ requirejs: {
       },
       name: 'pik7',
       out: 'core/pik7.js',
-      optimize: (grunt.cli.tasks.indexOf('dev') !== -1) ? 'none' : 'uglify'
+      optimize: 'uglify'
     }
   }
 },
@@ -143,7 +143,9 @@ compress: {
 grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 
-grunt.registerTask('dev',     'stylus cslint coffee copy docco server qunit requirejs');
-grunt.registerTask('default', 'stylus cslint coffee copy docco server qunit requirejs clean compress');
+
+grunt.registerTask('dev-frontend', 'stylus cslint coffee copy requirejs');
+grunt.registerTask('dev',          'stylus cslint coffee copy docco server qunit requirejs');
+grunt.registerTask('default',      'stylus cslint coffee copy docco server qunit requirejs clean compress');
 
 };
