@@ -5,6 +5,8 @@
     line-height 1.45
   small
     font-size 0.5em
+    display block
+    color rgba(#444, 0.8)
   sub, sup
     font-size 0.75em
   input, output, button, keygen
@@ -113,6 +115,20 @@
     margin-top 0.425em
     margin-bottom 0.425em
 
+  table
+    border-collapse collapse
+  table.center
+    margin-right auto
+    margin-left auto
+  th, td
+    padding 0.2em 0.5em
+  table:not(.noborder) th:not(:last-child), table:not(.noborder) td:not(:last-child)
+    border-right 0.1em solid #444
+  table:not(.noborder) tr:first-child th
+    border-bottom 0.1em solid #444
+  tr:not(:first-child) th:first-child
+    text-align right
+
   a
     color #083
     text-decoration none
@@ -182,6 +198,34 @@
   p.footnotes
     text-align left
     font-size 0.5em
+
+
+  // Fancy slide transitions
+  #PikSlides.fancy
+    #PikSlideWrapper
+      overflow visible
+    .pikSlide
+      transform translateX(-204%)
+      transition all 750ms
+      display none
+    .pikSlide.pikCurrent
+      z-index 9000
+      transform translateX(0)
+      display block
+    .pikSlide.pikPrev
+      visibility visible
+      transform translateX(-102%) scale(0.9)
+      display block
+    .pikSlide.pikNext
+      visibility visible
+      transform translateX(102%) scale(0.9)
+      display block
+    .pikSlide.pikNext ~ .pik-slide
+      visibility visible
+      transform translateX(204%) scale(0.9)
+      display block
+    .pikSlide.pikNext ~ .pikSlide
+      display none
 
 
 @media print
