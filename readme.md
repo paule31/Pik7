@@ -3,6 +3,8 @@ Pik7
 
 HTML5 presentation framework.
 
+![Screenshot](https://github.com/SirPepe/Pik7/raw/master/screenshot.png)
+
 Features
 --------
 
