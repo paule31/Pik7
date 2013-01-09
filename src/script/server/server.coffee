@@ -24,8 +24,7 @@ listDirectory = (request, response) ->
 # Ends a request with an error message
 endError = (request, response, err) ->
   response.end("Error #{err.status}")
-  if request.url != '/favicon.ico'
-    console.log("\u001b[31m Error - \u001b[m#{err.status} occurred for \u001b[1m#{request.url}\u001b[m")
+  console.log("\u001b[31m Error\u001b[m - #{err.status} for \u001b[1m#{request.url}\u001b[m")
 
 
 # Serve static files from the main directory.
@@ -38,8 +37,10 @@ server = require('http').createServer (request, response) ->
         if err.status == 404 && /^\/presentations/.test(request.url)
           listDirectory(request, response)
         else
-          endError(request, response, err)
+          endError(request, response, err) if request.url != '/favicon.ico'
+      else
+        console.log("  \u001b[30m#{response.statusCode} #{request.url}\u001b[m")
 
 
 server.listen(port)
-console.log("\u001b[36m Info  - \u001b[mPik7 server running at \u001b[1mlocalhost:#{port}\u001b[m")
+console.log("\u001b[36m Info\u001b[m  - Pik7 server running at \u001b[1mlocalhost:#{port}\u001b[m")
