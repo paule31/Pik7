@@ -4,7 +4,7 @@
 
   body
     font-family Ubuntu, Arial, sans-serif
-    line-height 1.45
+    line-height 1.425
   small
     font-size 0.5em
     display block
@@ -179,7 +179,7 @@
     color #333
     padding 0.1em
     font-size 0.95em
-  pre code
+  pre code, mark code
     background none
     padding 0
   blockquote, q
@@ -212,26 +212,28 @@
     #PikSlideWrapper
       overflow visible
     .pikSlide
+      -webkit-transform translateX(-204%)
+      -webkit-transition all 400ms cubic-bezier(0, 0.5, 0.3, 1)
       transform translateX(-204%)
-      transition all 750ms
-      display none
+      transition all 400ms cubic-bezier(0, 0.5, 0.3, 1)
     .pikSlide.pikCurrent
       z-index 9000
+      -webkit-transform translateX(0)
       transform translateX(0)
-      display block
     .pikSlide.pikPrev
       visibility visible
-      transform translateX(-102%) scale(0.9)
-      display block
+      -webkit-transform translateX(-102%)
+      transform translateX(-102%)
     .pikSlide.pikNext
       visibility visible
-      transform translateX(102%) scale(0.9)
-      display block
-    .pikSlide.pikNext ~ .pik-slide
-      visibility visible
-      transform translateX(204%) scale(0.9)
-      display block
+      -webkit-transform translateX(102%)
+      transform translateX(102%)
     .pikSlide.pikNext ~ .pikSlide
+      visibility visible
+      -webkit-transform translateX(204%)
+      transform translateX(204%)
+    .pikSlide.pikNext ~ .pikSlide ~ .pikSlide
+      visibility hidden
       display none
 
 
