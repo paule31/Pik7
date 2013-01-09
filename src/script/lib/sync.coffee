@@ -17,14 +17,16 @@ define ['lib/emitter'], (Emitter) ->
     initEvents: ->
       @onStorage = (evt) =>
         values = evt.newValue
-        state = JSON.parse(values)
-        @trigger('change', state, evt)
+        if values
+          state = JSON.parse(values)
+          @trigger('change', state, evt)
       window.addEventListener('storage', @onStorage, false)
 
     # Expected/returned state object format: `{ String file, Number slide, Boolean hidden }`
     setState: (state) ->
       values = JSON.stringify(state)
-      @storageArea.setItem('pik', values)
+      if values
+        @storageArea.setItem('pik', values)
 
     getState: () ->
       values = @storageArea.getItem 'pik'
