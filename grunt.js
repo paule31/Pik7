@@ -118,6 +118,7 @@ compress: {
         'index.html',
         'presenter.html',
         'readme.md',
+        'screenshot.png',
         'server.js',
         'core/pik7.js',
         'core/pik7.css',

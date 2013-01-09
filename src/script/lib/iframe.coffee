@@ -2,6 +2,7 @@
 define ['lib/emitter', 'jquery'], (Emitter, $) ->
   return class Iframe extends Emitter
 
+
     # Store frame and window references, call `super` and kick off the init procedure
     constructor: (frame) ->
       @frame = $(frame).first()
@@ -10,10 +11,12 @@ define ['lib/emitter', 'jquery'], (Emitter, $) ->
       super('load')
       @initFrame()
 
+
     # Dispatch load events in the frame to self
     initFrame: ->
       @frame.load =>
         @trigger('load', @window.location.href) if @window.Pik?
+
 
     # Trigger `action` with `arg` on the frames `Pik` object
     do: (action, arg) ->
@@ -24,5 +27,6 @@ define ['lib/emitter', 'jquery'], (Emitter, $) ->
           @window.Pik.goTo(arg)
         if action == 'hidden'
           @window.Pik.setHidden(arg)
+
 
     getNumSlides: -> @window.Pik.numSlides if @window.Pik?

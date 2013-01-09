@@ -19,8 +19,6 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
         self.setupSizes()
         @on('slide', self.goTo)
         @on('hidden', self.setHidden)
-        # Trigger ready state *after* setting up the slide and hidden events to prevent
-        # hours of bug seaching...
         if window != window.parent then window.parent.Pik.app.trigger('ready')
         $(window).load -> self.print()
 
@@ -89,7 +87,7 @@ define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Pres
 
 
 
-    # Pop up the print dialog if it look like a good idea
+    # Pop up the print dialog if it looks like a good idea
     print: ->
       window.print() if window.location.hash == '#print'
 

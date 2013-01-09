@@ -1,7 +1,7 @@
 # Creates a state object that's representing (wait for it...) the presentation's state!
-
 define ['lib/smartEmitter'], (SmartEmitter) ->
   return class State extends SmartEmitter
+
 
     # `defaults` is a state object that must also contain the `numSlides` a property for
     # obvious reasons.
@@ -10,6 +10,7 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
       required = ['file', 'slide', 'hidden', 'numSlides']
       throw new Error "Missing #{val} value in state defaults (actual value: #{defaults[val]})" for val in required when val not of defaults || !defaults[val]?
       @addState(defaults)
+
 
     # Setup state events, pre-fill the state with the supplied defaults
     addState: (defaults) ->
@@ -41,9 +42,9 @@ define ['lib/smartEmitter'], (SmartEmitter) ->
                 that.trigger(key, caller, value)
       }
 
+
     set: (data, caller) ->
       if data?
-        if 'numSlides' of data then throw new Error "Can't modify 'numSlides' after init"
+        if 'numSlides' of data then throw new Error("Can't modify 'numSlides' after init")
         @state.update(data, caller)
-
     get: (key) -> return @state.current[key]

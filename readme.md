@@ -39,3 +39,4 @@ To do
 
 * Do more testing
 * Add more themes
+* Fix broken doc generation

@@ -68,10 +68,12 @@ define ['app', 'lib/statefulEmitter', 'lib/iframe', 'jquery'], (App, StatefulEmi
     # Check the options to see what slide to display
     onSlide: (currentSlide) ->
       mainSlide = currentSlide
-      if @options.get('mainFrameContent') in ['nextSlide', 'nextSlideNoNotes'] then mainSlide++
+      if @options.get('mainFrameContent') in ['nextSlide', 'nextSlideNoNotes']
+        mainSlide++
       super(mainSlide)
       secondarySlide = currentSlide
-      if @options.get('secondaryFrameContent') in ['nextSlide', 'nextSlideNoNotes'] then secondarySlide++
+      if @options.get('secondaryFrameContent') in ['nextSlide', 'nextSlideNoNotes']
+        secondarySlide++
       @secondaryIframe.do('slide', secondarySlide)
 
 

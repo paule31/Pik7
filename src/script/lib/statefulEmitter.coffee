@@ -1,5 +1,4 @@
 # A simple emitter with an internal state and `get()` and `set()`
-
 define ['lib/emitter'], (Emitter) ->
   return class StatefulEmitter extends Emitter
 

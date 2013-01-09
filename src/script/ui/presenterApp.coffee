@@ -2,9 +2,6 @@
 define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
 
-  # Interface sizes
-  # ---------------
-
   # Use a 4/3 aspect ratio throughout the entire prsenter app
   forceAspectRatio = forceAspectRatio.bind(null, 4/3)
   wrapperEnforcer = forceAspectRatio('#PikPresenterAppWrapper', 'html', 1, yes, yes, 'margin-top')
@@ -26,21 +23,15 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
 
   # Reloadable App UI
-  # -----------------
-
   countdownTimerId = null
-
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
     pik = frame.Pik
-
     # Add a class to the presentation's html element to indicate that it's displayed in the presenter
     f.contentWindow.$('html').addClass('pikInPresenter') for f in $('iframe')
-
     # Change the page title when a new presentation loads
     presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)
-
     # Update slide counter
     $('#PikSlideCount').text(frame.Pik.numSlides)
     $('#PikSlideCurrent').text(app.controller.getSlide() + 1)
@@ -49,33 +40,30 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
 
     # Slide select
-    # ------------
-
     $slideSelect = $('#PikControlsSelect')
-
-    # Populate slide select
     pik.slides.each (index, slide) ->
       text = $(slide).find('h1, h2, h3, h4, h5, h6, p').first().text() || index
       $('<option />').attr('value', index).text(text).appendTo($slideSelect)
-
     # Advance the select to the current slide
     $slideSelect.val(app.controller.getSlide())
-
     # Listen for changes
     $slideSelect.change -> app.controller.goTo($(this).val())
-
     # Keep up with slide changes
     app.controller.on 'slide', (num) -> $slideSelect.val(num)
 
 
     # Timers
     # ------
+
+
     $timerCurrent = $('#PikTimeCurrent')
     $timerCountdown = $('#PikTimeCountdown')
     timerStart = Date.now()
 
-    # Turn a number into a string and pad it with a leading zero f it's a single digit
+
+    # Turn a number into a string and pad it with a leading zero if it's a single digit
     pad = (x) -> if String(x).length == 1 then '0' + x else '' + x
+
 
     # Countdown timer
     countdownStep = 1
@@ -88,12 +76,14 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     if countdownTimerId? then clearInterval(countdownTimerId)
     countdownTimerId = setInterval(updateCountdown, 1000)
 
+
     # Current time display
     updateTime = ->
       now = Date.now()
       diff = new Date(now - timerStart)
       $timerCurrent.html(new Date(now).toLocaleTimeString())
     setInterval(updateTime, 1000)
+
 
     # Countdown timer controls
     $('#PikCountdownControl').click (evt) ->
@@ -112,7 +102,8 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
   # Options window
   # --------------
 
-  # Open and close window
+
+  # Open and close options window
   $('#PikPresenterOptionsLink').click ->
     $('#PikPresenterOptions').addClass('open')
     $('#PikPresenterOptionsOverlay').addClass('open')
@@ -120,17 +111,20 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     $('#PikPresenterOptions').removeClass('open')
     $('#PikPresenterOptionsOverlay').removeClass('open')
 
+
   # Main frame selection
   $mainFrameSelect = $('#PikOptionsMainFrameContent')
   $mainFrameSelect.val(app.options.get('mainFrameContent'))
   $mainFrameSelect.change -> app.options.set('mainFrameContent', this.value)
   app.options.on 'mainFrameContent', (value) -> $mainFrameSelect.val(value)
 
+
   # Secondary frame selection
   $secondaryFrameSelect = $('#PikOptionsSecondaryFrameContent')
   $secondaryFrameSelect.val(app.options.get('secondaryFrameContent'))
   $secondaryFrameSelect.change -> app.options.set('secondaryFrameContent', this.value)
   app.options.on 'secondaryFrameContent', (value) -> $secondaryFrameSelect.val(value)
+
 
   # Suppress events
   $suppressEvents = $('#PikNoEvents')

@@ -1,30 +1,36 @@
 # Catch key events (left/right arrow, F5, ESC) and trigger the accoding events (`next`,
 # `prev`, `toggleHidden`). Also catches touch events.
-
 define ['lib/emitter', 'jquery'], (Emitter) ->
   return class Controls extends Emitter
 
+
     # Events are not caught when their original target is an interactive element
     nonTargets: ['a', 'input', 'textarea', 'select', 'button']
+
 
     constructor: ->
       super('next', 'prev', 'toggleHidden')
       @addKeyEvents()
       @addTouchEvents()
 
+
     addKeyEvents: ->
       $(window).keydown (evt) =>
         if @filterTargets(evt) then @dispatchKeyEvent(evt)
+
 
     addTouchEvents: ->
       $(window).bind 'touchstart', (evt) =>
         if @filterTargets(evt) then @dispatchTouchEvents(evt)
 
+
     stopEvent: (evt) -> evt.preventDefault()
+
 
     filterTargets: (evt) ->
       if evt.target.nodeType != 1 then return true
       return evt.target.nodeName.toLowerCase() not in @nonTargets
+
 
     dispatchKeyEvent: (evt) ->
       code = evt.keyCode
@@ -38,6 +44,9 @@ define ['lib/emitter', 'jquery'], (Emitter) ->
         @trigger('toggleHidden', evt)
         @stopEvent(evt)
 
+
+    # Tap the left half of the screen = previous slide
+    # Tap the right half of the screen = next slide
     dispatchTouchEvents: (evt) ->
       if evt.originalEvent.touches[0].pageX > window.innerWidth / 2
         @trigger('next', evt)
