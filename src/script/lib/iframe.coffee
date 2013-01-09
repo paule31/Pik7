@@ -15,7 +15,19 @@ define ['lib/emitter', 'jquery'], (Emitter, $) ->
     # Dispatch load events in the frame to self
     initFrame: ->
       @frame.load =>
-        @trigger('load', @window.location.href) if @window.Pik?
+        # Some web servers like the static node server don't treat relative urls right
+        # if the refering page's url is a directory without a closing slash (eg.
+        # `/presentations/Pik`). To help with this we add a closing slash to all paths that
+        # need one.
+        href = @window.location.href
+        isPresentation = typeof @window.Pik != 'undefined'
+        hasFileName = href.lastIndexOf('.') != -1
+        hasClosingSlash = href[href.length - 1] == '/'
+        if hasFileName || hasClosingSlash
+          @trigger('load', @window.location.href) if @window.Pik?
+        else
+          if isPresentation
+            @do('file', href += '/')
 
 
     # Trigger `action` with `arg` on the frames `Pik` object

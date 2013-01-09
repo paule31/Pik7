@@ -15,7 +15,10 @@ listDirectory = (request, response) ->
   fs.readdir dir, (err, result) ->
     if err then return endError(request, response, { status: 500 })
     result.forEach (file) ->
-      html += "<li><a href=\"#{encodeURI(request.url + '/' + file)}\">#{file}</a>"
+      url = encodeURI(request.url + '/' + file)
+      if fs.statSync(__dirname + request.url + '/' + file).isDirectory() then url += '/'
+      url = path.normalize(url)
+      html += "<li><a href=\"#{url}\">#{file}</a>"
     html += '</ul>'
     response.writeHead(200, { "Content-Type": "text/html" })
     response.end(html)
