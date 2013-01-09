@@ -1,7 +1,7 @@
 var require = {
   baseUrl: '',
   paths: {
-    jquery: 'lib/vendor/jquery-1.8.2.min',
+    jquery: 'lib/vendor/jquery-1.8.3.min',
     prefixfree: 'lib/vendor/prefixfree.min'
   }
 };

@@ -8,16 +8,17 @@
 <base target="_blank">
 <style>
 #EventsDemo p.awesome {
-    text-align: center;
-    font-style: italic;
-    font-weight: bold;
-    color: red;
-    transform-origin: 50% 50%;
-    transform: rotate(360deg) scale(2);
-    transition: all 750ms;
+	text-align: center;
+	font-style: italic;
+	font-weight: bold;
+	color: red;
+	transform-origin: 50% 50%;
+	transform: rotate(360deg) scale(2);
+	transition: all 800ms;
 }
 </style>
 <body onload="prettyPrint()">
+
 
 <div class="pikSlide">
 <h1>
@@ -26,32 +27,44 @@
 </h1>
 <h2>HTML5 presentation framework</h2>
 <p class="center pikNoprint">
-	Press <kbd>&rarr;</kbd> or swipe to the left to learn more
+	Press <kbd>&rarr;</kbd> or tap on the right to learn more
 </p>
 </div>
+
 
 <div class="pikSlide">
 <h2>Features</h2>
 <ul>
-<li>Dead simple
+<li>Dead simple&nbsp;&ndash; nothing but HTML, CSS and jQuery
+<li>Works in every Browser that's not IE&nbsp;8 or older
 <li>Multiple slide views and presenter mode
-<li>Rapid navigation between slide sets
-<li>Reasonable printing / PDF export
-<li>Good performance in modern browsers even with hundreds of slides (no fancyful animations)
+<li>Good performance in modern browsers even with hundreds of slides
 </ul>
+<div class="pikNotes">
+	<h2>Other features</h2>
+	<ul>
+		<li>Reasonably printable (can be used for PDF export too)
+		<li>Rapid navigation between slide sets
+	</ul>
+</div>
 </div>
 
 
 <div class="pikSlide">
 <h2>Downsides</h2>
 <ul>
-<li>Requires a modern web browser and web server to run
-<li>No fancyful animations&nbsp;*
-<li>Shares all drawbacks common to most HTML slides (e.g. no GUI to create presentations)
+<li>Requires a modern web browser and a web server&nbsp;*
+<li>No fancyful animations&nbsp;**
+<li>Shares all drawbacks common to most HTML presentation systems (e.g. no GUI to create slides)
 </ul>
 <p>
-<small>* Slide transitions <em>are</em> possible but require some advanced css wizzardy</small>
+<small>
+* Pik7 actually has it's own server, but it in turn requires <a href="http://nodejs.org/">Node.js</a>
+<br>
+** Slide transitions <em>are</em> possible but require some advanced css wizzardy
+</small>
 </div>
+
 
 <div class="pikSlide">
 <h2>Getting started</h2>
@@ -62,27 +75,21 @@
 </ol>
 </div>
 
+
 <div class="pikSlide">
 <h2>Controls</h2>
 <ul>
 <li>Use the arrow keys and PGUP/PGDN to navigate through the slides
 <li>The <kbd>F5</kbd> and <kbd>ESC</kbd> keys hide the presentation
-<li>On mobile devices you can swipe left and right to navigate
+<li>On mobile devices you can tap left and right to navigate
 <li>The control panel can be found on the bottom right
 </ul>
 </div>
 
-<div class="pikSlide">
-<h2>Presenter mode</h2>
-<ul>
-<li>Open <code>presenter.html</code> in a new window (use the control panel) to open the presenter mode.
-<li>The presenter mode offers more control elements, displays a timer and a slide overview
-<li>Requires a browser that supports Web Storage (every browser except IE &lt; 8)
-</ul>
-</div>
 
 <div class="pikSlide">
 <h2>Building presentations</h2>
+<p>Minimal working example:
 <pre><code class="prettyprint language-html">&lt;!-- /presentations/Foo/bar.html --&gt;
 &lt;html id="PikSlides"&gt;
 &lt;script src="../../core/pik7.js"&gt;&lt;/script&gt;
@@ -93,6 +100,7 @@
 Use <code>presentations/Template/index.html</code> as a starting point.
 </div>
 
+
 <div class="pikSlide">
 <h2>Styling presentations</h2>
 <ul>
@@ -102,14 +110,59 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 </ul>
 </div>
 
+
 <div class="pikSlide">
-<h2>Slide events</h2>
+<h2>Multiple views</h2>
+<p>Open Pik7 in additional browser windows to create multiple, synchronized presentation views</p>
+<p><a href="../index.html">Try it now!</a></p>
+</div>
+
+
+<div class="pikSlide">
+<h2>Presenter view</h2>
+<img src="assets/presenter.png" width="50%" style="float:right; margin: 1em -0.5em 1em 1.5em">
+<ul>
+<li>Two configurable views for current and coming slides as well as speaker notes, synchronized with all other views
+<li>Additional controls, timer
+<li><a href="../presenter.html">Try it now!</a>
+</ul>
+</div>
+
+
+<div class="pikSlide">
+<h2>Speaker notes</h2>
+<p>Additional speaker notes can be added using an element with the class <code>pikNotes</code> for each slide
+<pre><code class="prettyprint language-html">&lt;div class="pikNotes"&gt;
+    &lt;p&gt;Use all the HTML you like here!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+<p>Notes are invisible in the presentation, but are shown in the presenter view
+</ul>
+<div class="pikNotes">
+	<p>Use all the HTML you like here!</p>
+</div>
+</div>
+
+
+<div class="pikSlide">
+<h2>Printing</h2>
+<ul>
+<li>Use the print link in the control panel to print your presentation
+<li>A very basic print stylesheet is included; use your own style file to enhance it to your liking
+<li>Hide non-printable elements by adding the class <code>pikNoprint</code>
+<li>Use Chrome's print to PDF functionality to create simple PDF versions of your slides
+</ul>
+</div>
+
+
+<div class="pikSlide">
+<h2>Events</h2>
 <ul>
 <li><code>pikActivate</code> fires on a slide when it becomes the current slide, <code>pikDeactivate</code> fires when the slide ist navigated away from
 <li><code>pikSlide</code> fires on <code>window</code> each time slides change, passing the current slide element and it's number
 <li><code>pikHide</code> and <code>pikShow</code> fire on <code>window</code> when the hidden state changes
 </ul>
 </div>
+
 
 <div class="pikSlide" id="EventsDemo">
 <h2>Events demo</h2>
@@ -140,94 +193,55 @@ $(document).ready(function(){
 
 
 <div class="pikSlide">
-<h2>Notes</h2>
+<h2>Summary of special html classes</h2>
 <ul>
-<li>Notes can be added using an element with the class <code>pik-notes</code> for each slide
-<li>Notes are invisible in the presentation, but are shown in the presenter view
-<li>Look at this slide for an example
-</ul>
-<div class="pikNotes">
-	<h3>Use all the tags you like!</h3>
-	<ul>
-		<li>No limitations! Use <a href="http://www.google.com">links</a>, headlines and everything else!
-		<li>Notes won't be printed
-	</ul>
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="pikSlide">
-<h2>Special css classes</h2>
-<ul>
+<li><code>pikSlide</code> marks a slide container
 <li><code>pikNoprint</code> prevents an element from being printed
-<li><code>pikNotes</code>
+<li><code>pikNotes</code> inside of <code>pikSlide</code> elements contain content for speaker notes
 </ul>
 </div>
-
-
-
-
 
 
 <div class="pikSlide">
 <h2>Slide transitions</h2>
 <ul>
 <li>Slide visibility is completly managed by css; all slides except the one with the
-class <code>pik-current</code> are invisible by default
-<li>By changing the behavior of this class and the classes <code>pik-next</code> and
-<code>pik-prev</code> it is possible to create slide transitions
+class <code>pikCurrent</code> are invisible by default
+<li>By changing the behavior of this class and the classes <code>pikNext</code> and
+<code>pikPrev</code> it is possible to create slide transitions
 </ul>
+<p><button id="Fancify">Enable fancy transition demo</button>
 </div>
+<script>
+$('#Fancify').click(function(){
+  var $html = $('html');
+  var $this = $(this);
+  if($html.hasClass('fancy')){
+    $html.removeClass('fancy');
+    $this.html('Enable fancy transition demo');
+  }
+  else {
+    $html.addClass('fancy');
+    $this.html('Disable fancy transition demo');
+  }
+})
+</script>
+
 
 <div class="pikSlide">
-<h2>Programming presentations</h2>
+<h2>Server</h2>
 <ul>
-<li>An <code>slideactivate</code> event is fired on the slides when they are shown
-<li>A <code>slidedeactivate</code> event when hidden
-<li>A <code>slidechange</code> event is fired on the <code>window</code> object when slides change
+<li>A <em>very</em> basic web server based on Node.js is provided
+<li>To run: <code>node server.js</code>
 </ul>
 </div>
 
-
-
-<div class="pikSlide">
-<h2>Printing presentations</h2>
-<ul>
-<li>Use the print link in the control panel to print your presentation
-<li>A very basic print stylesheet is included; use your own style file to enhance it to your liking
-<li>Hide non-printable elements by adding the class <code>noprint</code>
-</ul>
-</div>
-
-<div class="pikSlide">
-<h2>Plugins</h2>
-<ul>
-<li>Plugins are simple scripts that can be used to add features a presentation
-<li><em>backgroundHarmonizer.js</em> keeps the presentation document's background color in sync with the current slide's background color.
-<li><em>inputProtector.js</em> prevents Pik6 from interpreting arrow key events emitted on input elements in the presentation as presentation commands
-<li><em>printHandout.js</em> enables a handout mode for printing, where only slides with the class <code>handout</code> are printed
-</ul>
-</div>
 
 <div class="pikSlide">
 <h2>Links</h2>
 <ul>
-<li><a href="https://github.com/SirPepe/Pik6">Github</a>
-(<a href="https://github.com/SirPepe/Pik6/issues">report bugs here!</a>)
-<li><a href="http://pik6.peterkroener.de/">Web site</a>
-<li><a href="../../changelog.md">Changelog</a>
+<li><a href="https://github.com/SirPepe/Pik7">Github</a>
+(<a href="https://github.com/SirPepe/Pik7/issues">report bugs here!</a>)
 <li><a href="mailto:peter@peterkroener.de">Contact me</a>
 </ul>
 </div>

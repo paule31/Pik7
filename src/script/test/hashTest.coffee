@@ -4,10 +4,10 @@ require ['lib/hash'], (Hash) ->
   hash = new Hash
 
   examples = {
-    'http://foo.org/index.html#!/index/index.html@1': ['index/index.html', 1, false]
-    'localhost://#!presentations/HTML5/05_Formulare.html@37!hidden': ['presentations/HTML5/05_Formulare.html', 37, true]
-    'http://www.foo.de/some/dir#!/presentations/Pik6Vorstellung@14': ['presentations/Pik6Vorstellung', 14, false]
-    'file:///home/user/moo.html#!Pik6Vorstellung@11!hidden': ['Pik6Vorstellung', 11, true]
+    'http://foo.org/index.html#!/index/index.html@1': ['index/index.html', 0, false]
+    'localhost://#!presentations/HTML5/05_Formulare.html@37!hidden': ['presentations/HTML5/05_Formulare.html', 36, true]
+    'http://www.foo.de/some/dir#!/presentations/Pik6Vorstellung@14': ['presentations/Pik6Vorstellung', 13, false]
+    'file:///home/user/moo.html#!Pik6Vorstellung@11!hidden': ['Pik6Vorstellung', 10, true]
   }
 
   test 'Parse URLs', ->

@@ -1,55 +1,131 @@
 #PikPresenterApp
 
-  $wide  = "screen and (min-aspect-ratio:7/5)"
-  $small = "screen and (max-aspect-ratio:7/5)"
-
   body
-    font-size 16px
     font-family Arial, sans-serif
     line-height 1.25
+    color #000
+  #PikPresenterAppWrapper
+    position relative
+    margin-left auto
+    margin-right auto
+
+
+  input, select
+    font-size inherit
+
 
   iframe
     display block
     border none
     margin 0
-    box-shadow 0 0 3em -0.2em rgba(#000, 0.5)
-    background pink
-  #PikFrame, #PikFramePreviewContainer
+    box-shadow 0 0 1.25em -0.2em rgba(#000, 0.65)
+    background #FFF
     position absolute
     &:hover
       z-index 1337
-
-  // Regular (widescreen) layout
   #PikFrame
-    height 100%
-    width 70%
-  #PikFramePreviewContainer
-    text-align right
+    left 0
+  #PikFramePreview
     right 0
-    height 70%
-    width 45%
-    iframe
-      height 100%
-      width 100%
 
 
-// Timer and slide counter
-#PikSlideCounter, #PikTimer
-  display inline-block
-  margin 20px 32px
-#PikSlideCounter
-  font-weight bold
-  font-size 2.5em
-#PikTimer
-  span
+  // Timer and slide counter
+  #PikCounterContainer
+    font-size 55%
+    text-align:right
+    position absolute
+    top 11%
+    right 0
+  #PikSlideCounter, #PikTimer
     display block
+  #PikSlideCounter
+    font-weight bold
+    font-size 2em
+  #PikTimeCountdown
+    font-weight bold
+  #PikTimeCurrent
+    font-size 0.8em
+  #PikCountdownControl
+    text-decoration none
+    color #000
+    opacity 0.35
+    overflow hidden
+    margin-right 0.25em
+    &:before
+      @extend [class^='icon']:before
+      @extend .iconPause:before
+    &.paused
+      &:before
+        @extend .iconPlay:before
+    &:hover
+      opacity 1
+    span
+      display inline-block
+      height 0
+      width 0
+      overflow hidden
 
 
-// Controls
-#PikControlsContainer
-  margin 20px 16px
-  line-height 2
-  a, select, label
-    margin-right 16px
-    max-width 33%
-    font-size inherit
+  // Controls
+  #PikControlsContainer
+    font-size 35%
+    text-align:right
+    position absolute
+    bottom 10%
+    right 0
+    width 100%
+    p
+      margin 1.25em 0
+    select
+      width 22.5%
+    a
+      cursor pointer
+      margin-left 0.5em
+      text-decoration none
+      border-bottom-width 0.1em
+      border-bottom-style solid
+      &:link, &:visited
+        color inherit
+        border-bottom-color currentcolor
+      &:hover
+        color inherit
+        border-bottom-color transparent
+      &:active
+        color #C00
+        border-bottom-color transparent
+      &:before
+        margin-right 0.25em
+
+  // Advanced Options
+  #PikPresenterOptions
+    font-size 0.45em
+    background #FFF
+    box-shadow 0 0 2em -0.25em rgba(#000, 0.6)
+    display table
+    position absolute
+    z-index 9000
+    width 80%
+    left 10%
+    padding 1em 2em
+    h1
+      font-size 1.4em
+    h2
+      font-size 1.1em
+    input[type=number]
+      max-width 20%
+    #PikOptionsClose
+      margin-top 2.5em
+      text-align right
+      input
+        font-weight bold
+        cursor pointer
+  #PikPresenterOptionsOverlay
+    position absolute
+    z-index 8999
+    top 0
+    left 0
+    right 0
+    bottom 0
+    background rgba(#000, 0.75)
+  #PikPresenterOptions:not(.open), #PikPresenterOptionsOverlay:not(.open)
+    display none

@@ -3,7 +3,7 @@
   "glyphs": [
     {
       "uid": "2cfb3f2b46b34a1790aec0aa846297b6",
-      "orig_css": "th-list",
+      "orig_css": "menu",
       "orig_code": 9776,
       "css": "th-list",
       "code": 9776,
@@ -15,6 +15,14 @@
       "orig_code": 8962,
       "css": "home",
       "code": 8962,
+      "src": "entypo"
+    },
+    {
+      "uid": "25fc99a30fecc4021fdcae5fff5ba9ac",
+      "orig_css": "eye",
+      "orig_code": 59146,
+      "css": "eye",
+      "code": 59146,
       "src": "entypo"
     },
     {
@@ -42,6 +50,14 @@
       "src": "entypo"
     },
     {
+      "uid": "bc64550dd022ce21604f97309b346cea",
+      "orig_css": "cog",
+      "orig_code": 9881,
+      "css": "cog",
+      "code": 9881,
+      "src": "entypo"
+    },
+    {
       "uid": "744a71fe4b5ab7c4f4b7cd598e9bf75a",
       "orig_css": "window",
       "orig_code": 59214,
@@ -58,11 +74,27 @@
       "src": "entypo"
     },
     {
-      "uid": "25fc99a30fecc4021fdcae5fff5ba9ac",
-      "orig_css": "eye",
-      "orig_code": 59146,
-      "css": "eye",
-      "code": 59146,
+      "uid": "d94334f23acba022bfd68e49d76b31bb",
+      "orig_css": "github",
+      "orig_code": 62208,
+      "css": "github",
+      "code": 62208,
+      "src": "entypo"
+    },
+    {
+      "uid": "d8d378d0ce413f231dfa37592e39c227",
+      "orig_css": "pause",
+      "orig_code": 9097,
+      "css": "pause",
+      "code": 9097,
+      "src": "entypo"
+    },
+    {
+      "uid": "cb13afd4722a849d48056540bb74c47e",
+      "orig_css": "play",
+      "orig_code": 9654,
+      "css": "play",
+      "code": 9654,
       "src": "entypo"
     }
   ]

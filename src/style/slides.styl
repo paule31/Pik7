@@ -22,8 +22,38 @@
       background #000
       z-index 999999999999999999
 
-    // Special classes make slides and hide overlay visible */
+    // Special classes make slides and hide overlay visible
     .pikSlide.pikCurrent
       visibility visible
     #PikHide.pikActive
       visibility visible
+
+    // Notes are invisible in the normal presentation view...
+    .pikNotes
+      display none
+
+    // ... and styled differently in the presenter
+    &.pikInPresenter:not(.pikOnlyNotes):not(.pikNoNotes) .pikNotes
+      display block
+      background rgba(#000, 0.75)
+      color #FFF
+      font-size 0.6em
+      position absolute
+      bottom 0
+      left 0
+      right 0
+      padding 0.5em 1.5em
+      transition opacity 750ms
+      &:hover
+        opacity 0
+
+    // Overlay modifications for presenter display
+    &.pikInPresenter #PikHide
+      opacity 0.6
+
+    // Only-notes-showing mode for presenter
+    &.pikOnlyNotes
+      .pikSlide > :not(.pikNotes)
+        display none
+      .pikNotes
+        display block !important

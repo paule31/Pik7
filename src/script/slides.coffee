@@ -1,4 +1,4 @@
-define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
+define ['lib/presentation', 'lib/hash', 'lib/forceAspectRatio', 'jquery'], (Presentation, Hash, forceAspectRatio, $) ->
   return class Slides
 
     # Index for the current, next and previous slide
@@ -11,6 +11,7 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
     wrapper: null
     hideLayer: null
 
+
     constructor: ->
       self = this
       @presentation = new Presentation ->
@@ -18,18 +19,18 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
         self.setupSizes()
         @on('slide', self.goTo)
         @on('hidden', self.setHidden)
-        # Trigger ready state *after* setting up the slide and hidden events to prevent
-        # hours of bug seaching...
         if window != window.parent then window.parent.Pik.app.trigger('ready')
-        self.print()
+        $(window).load -> self.print()
 
 
     # Try to figure out where the base directory is relative to the page
     getBasePath: ->
-      source = if window.parent != window
+      source = if window.parent? && window.parent != window
         window.parent.location.href
+      else if window.opener?
+        window.opener.location.href
       else
-        window.opener.location.href || ''
+        ''
       return base = if source
         Hash::commonPath(window.location.href, source)
       else
@@ -64,56 +65,47 @@ define ['lib/presentation', 'lib/hash', 'jquery'], (Presentation, Hash) ->
       # **HACK HACK HACK HACK**
       # Hack to ensure a fully sized canvas ASAP. This is needed because iframe's
       # load events are unreliable, but domready events are not. So when we add
-      # `setSizes()` to the load event in `@setupSizes()` there's no guarantee that this
-      # will ever happen. But simply calling `setSizes()` on domready isn't enough too,
-      # because than the base style sheet might not be loaded and/or parsed/applied to
-      # the document. Only way out is to set the styles manually and calling `setSizes()`
-      # independently of any events down in `@setupSizes()`.
+      # `ratioEnforder()` to the load event in `@setupSizes()` there's no guarantee that
+      # this will ever happen. But simply calling `setSizes()` on domready isn't enough
+      # too, because than the base style sheet might not be loaded and/or parsed/applied
+      # to the document. Only way out is to set the styles manually and calling
+      # `ratioEnforder()` once independently of any events down in `@setupSizes()`.
       $('html, body').css('height', '100%')
 
 
     # Maintain a 4:3 aspect ratio, body positions, font and slide size every time the
     #presentation loads or the window is resized.
     setupSizes: ->
-      setSizes = =>
-        size = {
-          x: $('html').width()
-          y: $('html').height()
-        }
-        ratio = 4 / 3
-        newwidth  = Math.floor(if size.x > size.y * ratio then size.y * ratio else size.x)
-        newheight = Math.floor(if size.x > size.y * ratio then size.y else size.x / ratio)
-        topmargin = Math.floor((size.y - newheight) / 2)
-        fontsize  = (newheight + newwidth) / 6.5
-        @wrapper.css({
-          'width'     : "#{newwidth}px"
-          'height'    : "#{newheight}px"
-          'font-size' : "#{fontsize}%"
-          'top'       : "#{topmargin}px"
-        })
-      setSizes() # See the long comment in `@setupDom()` for why this is here
-      $(window).bind('resize', setSizes)
+      ratioEnforcer = forceAspectRatio(4 / 3, @wrapper)
+      ratioEnforcer() # See the long comment in `@setupDom()` for why this is here
+      $(window).bind('resize', ratioEnforcer)
+      # Opera Mobile (and Chrome Mobile?) doesn't fire resize event when the device
+      # orientation changes, so we use media query listeners (works at least for Opera)
+      if window.matchMedia
+        mql = window.matchMedia("(orientation: portrait)")
+        mql.addListener(ratioEnforcer)
 
 
-    # Pop up the print dialog if it look like a good idea
+
+    # Pop up the print dialog if it looks like a good idea
     print: ->
       window.print() if window.location.hash == '#print'
 
 
     # Display the slide `num`
     goTo: (num) =>
-      $(@slides[@curr]).trigger('pikDeactivate')
+      $(@slides[@curr]).trigger('pikDeactivate') unless $('html').hasClass('pikNoEvents')
       $(@slides[@curr]).removeClass('pikCurrent')
       $(@slides[@next]).removeClass('pikNext')
       $(@slides[@prev]).removeClass('pikPrev')
       @curr = num
       @next = num + 1
       @prev = num - 1
-      $(@slides[@curr]).trigger('pikActivate')
+      $(@slides[@curr]).trigger('pikActivate') unless $('html').hasClass('pikNoEvents')
       $(@slides[@curr]).addClass('pikCurrent')
       $(@slides[@next]).addClass('pikNext')
       $(@slides[@prev]).addClass('pikPrev')
-      $(window).trigger('pikSlide', [@curr])
+      $(window).trigger('pikSlide', [@curr]) unless $('html').hasClass('pikNoEvents')
 
 
     # Hide the presentation

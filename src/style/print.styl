@@ -1,29 +1,54 @@
 @media print
 
+
   #PikSlideWrapper
-    font-size 17pt !important // Override metrics set by javascript
+    font-size 15pt !important // Override metrics set by javascript
+    width 100% !important // Override metrics set by javascript
     color black
     background white
-  h1, h2, h3, h4, h5, h6
-    clear both
-  a
-    color blue
-  .pikSlide
-    clear both
-    clearfix()
+
 
   // No printing and no page breaks for these guys
-  .pikNoprint, .pikNotes, input, textarea, iframe, button
+  .pikNoprint, .pikNotes
     display none !important
     page-break-after auto !important
 
 
+  // Typo
+  h1, h2, h3, h4, h5, h6
+    clear both
+    &:first-child
+      margin-top 0
+  pre
+    line-height 1.2
+  input, textarea, iframe
+    -webkit-print-color-adjust exact
+  a
+    color blue
+    word-wrap break-word
+    &:not(.url)[href^="http"]::after
+      content " (" attr(href) ")"
+      font-size 55%
+  .pikSlide.center
+    > img:only-child
+      display block
+      margin 0 auto
+
+
 // Emulate original slide layout for landscape format
 @media print and (orientation:landscape)
-
   #PikSlideWrapper
-    font-size 27pt !important // Override metrics set by javascript
+    font-size 21pt !important // Override metrics set by javascript
+  #PikSlides .pikSlide
+    page-break-inside avoid
+    page-break-after always
+  img[width="100%"]
+    width 75%
+    display block
+    margin 0 auto
 
-  .pikSlide
-    page-break-inside: avoid;
-    page-break-after: always;
+
+// Add extra margins for portrait mode
+@media print and (orientation:portrait)
+  #PikSlides .pikSlide
+    margin-bottom 3em

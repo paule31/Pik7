@@ -6,26 +6,80 @@
 <link rel="stylesheet" href="core/pik7.css">
 <script src="core/pik7.js"></script>
 
-<iframe name="Slides" id="PikFrame" src="about:blank"></iframe>
-<div id="PikFramePreviewContainer">
-	<div id="PikSlideCounter">
-		<span id="PikSlideCurrent">0</span>
-		/
-		<span id="PikSlideCount">0</span>
-	</div>
-	<div id="PikTimer">
-		<span id="PikTimeElapsed">00:00:00</span>
-		<span id="PikTimeCurrent">00:00:00</span>
-	</div>
+<div id="PikPresenterAppWrapper">
+	<iframe name="Slides" id="PikFrame" src="about:blank"></iframe>
 	<iframe id="PikFramePreview" src="about:blank"></iframe>
+	<div id="PikCounterContainer">
+		<div id="PikSlideCounter">
+			<span id="PikSlideCurrent">0</span>
+			/
+			<span id="PikSlideCount">0</span>
+		</div>
+		<div id="PikTimer">
+			<span id="PikTimeCurrent">00:00:00</span><br>
+			<a id="PikCountdownControl" href="#" class="running"><span>Stop</span></a>
+			<span id="PikTimeCountdown">00:00:00</span>
+		</div>
+	</div>
 	<div id="PikControlsContainer">
-		<p id="PikControls">
-			<a class="iconView" href="index.html" target="_blank">Open Viewer</a>
+		<p>
+			<a class="iconView" href="index.html" target="_blank">Viewer</a>
 			<a class="iconFolder" href="presentations" target="Slides">Browse</a>
-			<br>
-			Jump to slide <select id="PikControlsSelect"></select>
-			<br>
-			<label><input id="PikNoEvents" type="checkbox" value="1"> Suppress slide events in presenter</label>
+			<a class="iconCog" id="PikPresenterOptionsLink">Options</a>
+		</p>
+		<p>
+			<label>
+				Jump to slide:
+				<br>
+				<select id="PikControlsSelect"></select>
+			</label>
 		</p>
 	</div>
+
+	<div id="PikPresenterOptions">
+		<h1>Options</h1>
+		<h2>Layout</h2>
+		<p>
+			<label>
+				Main frame content:
+				<select id="PikOptionsMainFrameContent">
+					<option value="currentSlide">Current slide</option>
+					<option value="currentSlideNoNotes">Current slide (without notes)</option>
+					<option value="nextSlide">Next slide</option>
+					<option value="nextSlideNoNotes">Next slide (without notes)</option>
+					<option value="currentNotes">Notes for current slide</option>
+				</select>
+			</label>
+		</p>
+		<p>
+			<label>
+				Secondary frame content:
+				<select id="PikOptionsSecondaryFrameContent">
+					<option value="currentSlide">Current slide</option>
+					<option value="currentSlideNoNotes">Current slide (without notes)</option>
+					<option value="nextSlide">Next slide</option>
+					<option value="nextSlideNoNotes">Next slide (without notes)</option>
+					<option value="currentNotes">Notes for current slide</option>
+				</select>
+			</label>
+		</p>
+		<h2>Events</h2>
+		<p>
+			<label><input id="PikNoEvents" type="checkbox" value="1"> Suppress events in Presenter</label>
+		</p>
+		<!--<h2>Countdown</h2>
+		<p>
+			<label><input type="checkbox" name="PikOptionsCountdownActivate" value="1"> Show countdown instead of elapsed time</label>
+		</p>
+		<p>
+			<label>Start at <input type="number" name="PikOptionsCountdownAmount" value="30"> minutes</label>,
+			<label>warn at <input type="number" name="PikOptionsCountdownWarn" value="1"> minutes</label>
+		</p>-->
+		<p id="PikOptionsClose">
+			<input id="PikOptionsCloseButton" type="button" value="Done">
+		</p>
+	</div>
+
 </div>
+
+<div id="PikPresenterOptionsOverlay"><div>

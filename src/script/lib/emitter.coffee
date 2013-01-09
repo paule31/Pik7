@@ -5,13 +5,16 @@
 # 3. trigger events with `trigger('topic', arg1, arg2...)` (callbacks are called with `null` for `this`)
 #
 # Events can be removed via `off('topic', cb)` or offAll('topic').
-
 define ->
   return class Emitter
 
+
     constructor: (args...) ->
       @topics = {}
+      if args.length == 0
+        throw new Error "Got empty topic list"
       @topics[topic] = [] for topic in args
+
 
     on: (topic, callback) ->
       if typeof callback != 'function'
@@ -23,6 +26,7 @@ define ->
       else
         @topics[topic].push(callback)
 
+
     off: (topic, callback) ->
       if typeof callback != 'function'
         throw new Error "Can't remove callback from '#{topic}', '#{callback}' is not a function"
@@ -32,6 +36,7 @@ define ->
         throw new Error "Can't remove callback, not subscribed to '#{topic}'"
       else
         @topics[topic].splice(@topics[topic].indexOf(callback), 1)
+
 
     offAll: (topic) ->
       removeAllCallbacks = (list, target) ->
@@ -43,6 +48,7 @@ define ->
         removeAllCallbacks(@topics, topic)
       else
         removeAllCallbacks(@topics, target) for target of @topics
+
 
     trigger: (topic, args...) ->
       if topic not of @topics

@@ -17,6 +17,9 @@
     right 0
     padding 0.85em 1.25em 1.25em 2em
     margin 0
+    cursor pointer
+    &.open
+      cursor default
   #PikControls
     background rgba(0, 0, 0, 0.95)
     border-radius 0.5em
@@ -29,11 +32,11 @@
     padding 1.2em 1.6em 0.9em 1.6em
     opacity 0.3
     transition opacity $transitionDelay
-  #PikControlsContainer:hover #PikControls
+  #PikControlsContainer.open #PikControls
     opacity: 1
-  #PikControlsLinks, #PikControlsContainer:hover #PikControlsTitle
+  #PikControlsLinks, #PikControlsContainer.open #PikControlsTitle
     display none
-  #PikControlsContainer:hover #PikControlsLinks, #PikControlsTitle
+  #PikControlsContainer.open #PikControlsLinks, #PikControlsTitle
     display inline
 
 

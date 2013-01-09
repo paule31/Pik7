@@ -9,10 +9,10 @@
 
 define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash, Controls) ->
   return class Controller
-
     constructor: (defaults) ->
       @createEmitters(defaults)
       @initialUpdate()
+
 
     # Create the four emitters (the state object with a starting state derived from the
     # defaults, the url and local storage), then connect emitters
@@ -31,6 +31,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @connectSync(@sync)
       @connectControls(@controls)
 
+
     # After a state has been established, update Hash and Sync once
     initialUpdate: ->
       file = @state.get('file')
@@ -48,12 +49,12 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
     # Passing emitters as arguments simplifies connecting emitters from elsewhere (eg.
     # the frames' controls instances)
 
+
     # 1. Listen for hash changes and update the state accordingly
     # 2. When an event fires on the state, update the hash using `stateCb`
     connectHash: (emitter) ->
       emitter.on 'change', (data) =>
         @state.set(data, emitter)
-
       # Listen on the state emitter
       onstatechange = (key, value) =>
         emitter.update(key, value, { # `update` should better be called `setState`, like in Sync
@@ -64,6 +65,7 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @state.on 'file', emitter, onstatechange.bind(this, 'file')
       @state.on 'slide', emitter, onstatechange.bind(this, 'slide')
       @state.on 'hidden', emitter, onstatechange.bind(this, 'hidden')
+
 
     # 1. Listen on the emitter's change event and update the state accordingly
     # 2. When an event fires on the state, update the sync storage using `set()`
@@ -94,14 +96,17 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @state.on 'slide', emitter, (value) -> onstatechange('slide', value)
       @state.on 'hidden', emitter, (value) -> onstatechange('hidden', value)
 
+
     # Connect the contol emitter's events directly to the api methods
     connectControls: (emitter) ->
       emitter.on 'prev', => @goPrev()
       emitter.on 'next', => @goNext()
       emitter.on 'toggleHidden', => @toggleHidden()
 
+
     # API
     # ---
+
 
     # Expose the state manager's event hooks, but hide the "smart" parts
     # of the SmartEmitter's functionality by using `null` for caller/subscriber objects
@@ -119,15 +124,18 @@ define ['lib/state', 'lib/sync', 'lib/hash', 'lib/controls'], (State, Sync, Hash
       @sync.offAll(args...)
       @controls.offAll(args...)
 
+
     # Get and set the current file
     getFile: -> @state.get('file')
     openFile: (newFile) -> @state.set { file: newFile }
+
 
     # Get and navigate the slides
     getSlide: -> @state.get('slide')
     goTo: (num) -> @state.set { slide: Number num }
     goNext: -> @goTo(@getSlide() + 1)
     goPrev: -> @goTo(@getSlide() - 1)
+
 
     # Get, set and toggle the hidden state
     getHidden: -> @state.get('hidden')

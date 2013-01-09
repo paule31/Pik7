@@ -2,8 +2,8 @@
 # methods take an additional argument that identifies the emitter that is listening for
 # or triggering events. This allows the Smart Emitter to not propagate events back to
 # the objects that triggered them in the first place.
-
 define ['lib/emitter'], (Emitter) ->
+
 
   compareArrays = (a, b) ->
     a.sort()
@@ -12,7 +12,9 @@ define ['lib/emitter'], (Emitter) ->
     return false for val, idx in a when val != b[idx]
     return true
 
+
   return class SmartEmitter extends Emitter
+
 
     # Add the callbacks to the topics and add the `__subscriber__` property
     # *afterwards*. This order allows `__super__.on` to deal with non-function
@@ -21,9 +23,10 @@ define ['lib/emitter'], (Emitter) ->
       argsLen = arguments.length
       if argsLen < 3
         argsStr = [].join.call(arguments, ', ')
-        throw new Error "Missing arguments for 'on()' - expected 3, got #{argsLen} (#{argsStr})"
+        throw new Error("Missing arguments for 'on()' - expected 3, got #{argsLen} (#{argsStr})")
       super(topic, callback)
       callback.__subscriber__ = subscriber if subscriber?
+
 
     # Trigger all callbacks for the given topic if the callback's `__subscriber__`
     # property isn't equal to `caller`
@@ -35,7 +38,8 @@ define ['lib/emitter'], (Emitter) ->
       else
         topics = @topics
       args.unshift(topic)
-      SmartEmitter.__super__.trigger.apply { topics }, args
+      SmartEmitter.__super__.trigger.apply({ topics }, args)
+
 
     # Let this Smart Emitter listen on all events on another Emitter. The other
     # Emitter must have the exact same topics as the Smart Emitter for this to work.

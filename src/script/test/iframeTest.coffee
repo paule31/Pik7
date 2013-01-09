@@ -1,4 +1,4 @@
-require ['lib/iframe', 'jquery'], (Iframe) -> $(window).ready ->
+require ['lib/iframe', 'jquery'], (Iframe) ->
   'use strict'
 
   frameEl  = $('#Testframe')

@@ -1,7 +1,7 @@
 # Parses URLs and creates hashes for presentation frame windows.
-
 define ['lib/emitter'], (Emitter) ->
   return class Hash extends Emitter
+
 
     # The default format format looks like `#!/path/to/file.html@42!hidden` where...
     #
@@ -12,26 +12,31 @@ define ['lib/emitter'], (Emitter) ->
       super 'change'
       @addEvents()
 
+
     # Adds the `@hashchange` function to the window's `hashchange` event. Called
     # automatically when constructing a new instance
     addEvents: ->
-      window.addEventListener 'hashchange', @onchange, false
+      window.addEventListener('hashchange', @onchange, false)
+
 
     # The callback that's added to the window's `hashchange` event when a new Hash
     # instance created.
     onchange: (evt) =>
-      data = @parse evt.newURL
-      @trigger 'change', data, evt if data?
+      data = @parse(evt.newURL)
+      @trigger('change', data, evt) if data?
+
 
     # Parses a url, returns an object with the state information contained in the url.
     # Format: `{ String file, Number slide, Boolean hidden }`
+    # Slide numbers are the actual slide numbers, not the array index (first slide = 1)
     parse: (url) ->
       parsed = @format.exec url
       if parsed
         file = parsed[1] || null unless parsed[1] == 'undefined'
-        slide = Number parsed[2] unless !parsed[2]
+        slide = Number(parsed[2]) - 1 unless !parsed[2]
         hidden = if parsed[3] == '!hidden' then true else false
         return { file, slide, hidden }
+
 
     #Calculate the common path of two urls
     commonPath: (a, b) ->
@@ -45,11 +50,13 @@ define ['lib/emitter'], (Emitter) ->
         pos = a.substring(0, pos).lastIndexOf('/')
       return a.substring(0, pos + 1)
 
+
     # Creates a new hash (without pound sign) from state information (`file`, `slide`
-    # `hidden`)
+    # `hidden`). Slide numbers are the actual slide numbers, not the array index
+    # (first slide = 1)
     createHash: (file, slide, hidden) ->
       file   = String file
-      slide  = Number(slide).toString()
+      slide  = (Number(slide) + 1).toString()
       hidden = Boolean hidden
       hash  = '!'
       hash += '/' if file[0] != '/'
@@ -59,19 +66,22 @@ define ['lib/emitter'], (Emitter) ->
       if hidden == true then hash += '!hidden'
       return hash
 
+
     # Do a full hash replacement from the supplied state information
     set: (file, slide, hidden) ->
-      window.location.hash = @createHash file, slide, hidden
+      window.location.hash = @createHash(file, slide, hidden)
+
 
     # Do a partial hash update from the supplied state information
     update: (key, value, defaults) ->
       parsed = @parse(window.location.hash) || defaults
       parsed[key] = value
-      @set parsed.file, parsed.slide, parsed.hidden
+      @set(parsed.file, parsed.slide, parsed.hidden)
+
 
     # Overload the basic emitter's `offAll()` the remove the `hashchange` event from
     # window along with all the emitter's events.
     offAll: () ->
-      window.removeEventListener 'hashchange', @onchange, false
+      window.removeEventListener('hashchange', @onchange, false)
       window.location.hash = ''
       super()
