@@ -24,15 +24,15 @@ Drawbacks
 How to use
 ----------
 
-* `git clone git://github.com/SirPepe/Pik7.git && cd Pik7 && npm install && grunt`
-* If you want to use the included web server: `node server.js`
-* Copy the html file in `/presentations/Template` to `/presentations/yourslidestitle`. Edit/add slides (`<div class="pikSlide">`).
-* Open the presentation framework (`index.html`) in a recent version of your favorite browser
-* Use the "browse" link or the menu on the lower right to load your presentation
-* For multiple presentation views simply open more instances of `index.html` in new browser windows
-* Use the menu on the lower right to open the presenter view or point your browser to presenter.html
-* Navigate slides using the arrow keys or tap near the edges of the screen. Hide the presentation using the F5 or ESC key
-* See the slides about PIK7 (`/presentations/Pik7`) for more details.
+1. Download from [https://github.com/SirPepe/Pik7/tags](https://github.com/SirPepe/Pik7/tags) or `git clone git://github.com/SirPepe/Pik7.git`
+2. Build: `npm install && grunt`
+3. If you want to use the included web server: `node server.js`
+4. Copy the html file in `/presentations/Template` to `/presentations/yourslidestitle`. Edit/add slides (`<div class="pikSlide">`).
+5. Open the presentation framework (`index.html`) in a recent version of your favorite browser
+6. Use the "browse" link or the menu on the lower right to load your presentation
+7. Use the menu on the lower right to open the presenter view or point your browser to `presenter.html`
+8. Navigate slides using the arrow keys or tap near the edges of the screen. Hide the presentation using the F5 or ESC key
+9. See the slides about PIK7 (`/presentations/Pik7`) for more details.
 
 To do
 -----
