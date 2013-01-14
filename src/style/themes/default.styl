@@ -24,6 +24,11 @@
   p.footnotes
     text-align left
     font-size 0.5em
+  iframe
+    display none
+    border none
+  .pikCurrent iframe
+    display block
 
   // Google code prettify
   .pln { color: #000; }
@@ -162,10 +167,14 @@
     background yellow
     color #000
   pre.diff mark:nth-of-type(1) { background: yellow }
-  pre.diff mark:nth-of-type(2) { background: lighten(lime, 10%) }
-  pre.diff mark:nth-of-type(3) { background: lighten(fuchsia, 40%) }
-  pre.diff mark:nth-of-type(4) { background: aqua }
-  pre.diff mark:nth-of-type(5) { background: tomato }
+  pre.diff mark:nth-of-type(2), mark.green { background: lighten(lime, 10%) }
+  pre.diff mark:nth-of-type(3), mark.magenta { background: lighten(fuchsia, 40%) }
+  pre.diff mark:nth-of-type(4), mark.blue { background: aqua }
+  pre.diff mark:nth-of-type(5), mark.red { background: tomato }
+  span.box
+    display inline-block
+    border 0.1em solid #666
+    padding 0.2em
 
   pre, code
     font-family Monaco, "Bitstream Vera Sans Mono", "DejaVu Sans Mono" "Lucida Console", Consolas, Terminal, monospace
