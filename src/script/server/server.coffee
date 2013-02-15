@@ -15,10 +15,7 @@ listDirectory = (request, response) ->
   fs.readdir dir, (err, result) ->
     if err then return endError(request, response, { status: 500 })
     result.forEach (file) ->
-      url = encodeURI(request.url + '/' + file)
-      if fs.statSync(__dirname + request.url + '/' + file).isDirectory() then url += '/'
-      url = path.normalize(url)
-      html += "<li><a href=\"#{url}\">#{file}</a>"
+      html += "<li><a href=\"#{encodeURI(request.url + '/' + file)}\">#{file}</a>"
     html += '</ul>'
     response.writeHead(200, { "Content-Type": "text/html" })
     response.end(html)
@@ -27,7 +24,8 @@ listDirectory = (request, response) ->
 # Ends a request with an error message
 endError = (request, response, err) ->
   response.end("Error #{err.status}")
-  console.log("\u001b[31m Error\u001b[m - #{err.status} for \u001b[1m#{request.url}\u001b[m")
+  if request.url != '/favicon.ico'
+    console.log("\u001b[31m Error - \u001b[m#{err.status} occurred for \u001b[1m#{request.url}\u001b[m")
 
 
 # Serve static files from the main directory.
@@ -40,10 +38,8 @@ server = require('http').createServer (request, response) ->
         if err.status == 404 && /^\/presentations/.test(request.url)
           listDirectory(request, response)
         else
-          endError(request, response, err) if request.url != '/favicon.ico'
-      else
-        console.log("  \u001b[30m#{response.statusCode} #{request.url}\u001b[m")
+          endError(request, response, err)
 
 
 server.listen(port)
-console.log("\u001b[36m Info\u001b[m  - Pik7 server running at \u001b[1mlocalhost:#{port}\u001b[m")
+console.log("\u001b[36m Info  - \u001b[mPik7 server running at \u001b[1mlocalhost:#{port}\u001b[m")
