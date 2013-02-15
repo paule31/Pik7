@@ -1,0 +1,25 @@
+<snippet>
+  <content><![CDATA[<!doctype html>
+<html id="PikSlides">                      <!-- Important - do not remove or rename! -->
+<script src="../../core/pik7.js"></script> <!-- Important - do not remove or rename! -->
+<meta charset="utf-8">
+<title>${1:Presentation Title}</title>
+<base target="_blank">
+<body>
+
+<div class="pikSlide">
+<h1>${1:Presentation Title}</h1>
+<ul>
+<li>
+<li>
+<li>
+<li>
+</ul>
+</div>
+
+</body>
+</html>]]></content>
+  <tabTrigger>presentation</tabTrigger>
+  <scope>text.html</scope>
+  <description>Pik7 presentation boilerplate</description>
+</snippet>
