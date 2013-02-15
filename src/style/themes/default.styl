@@ -44,6 +44,11 @@
   mark span
     &.pln, &.str, &.kwd, &.com, &.dec, &.typ, &.lit, &.pun, &.opn, &.clo, &.tag, &.atn, &.atv
       color #000
+  s
+    text-decoration none
+    span
+      &.pln, &.str, &.kwd, &.com, &.dec, &.typ, &.lit, &.pun, &.opn, &.clo, &.tag, &.atn, &.atv
+        color #AAA
 
 
 @media screen
@@ -81,6 +86,8 @@
       background-size contain
       background-repeat no-repeat
       background-position center center
+      img
+        display none
 
   .left
     text-align left
@@ -123,10 +130,12 @@
     margin 1.25em 0
   ul
     padding-left 1em
+  ol ol
+    list-style-type lower-alpha
   ul, ol
     ul, ol
-      margin-left 0.5em
-  ul ul, ol ul, ul ol, li
+      margin-left 1em
+  ul ul, ol ol, ul ol, ol ul, li
     margin-top 0.425em
     margin-bottom 0.425em
 
@@ -197,10 +206,10 @@
   q
     quotes "\201E" "\201C" "\201A" "\2018"
   blockquote + p.cite
-    text-align left
-    font-size 0.8em
-    margin-top -0.5em
-    margin-bottom 2em
+    text-align left !important // Override .center > *
+    font-size 0.8em !important // Override .center > *
+    margin-top -0.5em !important // Override .center > *
+    margin-bottom 2em !important // Override .center > *
 
   kbd
     font normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif
