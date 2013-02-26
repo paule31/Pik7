@@ -1,5 +1,5 @@
-# Index
-# =====
+# Pik7
+# ====
 
 # `pik7.coffee` is the basis for every aspect of Pik7. It powers the viewer, the
 # presenter or a slide set, depending on where it is included. Therefore, this
@@ -41,10 +41,8 @@ require [
   isSlides = $('#PikSlides').length > 0
 
   if isApp
-    app = new App(appDefaults)
-    appUi(app)
+    appUi new App(appDefaults)
   else if isPresenter
-    app = new PresenterApp(appDefaults, presenterAppOptionDefaults)
-    presenterAppUi(app)
+    presenterAppUi new PresenterApp(appDefaults, presenterAppOptionDefaults)
   else if isSlides
-    app = new Slides()
+    new Slides()

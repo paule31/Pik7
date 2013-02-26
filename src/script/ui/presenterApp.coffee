@@ -1,8 +1,12 @@
-# UI code for the presenter view
+# Presenter App
+# =============
+
+# UI code for the presenter view.
+
 define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
 
-  # Use a 4/3 aspect ratio throughout the entire prsenter app
+  # Use a 4/3 aspect ratio throughout the entire presenter app
   forceAspectRatio = forceAspectRatio.bind(null, 4/3)
   wrapperEnforcer = forceAspectRatio('#PikPresenterAppWrapper', 'html', 1, yes, yes, 'margin-top')
   mainEnforcer = forceAspectRatio('#PikFrame', '#PikPresenterAppWrapper', 0.75)
@@ -15,8 +19,9 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     optionsEnforcer()
   ratioEnforcer()
   $(window).bind('resize', ratioEnforcer)
-  # Opera Mobile (and Chrome Mobile?) doesn't fire resize event when the device
-  # orientation changes, so we use media query listeners (works at least for Opera)
+  # Opera Mobile (and Chrome Mobile?) don't fire resize event when the device
+  # orientation changes, so we use media query listeners (works at least for
+  # Opera)
   if window.matchMedia
     mql = window.matchMedia("(orientation: portrait)")
     mql.addListener(ratioEnforcer)
@@ -27,7 +32,8 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
     pik = frame.Pik
-    # Add a class to the presentation's html element to indicate that it's displayed in the presenter
+    # Add a class to the presentation's html element to indicate that it's
+    # displayed in the presenter
     f.contentWindow.$('html').addClass('pikInPresenter') for f in $('iframe')
     # Change the page title when a new presentation loads
     presentationTitle = frame.$('title').text()
