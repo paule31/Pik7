@@ -85,7 +85,8 @@ groc: {
     'src/script/server/*.coffee',
     'src/script/ui/*.coffee'
   ],
-  out: './src/docs'
+  out: './src/docs',
+  index: 'src/script/pik7'
 },
 
 clean: [

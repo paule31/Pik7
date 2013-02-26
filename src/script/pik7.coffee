@@ -1,6 +1,17 @@
-require ['lib/polyfill/bind', 'almond',
-         'app', 'presenterApp', 'ui/app', 'ui/presenterApp',
-         'slides', 'jquery', 'prefixfree'], (_bind, _almond, App, PresenterApp, appUi, presenterAppUi, Slides) ->
+# Index
+# =====
+
+# `pik7.coffee` is the basis for every aspect of Pik7. It powers the viewer, the
+# presenter or a slide set, depending on where it is included. Therefore, this
+# module is responsible for loading all the polyfills, libraries and classes
+# that will ever be used by Pik7.
+require [
+  'almond',            # AMD implementation for optimzed build
+  'lib/polyfill/bind', # Required by prehistoric android browsers
+  'app', 'presenterApp', 'ui/app', 'ui/presenterApp', 'slides', # Pik7 classes
+  'jquery', 'prefixfree'
+], (_bind, _almond, App, PresenterApp, appUi, presenterAppUi, Slides) ->
+
 
   # Default values for a newly initalized App or PresenterApp
   appDefaults = {
@@ -9,6 +20,7 @@ require ['lib/polyfill/bind', 'almond',
     hidden: no
     numSlides: 1
   }
+
 
   # Default PresenterApp options
   presenterAppOptionDefaults = {
@@ -21,16 +33,18 @@ require ['lib/polyfill/bind', 'almond',
     countdownWarnAmount: 1
   }
 
-  # Default app view
-  if $('#PikApp').length > 0
+
+  # Depending on the environment, initalize Pik7 as a Viewer (`App`), as a
+  # PresenterApp or as a slide set
+  isApp = $('#PikApp').length > 0
+  isPresenter = $('#PikPresenterApp').length > 0
+  isSlides = $('#PikSlides').length > 0
+
+  if isApp
     app = new App(appDefaults)
     appUi(app)
-
-  # Presenter view
-  else if $('#PikPresenterApp').length > 0
+  else if isPresenter
     app = new PresenterApp(appDefaults, presenterAppOptionDefaults)
     presenterAppUi(app)
-
-  # Slide set
-  else if $('#PikSlides').length > 0
-    new Slides()
+  else if isSlides
+    app = new Slides()
