@@ -62,8 +62,8 @@
     background #FFF
     box-shadow 0 0 1.5em -0.5em #999
     width 96%
-    height 96%
-    margin 2%
+    height 97%
+    margin 1% 2%
     padding 0.5em 1.5em
     // Special slide styles
     &:first-child
@@ -72,11 +72,12 @@
       background transparent
       box-shadow none
 
-    // Centered content
+    // Centered content (atm Webkit only)
     &.center
       display -webkit-flex
       -webkit-flex-direction column
       -webkit-justify-content space-around
+      text-align center
       > *
         margin 0 auto
         text-align center
