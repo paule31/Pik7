@@ -34,10 +34,3 @@ How to use
 8. Use the menu on the lower right to open the presenter view or point your browser to `presenter.html`
 9. Navigate slides using the arrow keys or tap near the edges of the screen. Hide the presentation using the F5 or ESC key
 10. See the slides about PIK7 (`/presentations/Pik7`) for more details.
-
-To do
------
-
-* Do more testing
-* Add more themes
-* Fix broken doc generation

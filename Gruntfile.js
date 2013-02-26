@@ -19,7 +19,7 @@ stylus: {
 },
 
 coffee: {
-  compile: {
+  all: {
     options: {
       bare: true
     },
@@ -78,12 +78,23 @@ requirejs: {
   }
 },
 
+groc: {
+  glob: [
+    'src/script/*.coffee',
+    'src/script/lib/*.coffee',
+    'src/script/server/*.coffee',
+    'src/script/ui/*.coffee'
+  ],
+  out: './src/docs'
+},
+
 clean: [
   'src/script/*.js',
   'src/script/server/*.js',
   'src/script/lib/*.js',
   'src/script/ui/*.js',
-  'src/script/test/*.js'
+  'src/script/test/*.js',
+  'src/script/docs/*'
 ],
 
 compress: {
@@ -120,13 +131,14 @@ parallel: {
 });
 
 
+grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
 grunt.loadNpmTasks('grunt-parallel');
 
 
 grunt.registerTask('compile', ['parallel:compile', 'copy']);
 grunt.registerTask('test',    ['connect', 'qunit']);
-grunt.registerTask('finish',  ['clean', 'compress']);
+grunt.registerTask('finish',  ['clean', 'groc', 'compress']);
 
 
 grunt.registerTask('dev-front', ['compile']);

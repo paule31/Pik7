@@ -1,5 +1,5 @@
 node_modules
-src/script/docs
+src/docs
 src/script/lib/vendor
 core/pik7.css
 core/pik7.js
