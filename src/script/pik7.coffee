@@ -1,4 +1,4 @@
-require ['lib/polyfill/bind', 'lib/vendor/almond',
+require ['lib/polyfill/bind', 'almond',
          'app', 'presenterApp', 'ui/app', 'ui/presenterApp',
          'slides', 'jquery', 'prefixfree'], (_bind, _almond, App, PresenterApp, appUi, presenterAppUi, Slides) ->
 

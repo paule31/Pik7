@@ -67,8 +67,9 @@ requirejs: {
     options: {
       baseUrl: 'src/script',
       paths: {
-        jquery: 'lib/vendor/jquery-1.8.3.min',
-        prefixfree: 'lib/vendor/prefixfree.min'
+        almond: 'lib/vendor/almond/almond',
+        jquery: 'lib/vendor/jquery/jquery',
+        prefixfree: 'lib/vendor/prefix-free/prefixfree'
       },
       name: 'pik7',
       out: 'core/pik7.js',
@@ -98,6 +99,7 @@ compress: {
       { src: 'server.js' },
       { src: 'core/**' },
       { src: 'themes/**' },
+      { src: 'extras/**' },
       { src: 'presentations/Pik/**' },
       { src: 'presentations/Template/**' }
     ]
@@ -106,12 +108,12 @@ compress: {
 
 parallel: {
   compile: [
-    { grunt: true, args: ['coffee'] },
-    { grunt: true, args: ['stylus'] }
+    { grunt: true, args: ['coffee'], opts: { stdio: 'inherit' } },
+    { grunt: true, args: ['stylus'], opts: { stdio: 'inherit' } }
   ],
   testAndOptimize: [
-    { grunt: true, args: ['connect', 'qunit'] },
-    { grunt: true, args: ['requirejs'] }
+    { grunt: true, args: ['connect', 'qunit'], opts: { stdio: 'inherit' } },
+    { grunt: true, args: ['requirejs'], opts: { stdio: 'inherit' } }
   ]
 }
 
