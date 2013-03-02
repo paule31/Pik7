@@ -116,17 +116,6 @@ compress: {
       { src: 'presentations/Template/**' }
     ]
   }
-},
-
-parallel: {
-  compile: [
-    { grunt: true, args: ['coffee'], opts: { stdio: 'inherit' } },
-    { grunt: true, args: ['stylus'], opts: { stdio: 'inherit' } }
-  ],
-  testAndOptimize: [
-    { grunt: true, args: ['connect', 'qunit'], opts: { stdio: 'inherit' } },
-    { grunt: true, args: ['requirejs'], opts: { stdio: 'inherit' } }
-  ]
 }
 
 });
@@ -137,14 +126,14 @@ grunt.loadNpmTasks('grunt-contrib');
 grunt.loadNpmTasks('grunt-parallel');
 
 
-grunt.registerTask('compile', ['parallel:compile', 'copy']);
+grunt.registerTask('compile', ['coffee', 'stylus', 'copy']);
 grunt.registerTask('test',    ['connect', 'qunit']);
 grunt.registerTask('finish',  ['clean', 'groc', 'compress']);
 
 
 grunt.registerTask('dev-front', ['compile']);
-grunt.registerTask('dev',       ['compile', 'parallel:testAndOptimize']);
-grunt.registerTask('default',   ['compile', 'parallel:testAndOptimize', 'finish']);
+grunt.registerTask('dev',       ['compile', 'test', 'requirejs']);
+grunt.registerTask('default',   ['compile', 'test', 'requirejs', 'finish']);
 
 
 };

@@ -18,7 +18,6 @@
     "coffee-script": "1.4.x",
     "grunt": "0.4.x",
     "grunt-contrib": "0.4.x",
-    "grunt-parallel": "0.1.x",
     "nib": "0.9.x",
     "stylus": "0.32.x",
     "groc": "0.3.x"
