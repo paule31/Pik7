@@ -73,10 +73,27 @@ requirejs: {
       },
       name: 'pik7',
       out: 'core/pik7.js',
-      optimize: 'uglify'
+      optimize: 'none'
     }
   }
 },
+
+uglify: {
+  all: {
+    files: {
+      'core/pik7.js': ['core/pik7.js']
+    }
+  }
+},
+
+clean: [
+  'src/script/*.js',
+  'src/script/server/*.js',
+  'src/script/lib/*.js',
+  'src/script/ui/*.js',
+  'src/script/test/*.js',
+  'src/script/docs/*'
+],
 
 groc: {
   glob: [
@@ -88,15 +105,6 @@ groc: {
   out: './src/docs',
   index: 'src/script/pik7'
 },
-
-clean: [
-  'src/script/*.js',
-  'src/script/server/*.js',
-  'src/script/lib/*.js',
-  'src/script/ui/*.js',
-  'src/script/test/*.js',
-  'src/script/docs/*'
-],
 
 compress: {
   zip: {
@@ -123,16 +131,15 @@ compress: {
 
 grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
-grunt.loadNpmTasks('grunt-parallel');
 
 
 grunt.registerTask('compile', ['coffee', 'stylus', 'copy']);
 grunt.registerTask('test',    ['connect', 'qunit']);
-grunt.registerTask('finish',  ['clean', 'groc', 'compress']);
+grunt.registerTask('finish',  ['uglify', 'clean', 'groc', 'compress']);
 
 
 grunt.registerTask('dev-front', ['compile']);
-grunt.registerTask('dev',       ['compile', 'test', 'requirejs']);
+grunt.registerTask('dev',       ['compile', 'requirejs']);
 grunt.registerTask('default',   ['compile', 'test', 'requirejs', 'finish']);
 
 
