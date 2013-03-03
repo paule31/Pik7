@@ -72,8 +72,9 @@
       background transparent
       box-shadow none
 
-    // Centered content (atm Webkit only)
+    // Centered content by way of flexbox
     &.center
+      // This works in Chrome - if anyone can help out with other browsers...
       display -webkit-flex
       -webkit-flex-direction column
       -webkit-justify-content space-around
@@ -81,7 +82,6 @@
       > *
         margin 0 auto
         text-align center
-
     // Filling background image
     &.image
       background-size contain

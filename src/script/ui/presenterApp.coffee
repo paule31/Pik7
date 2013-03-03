@@ -145,3 +145,25 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
         else
           f.contentWindow.$('html').removeClass('pikNoEvents')
   app.options.trigger('suppressEvents', app.options.get('suppressEvents'))
+
+
+  # Full screen for iframes
+  fullScreenApi =
+    if Element.prototype.requestFullScreen then 'requestFullScreen'
+    else if Element.prototype.mozRequestFullScreen then 'mozRequestFullScreen'
+    else if Element.prototype.webkitRequestFullScreen then 'webkitRequestFullScreen'
+    else null
+  if fullScreenApi
+    $container = $('#PikTimer')
+    $('<a />').attr({
+      'id': 'PikFullScreenMain'
+      'title': 'Fullsceen for main frame'
+      'class': 'iconFullscreen pikFullScreen'
+    }).appendTo($container).click ->
+      $('#PikFrame')[0][fullScreenApi]()
+    $('<a />').attr({
+      'id': 'PikFullScreenPreview'
+      'title': 'Fullsceen for secondary frame'
+      'class': 'iconFullscreen pikFullScreen'
+    }).appendTo($container).click ->
+      $('#PikFramePreview')[0][fullScreenApi]()
