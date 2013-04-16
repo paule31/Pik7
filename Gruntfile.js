@@ -96,14 +96,16 @@ clean: [
 ],
 
 groc: {
-  glob: [
+  javascript: [
     'src/script/*.coffee',
     'src/script/lib/*.coffee',
     'src/script/server/*.coffee',
     'src/script/ui/*.coffee'
   ],
-  out: './src/docs',
-  index: 'src/script/pik7'
+  options: {
+    out: './src/docs',
+    index: 'src/script/pik7'
+  }
 },
 
 compress: {
@@ -129,8 +131,8 @@ compress: {
 });
 
 
-grunt.loadTasks('src/tasks');
 grunt.loadNpmTasks('grunt-contrib');
+grunt.loadNpmTasks('grunt-groc');
 
 
 grunt.registerTask('compile', ['coffee', 'stylus', 'copy']);
