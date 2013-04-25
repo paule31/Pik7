@@ -1,7 +1,7 @@
 Pik7
 ====
 
-HTML5 presentation framework.
+HTML5 presentation framework. I deal with metric tons of complex slide sets every day. I need them in the browser, i need them to be fast and scriptable and I need to have speaker notes and a presenter mode. I created Pik7 to solve my own problems with existing solutions. If you're not me, you'll probably don't want to use it.
 
 ![Screenshot](https://github.com/SirPepe/Pik7/raw/master/screenshot.png)
 
@@ -10,15 +10,18 @@ Features
 
 * 100% HTML5, CSS and JavaScript (jQuery)
 * Programmable slides, easy to embed content from the web
-* Great performance in modern browsers even with hundreds of slides
-* Works in every modern browser
+* Good performance in modern browsers even with hundreds of slides
+* Works in every modern browser (everything not IE 8 or older)
 * As fancy or a simple as you want it to be
 * Multiple synchronized presentation views and a presenter mode
+* Reasonably printable (useful for PDF export)
+* Rapid navigation between slide sets
 
 Drawbacks
 ---------
 
 * Requires a modern browser and a web server to run from (a simple server is included, but requires Node.js to work)
+* No fancyful animations by default
 * Shares all drawbacks common to HTML slides (no GUI to create presentations, no PDF export, images hard to use)
 
 How to use
