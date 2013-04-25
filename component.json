@@ -5,7 +5,7 @@
     "jquery": "2.0.x",
     "almond": "0.2.x",
     "prefix-free": "a157cbd4a0ab8fb7f63321764f62450d0a00ba6e",
-    "requirejs": "2.1.x",
+    "requirejs": "2.0.x",
     "qunit": "1.11.x"
   }
 }
