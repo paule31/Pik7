@@ -95,19 +95,6 @@ clean: [
   'src/script/docs/*'
 ],
 
-groc: {
-  javascript: [
-    'src/script/*.coffee',
-    'src/script/lib/*.coffee',
-    'src/script/server/*.coffee',
-    'src/script/ui/*.coffee'
-  ],
-  options: {
-    out: './src/docs',
-    index: 'src/script/pik7'
-  }
-},
-
 compress: {
   zip: {
     options: {
@@ -132,12 +119,11 @@ compress: {
 
 
 grunt.loadNpmTasks('grunt-contrib');
-grunt.loadNpmTasks('grunt-groc');
 
 
 grunt.registerTask('compile', ['coffee', 'stylus', 'copy']);
 grunt.registerTask('test',    ['connect', 'qunit']);
-grunt.registerTask('finish',  ['uglify', 'clean', 'groc', 'compress']);
+grunt.registerTask('finish',  ['uglify', 'clean', 'compress']);
 
 
 grunt.registerTask('dev-front', ['compile']);
