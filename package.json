@@ -12,12 +12,17 @@
     "email": "peter@peterkroener.de"
   },
   "dependencies": {
-    "coffee-script": "1.3.x",
-    "coffeelint": "0.4.x",
-    "docco": "0.4.x",
-    "grunt-contrib": "0.3.0",
-    "nib": "0.9.x",
-    "stylus": "0.31.x",
     "node-static": "0.6.x"
-  }
+  },
+  "devDependencies" : {
+    "coffee-script": "1.6.x",
+    "grunt": "0.4.x",
+    "grunt-contrib": "0.6.x",
+    "nib": "0.9.x",
+    "stylus": "0.32.x"
+  },
+  "licenses":[{
+    "type": "MIT",
+    "url": "https://github.com/SirPepe/Pik7/raw/master/LICENSE"
+  }]
 }

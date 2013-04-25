@@ -1,0 +1,14 @@
+<snippet>
+  <content><![CDATA[<div class="pikSlide">
+<h2>${1:Slide Title}</h2>
+<ul>
+<li>
+<li>
+<li>
+<li>
+</ul>
+</div>]]></content>
+  <tabTrigger>slide</tabTrigger>
+  <scope>text.html</scope>
+  <description>Pik7 slide</description>
+</snippet>

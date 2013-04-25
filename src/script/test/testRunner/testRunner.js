@@ -1,16 +1,16 @@
 var require = {
   baseUrl: '',
   paths: {
-    jquery: 'lib/vendor/jquery-1.8.3.min',
+    almond: 'lib/vendor/almond/almond',
+    jquery: 'lib/vendor/jquery/jquery',
     prefixfree: 'lib/vendor/prefixfree.min'
   }
 };
 
 var runTestsFor = function(file, baseUrl){
-  var qunitVersion = '1.10.0';
   require.baseUrl = baseUrl;
   require.paths[file] = 'test/' + file;
-  document.write('<script src="../lib/vendor/qunit/qunit-' + qunitVersion + '.js"></script>');
-  document.write('<link rel="stylesheet" href="../lib/vendor/qunit/qunit-' + qunitVersion + '.css">');
-  document.write('<script src="../lib/vendor/require.js" data-main="' + file + '"></script>');
+  document.write('<script src="../lib/vendor/qunit/qunit.js"></script>');
+  document.write('<link rel="stylesheet" href="../lib/vendor/qunit/qunit.css">');
+  document.write('<script src="../lib/vendor/requirejs/require.js" data-main="' + file + '"></script>');
 };

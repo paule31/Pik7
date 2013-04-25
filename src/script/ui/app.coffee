@@ -1,10 +1,13 @@
-# UI code for the default app view
+# App
+# ===
+
+# UI code for the default presentation viewer.
+
 define ['jquery'], ($) -> return (app) ->
 
 
   # Reload link
-  $('.reloadLink').click ->
-    $('iframe')[0].contentWindow.location.reload(true)
+  $('.reloadLink').click -> $('iframe')[0].contentWindow.location.reload(true)
 
 
   # Print link
@@ -14,8 +17,8 @@ define ['jquery'], ($) -> return (app) ->
 
 
   # Open and close the control panel by toggleing a class on touch or mouseover.
-  # Working with :hover makes things complicated on touch devices, so this will have
-  # to do. Open/close the control panel when it's hovered or touched.
+  # Working with `:hover` makes things complicated on touch devices, so this
+  # will have to do. Open/close the control panel when it's hovered or touched.
   $controlsContainer = $('#PikControlsContainer')
   $controlsContainer.bind 'mouseover', -> $(this).addClass('open')
   $controlsContainer.bind 'mouseout', -> $(this).removeClass('open')
@@ -25,8 +28,8 @@ define ['jquery'], ($) -> return (app) ->
     $(this).toggleClass('open')
   $controlsContainer.find('a').bind 'touchstart', (evt) ->
     evt.stopPropagation()
-    # The timeout prevents iOS from closing the control panel before the touch is
-    # registered on the link
+    # The timeout prevents iOS from closing the control panel before the touch
+    # is registered on the link
     setTimeout (-> $controlsContainer.removeClass('open')), 600
 
 
@@ -36,8 +39,8 @@ define ['jquery'], ($) -> return (app) ->
     $('title').text(presentationTitle)
 
 
-    # Clicks and touches in the iframe don't bubble up to the containing window by
-    # themselves, so we have to delegate them manually
+    # Clicks and touches in the iframe don't bubble up to the containing window
+    # by themselves, so we have to delegate them manually
     for iframe in $('iframe')
       iframe.contentWindow.$('body').bind 'touchstart', (evt) ->
         if $controlsContainer.hasClass('open')

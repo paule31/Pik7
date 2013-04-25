@@ -33,36 +33,34 @@
 
 
 <div class="pikSlide">
+<h2>Background</h2>
+<p>
+I deal with metric tons of complex slide sets every day. I need them in the browser, i need them to be fast and scriptable and I need to have speaker notes and a presenter mode. I created Pik7 to solve my own problems with existing solutions. If you're not me, you'll probably don't want to use it.
+<p>
+Having said that&nbsp;&hellip;
+</div>
+
+
+<div class="pikSlide">
 <h2>Features</h2>
 <ul>
 <li>Dead simple&nbsp;&ndash; nothing but HTML, CSS and jQuery
 <li>Works in every Browser that's not IE&nbsp;8 or older
 <li>Multiple slide views and presenter mode
 <li>Good performance in modern browsers even with hundreds of slides
+<li>Reasonably printable (useful for PDF export)
+<li>Rapid navigation between slide sets
 </ul>
-<div class="pikNotes">
-	<h2>Other features</h2>
-	<ul>
-		<li>Reasonably printable (can be used for PDF export too)
-		<li>Rapid navigation between slide sets
-	</ul>
-</div>
 </div>
 
 
 <div class="pikSlide">
 <h2>Downsides</h2>
 <ul>
-<li>Requires a modern web browser and a web server&nbsp;*
-<li>No fancyful animations&nbsp;**
+<li>Requires a modern web browser and a web server
+<li>No fancyful animations by default
 <li>Shares all drawbacks common to most HTML presentation systems (e.g. no GUI to create slides)
 </ul>
-<p>
-<small>
-* Pik7 actually has it's own server, but it in turn requires <a href="http://nodejs.org/">Node.js</a>
-<br>
-** Slide transitions <em>are</em> possible but require some advanced css wizzardy
-</small>
 </div>
 
 
@@ -81,8 +79,8 @@
 <ul>
 <li>Use the arrow keys and PGUP/PGDN to navigate through the slides
 <li>The <kbd>F5</kbd> and <kbd>ESC</kbd> keys hide the presentation
-<li>On mobile devices you can tap left and right to navigate
-<li>The control panel can be found on the bottom right
+<li>To navigate on touch devices, tap left and right
+<li>The control and navigation panel can be found on the bottom right
 </ul>
 </div>
 
@@ -113,17 +111,25 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 
 <div class="pikSlide">
 <h2>Multiple views</h2>
-<p>Open Pik7 in additional browser windows to create multiple, synchronized presentation views</p>
-<p><a href="../index.html">Try it now!</a></p>
+<p>Open Pik7 in additional browser windows to create multiple, synchronized presentation views.</p>
+<p><a href="../../index.html">Try it now!</a></p>
+</div>
+
+
+<div class="pikSlide center">
+<figure>
+<img src="assets/presenter.png" width="100%" alt="">
+<figcaption>Presenter view</figcaption>
+</figure>
 </div>
 
 
 <div class="pikSlide">
 <h2>Presenter view</h2>
-<img src="assets/presenter.png" width="50%" style="float:right; margin: 1em -0.5em 1em 1.5em">
 <ul>
-<li>Two configurable views for current and coming slides as well as speaker notes, synchronized with all other views
-<li>Additional controls, timer
+<li>Two configurable views for current and coming slides plus additional controls and a timer
+<li>Views can be used for speaker notes too
+<li>Views are synchronized with all other open presentation instances
 <li><a href="../presenter.html">Try it now!</a>
 </ul>
 </div>
@@ -131,11 +137,11 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 
 <div class="pikSlide">
 <h2>Speaker notes</h2>
-<p>Additional speaker notes can be added using an element with the class <code>pikNotes</code> for each slide
+<p>Additional speaker notes can be added using an element with the class <code>pikNotes</code> for each slide.
 <pre><code class="prettyprint language-html">&lt;div class="pikNotes"&gt;
-    &lt;p&gt;Use all the HTML you like here!&lt;/p&gt;
+  &lt;p&gt;Use all the HTML you like here!&lt;/p&gt;
 &lt;/div&gt;</code></pre>
-<p>Notes are invisible in the presentation, but are shown in the presenter view
+<p>Notes are invisible in the presentation, but can be shown in the presenter view.
 </ul>
 <div class="pikNotes">
 	<p>Use all the HTML you like here!</p>
@@ -234,6 +240,16 @@ $('#Fancify').click(function(){
 <li>A <em>very</em> basic web server based on Node.js is provided
 <li>To run: <code>node server.js</code>
 </ul>
+</div>
+
+
+<div class="pikSlide">
+<h2>To do</h2>
+<ul>
+<li>Better support for browsers that are not Chrome
+<li>Support synced presentations/presenter mode via server
+</ul>
+<p><a href="https://github.com/SirPepe/Pik7">Contributions are appreciated!</a>
 </div>
 
 

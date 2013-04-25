@@ -18,7 +18,7 @@ require ['lib/controls'], (Controls) ->
 
   test 'Navigation keys', ->
     controls = new MockControls
-    stop(keys.toggleHidden.next + keys.toggleHidden.prev)
+    stop(keys.toggleHidden.length + keys.toggleHidden.length)
     controls.on 'next', (evt) ->
       ok evt.keyCode in keys.next
       start()

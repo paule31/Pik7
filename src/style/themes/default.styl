@@ -24,6 +24,11 @@
   p.footnotes
     text-align left
     font-size 0.5em
+  iframe
+    display none
+    border none
+  .pikCurrent iframe
+    display block
 
   // Google code prettify
   .pln { color: #000; }
@@ -39,6 +44,11 @@
   mark span
     &.pln, &.str, &.kwd, &.com, &.dec, &.typ, &.lit, &.pun, &.opn, &.clo, &.tag, &.atn, &.atv
       color #000
+  s
+    text-decoration none
+    span
+      &.pln, &.str, &.kwd, &.com, &.dec, &.typ, &.lit, &.pun, &.opn, &.clo, &.tag, &.atn, &.atv
+        color #AAA
 
 
 @media screen
@@ -52,8 +62,8 @@
     background #FFF
     box-shadow 0 0 1.5em -0.5em #999
     width 96%
-    height 96%
-    margin 2%
+    height 97%
+    margin 1% 2%
     padding 0.5em 1.5em
     // Special slide styles
     &:first-child
@@ -61,21 +71,25 @@
     &.invisible
       background transparent
       box-shadow none
-
-    // Centered content
+    // Centered content by way of flexbox
     &.center
+      // This works in Chrome - if anyone can help out with other browsers...
       display -webkit-flex
       -webkit-flex-direction column
       -webkit-justify-content space-around
+      text-align center
       > *
         margin 0 auto
         text-align center
-
+    .left
+      text-align left
     // Filling background image
     &.image
       background-size contain
       background-repeat no-repeat
       background-position center center
+      img
+        display none
 
   .left
     text-align left
@@ -118,10 +132,12 @@
     margin 1.25em 0
   ul
     padding-left 1em
+  ol ol
+    list-style-type lower-alpha
   ul, ol
     ul, ol
-      margin-left 1.5em
-  ul ul, ol ul, ul ol, li
+      margin-left 1em
+  ul ul, ol ol, ul ol, ol ul, li
     margin-top 0.425em
     margin-bottom 0.425em
 
@@ -162,10 +178,14 @@
     background yellow
     color #000
   pre.diff mark:nth-of-type(1) { background: yellow }
-  pre.diff mark:nth-of-type(2) { background: lighten(lime, 10%) }
-  pre.diff mark:nth-of-type(3) { background: lighten(fuchsia, 40%) }
-  pre.diff mark:nth-of-type(4) { background: aqua }
-  pre.diff mark:nth-of-type(5) { background: tomato }
+  pre.diff mark:nth-of-type(2), mark.green { background: lighten(lime, 10%) }
+  pre.diff mark:nth-of-type(3), mark.magenta { background: lighten(fuchsia, 40%) }
+  pre.diff mark:nth-of-type(4), mark.blue { background: aqua }
+  pre.diff mark:nth-of-type(5), mark.red { background: tomato }
+  span.box
+    display inline-block
+    border 0.1em solid #666
+    padding 0.2em
 
   pre, code
     font-family Monaco, "Bitstream Vera Sans Mono", "DejaVu Sans Mono" "Lucida Console", Consolas, Terminal, monospace
@@ -188,10 +208,10 @@
   q
     quotes "\201E" "\201C" "\201A" "\2018"
   blockquote + p.cite
-    text-align left
-    font-size 0.8em
-    margin-top -0.5em
-    margin-bottom 2em
+    text-align left !important // Override .center > *
+    font-size 0.8em !important // Override .center > *
+    margin-top -0.5em !important // Override .center > *
+    margin-bottom 2em !important // Override .center > *
 
   kbd
     font normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif
