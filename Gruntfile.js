@@ -109,6 +109,7 @@ compress: {
       { src: 'core/**' },
       { src: 'themes/**' },
       { src: 'extras/**' },
+      { src: 'presentations/ht.access' },
       { src: 'presentations/Pik/**' },
       { src: 'presentations/Template/**' }
     ]
