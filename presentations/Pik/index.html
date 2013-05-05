@@ -16,8 +16,31 @@
 	transform: rotate(360deg) scale(2);
 	transition: all 800ms;
 }
+#Badge {
+	display: block;
+	position: absolute;
+	z-index: 9001;
+	font-size: 1.1em;
+	top: 8.5em;
+	right: 0;
+	transform: rotate(45deg);
+	transform-origin: bottom right;
+	padding: 1em 4em;
+	background: #083;
+	border: 2px solid #FFF;
+	box-shadow: 0 0 1.5em #999;
+	color: #FFF;
+}
 </style>
 <body onload="prettyPrint()">
+
+
+<a id="Badge" href="../../pik7-1.0.0.zip">Download Pik7 1.0.0</a>
+<script>
+if(location.hostname !== 'pik.peterkroener.de'){
+	document.getElementById('Badge').style.display = 'none';
+}
+</script>
 
 
 <div class="pikSlide">
@@ -28,16 +51,8 @@
 <h2>HTML5 presentation framework</h2>
 <p class="center pikNoprint">
 	Press <kbd>&rarr;</kbd> or tap on the right to learn more
-</p>
-</div>
-
-
-<div class="pikSlide">
-<h2>Background</h2>
-<p>
-I deal with metric tons of complex slide sets every day. I need them in the browser, i need them to be fast and scriptable and I need to have speaker notes and a presenter mode. I created Pik7 to solve my own problems with existing solutions. If you're not me, you'll probably don't want to use it.
-<p>
-Having said that&nbsp;&hellip;
+	<br>
+	<span style="font-size:0.5em">v. 1.0.0</span>
 </div>
 
 
@@ -67,7 +82,7 @@ Having said that&nbsp;&hellip;
 <div class="pikSlide">
 <h2>Getting started</h2>
 <ol>
-<li>Download Pik7 from <a href="https://github.com/SirPepe/Pik7">Github</a> or <code>git clone git://github.com/SirPepe/Pik7.git</code>
+<li>Download Pik7 from <a href="http://pik.peterkroener.de/">pik.peterkroener.de</a> or <code>git clone git://github.com/<wbr>SirPepe/<wbr>Pik7.git &amp;&amp; npm install &amp;&amp; bower install &amp;&amp; grunt</code>
 <li>Place the files in a directory on your web server
 <li>Open Pik7 in a browser, click the "Browse" link to navigate through the slide sets
 </ol>
@@ -119,7 +134,7 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 <div class="pikSlide center">
 <figure>
 <img src="assets/presenter.png" width="100%" alt="">
-<figcaption>Presenter view</figcaption>
+<figcaption><a href="../../presenter.html">Presenter view</a></figcaption>
 </figure>
 </div>
 
@@ -130,7 +145,7 @@ Use <code>presentations/Template/index.html</code> as a starting point.
 <li>Two configurable views for current and coming slides plus additional controls and a timer
 <li>Views can be used for speaker notes too
 <li>Views are synchronized with all other open presentation instances
-<li><a href="../presenter.html">Try it now!</a>
+<li><a href="../../presenter.html">Try it now!</a>
 </ul>
 </div>
 
@@ -236,18 +251,15 @@ $('#Fancify').click(function(){
 
 <div class="pikSlide">
 <h2>Server</h2>
-<ul>
-<li>A <em>very</em> basic web server based on Node.js is provided
-<li>To run: <code>node server.js</code>
-</ul>
+<p>A <em>very</em> basic web server based on Node.js is provided. To run: <code>node server.js</code>
 </div>
 
 
 <div class="pikSlide">
 <h2>To do</h2>
 <ul>
-<li>Better support for browsers that are not Chrome
-<li>Support synced presentations/presenter mode via server
+<li>Better support for browsers that are not Chrome, better printing
+<li>Support synced presentations/presenter mode via web sockets
 </ul>
 <p><a href="https://github.com/SirPepe/Pik7">Contributions are appreciated!</a>
 </div>

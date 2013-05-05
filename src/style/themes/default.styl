@@ -75,8 +75,14 @@
     &.center
       // This works in Chrome - if anyone can help out with other browsers...
       display -webkit-flex
+      display -ms-flexbox
+      display flex
       -webkit-flex-direction column
       -webkit-justify-content space-around
+      -ms-flex-direction column
+      -ms-flex-pack distribute
+      flex-direction column
+      justify-content space-around
       text-align center
       > *
         margin 0 auto

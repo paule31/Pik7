@@ -24,16 +24,26 @@ Drawbacks
 * No fancyful animations by default
 * Shares all drawbacks common to HTML slides (no GUI to create presentations, no PDF export, images hard to use)
 
-How to use
-----------
+Install
+-------
 
-1. Download from [https://github.com/SirPepe/Pik7/tags](https://github.com/SirPepe/Pik7/tags) or `git clone git://github.com/SirPepe/Pik7.git`
+The easy way: download from [pik.peterkroener.de](http://pik.peterkroener.de/) and unzip into a directory on your web server.
+
+The hard way:
+
+1. Clone repository into a directory on your web server: `git clone git://github.com/SirPepe/Pik7.git`
 2. Install dependencies: `npm install` and `sudo npm install -g bower && bower install`
 3. Build: `grunt`
-4. If you want to use the included web server: `node server.js`
-5. Copy the html file in `/presentations/Template` to `/presentations/yourslidestitle`. Edit/add slides (`<div class="pikSlide">`).
-6. Open the presentation framework (`index.html`) in a recent version of your favorite browser
-7. Use the "browse" link or the menu on the lower right to load your presentation
-8. Use the menu on the lower right to open the presenter view or point your browser to `presenter.html`
-9. Navigate slides using the arrow keys or tap near the edges of the screen. Hide the presentation using the F5 or ESC key
-10. See the slides about PIK7 (`/presentations/Pik7`) for more details.
+
+Use
+---
+
+If you want to use the included web server: `node server.js`. Then:
+
+1. Copy the html file in `/presentations/Template` to `/presentations/yourslidestitle`. Edit/add slides (`<div class="pikSlide">`).
+2. Open the presentation framework (`index.html`) in a recent version of your favorite browser
+3. Use the "browse" link or the menu on the lower right to load your presentation
+4. Use the menu on the lower right to open the presenter view or point your browser to `presenter.html`
+5. Navigate slides using the arrow keys or tap near the edges of the screen. Hide the presentation using the F5 or ESC key
+
+See the slides about PIK7 (`/presentations/Pik7`) for more details.
