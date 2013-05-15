@@ -106,6 +106,7 @@ compress: {
       { src: 'readme.md' },
       { src: 'screenshot.png' },
       { src: 'server.js' },
+      { src: 'changelog.md' },
       { src: 'core/**' },
       { src: 'themes/**' },
       { src: 'extras/**' },
