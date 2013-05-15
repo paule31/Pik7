@@ -1,8 +1,8 @@
 {
   "name": "Pik7",
   "description": "HTML5 presentation framework",
-  "version": "1.0.0",
-  "homepage": "https://github.com/SirPepe/Pik7",
+  "version": "1.0.1",
+  "homepage": "http://pik.peterkroener.de/",
   "repository": {
     "type": "git",
     "url": "https://github.com/SirPepe/Pik7.git"
