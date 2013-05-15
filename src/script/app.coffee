@@ -61,7 +61,7 @@ define [
 
   # Connect the iframe's controls instance to the controller
   connectControls: ->
-    controls = @iframe.window.Pik.controls
+    controls = @iframe.window.Pik.__app__.controls
     controls.on('next', @controller.goNext.bind(@controller))
     controls.on('prev', @controller.goPrev.bind(@controller))
     controls.on('toggleHidden', @controller.toggleHidden.bind(@controller))
@@ -107,7 +107,7 @@ define [
     newFile = slidesPath != @controller.getFile()
     state = {
       file: slidesPath
-      numSlides: @iframe.window.Pik.numSlides
+      numSlides: @iframe.window.Pik.__app__.numSlides
       slide: if newFile then 0 else @controller.getSlide()
       hidden: if newFile then no else @controller.getHidden()
     }

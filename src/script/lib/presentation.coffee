@@ -22,11 +22,14 @@ define [
 
   createApi: ->
     self = this
-    window.Pik = {
-      slides: $('.pikSlide')
-      numSlides: self.numSlides
-      controls: new Controls()
-      goTo: (slide) -> self.trigger('slide', slide)
-      setHidden: (state) -> self.trigger('hidden', state)
-      inPrint: window.location.hash == '#print'
+    window.Pik = {}
+    Object.defineProperty window.Pik, '__app__', {
+      value: {
+        slides: $('.pikSlide')
+        numSlides: self.numSlides
+        controls: new Controls()
+        goTo: (slide) -> self.trigger('slide', slide)
+        setHidden: (state) -> self.trigger('hidden', state)
+        inPrint: window.location.hash == '#print'
+      }
     }

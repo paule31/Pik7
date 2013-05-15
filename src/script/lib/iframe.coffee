@@ -39,11 +39,11 @@ define ['lib/emitter', 'jquery'], (Emitter, $) -> return class Iframe extends Em
   do: (action, arg) ->
     if action == 'file'
       @window.location.href = arg if arg != @window.location.toString()
-    else if @window.Pik?
+    else if @window.Pik.__app__?
       if action == 'slide'
-        @window.Pik.goTo(arg)
+        @window.Pik.__app__.goTo(arg)
       if action == 'hidden'
-        @window.Pik.setHidden(arg)
+        @window.Pik.__app__.setHidden(arg)
 
 
-  getNumSlides: -> @window.Pik.numSlides if @window.Pik?
+  getNumSlides: -> @window.Pik.__app__.numSlides if @window.Pik.__app__?

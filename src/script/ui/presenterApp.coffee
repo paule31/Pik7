@@ -31,7 +31,7 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
   countdownTimerId = null
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
-    pik = frame.Pik
+    pik = frame.Pik.__app__
     # Add a class to the presentation's html element to indicate that it's
     # displayed in the presenter
     f.contentWindow.$('html').addClass('pikInPresenter') for f in $('iframe')
@@ -39,7 +39,7 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
     presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)
     # Update slide counter
-    $('#PikSlideCount').text(frame.Pik.numSlides)
+    $('#PikSlideCount').text(pik.numSlides)
     $('#PikSlideCurrent').text(app.controller.getSlide() + 1)
     app.controller.on 'slide', (num) ->
       $('#PikSlideCurrent').text(num + 1)

@@ -4,17 +4,17 @@ require ['lib/presentation'], (Presentation) ->
   test 'Init procedure', ->
     stop()
     presentation = new Presentation ->
-      equal window.Pik.numSlides, $('.pikSlide').length
+      equal window.Pik.__app__.numSlides, $('.pikSlide').length
       start()
 
   test 'API functions trigger events on presentation object', ->
     stop(2)
     presentation = new Presentation ->
       @on 'slide', (slide) ->
-        equal slide, 1337
+        equal(slide, 1337)
         start()
       @on 'hidden', (state) ->
-        equal state, 'something'
+        equal(state, true)
         start()
-      window.Pik.goTo(1337)
-      window.Pik.setHidden('something')
+      window.Pik.__app__.goTo(1337)
+      window.Pik.__app__.setHidden(true)
