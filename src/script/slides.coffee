@@ -31,6 +31,8 @@ define [
       # Trigger local actions for events on `@presentation`
       @on('slide', self.goTo)
       @on('hidden', self.setHidden)
+      # Extend presentation api
+
       # Notify the parent document of the slide document's ready state
       if window != window.parent then window.parent.Pik.app.trigger('ready')
       # Setup print logic
@@ -127,8 +129,8 @@ define [
   # Hide the presentation
   setHidden: (state) ->
     if state
-      $(window).trigger('pikHide', [@curr])
+      $(window).trigger('pikHide')
       $('#PikHide').addClass('pikActive')
     else
-      $(window).trigger('pikShow', [@curr])
+      $(window).trigger('pikShow')
       $('#PikHide').removeClass('pikActive')
