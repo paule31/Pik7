@@ -110,11 +110,10 @@ define [
   setupOptions: ->
     options = new StatefulEmitter({}, 'pikOptions')
     # Disable events when in presenter
-    $(window).load ->
-      if $('html').hasClass('pikInPresenter')
-        options.on 'suppressEvents', (state) ->
-          $('html').toggleClass('pikNoEvents', state)
-      $('html').toggleClass('pikNoEvents', options.get('suppressEvents'))
+    if window.Pik.__app__.inPresenter
+      options.on 'suppressEvents', (state) ->
+        $('html').toggleClass('pikNoEvents', state)
+    $('html').toggleClass('pikNoEvents', options.get('suppressEvents'))
 
 
   # Pop up the print dialog if it looks like a good idea

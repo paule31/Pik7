@@ -32,9 +32,6 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
   app.on 'load', ->
     frame = $('#PikFrame')[0].contentWindow
     pik = frame.Pik.__app__
-    # Add a class to the presentation's html element to indicate that it's
-    # displayed in the presenter
-    f.contentWindow.$('html').addClass('pikInPresenter') for f in $('iframe')
     # Change the page title when a new presentation loads
     presentationTitle = frame.$('title').text()
     $('title').text(presentationTitle)

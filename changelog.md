@@ -15,4 +15,5 @@ Changelog
 1.1.0
 -----
 
-* Added a template for a .htaccess file to /presentations that can be used to allow directory listing
+* NEW: Added a template for a .htaccess file to /presentations that can be used to allow directory listing
+* FIXED issue #8: Event suppression in presenter partially broken

@@ -31,5 +31,6 @@ define [
         goTo: (slide) -> self.trigger('slide', slide)
         setHidden: (state) -> self.trigger('hidden', state)
         inPrint: window.location.hash == '#print'
+        inPresenter: window.parent.$('html').hasClass('pikPresenterApp')
       }
     }
