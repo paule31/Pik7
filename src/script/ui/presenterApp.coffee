@@ -135,15 +135,10 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
   # Suppress events
   $suppressEvents = $('#PikNoEvents')
   $suppressEvents.prop('checked', app.options.get('suppressEvents'))
-  $suppressEvents.change -> app.options.set('suppressEvents', this.checked)
-  app.options.on 'suppressEvents', (value) ->
-    $suppressEvents.prop('checked', value)
-    for f in $('iframe')
-      if f.contentWindow.location.href != 'about:blank'
-        if value == yes
-          f.contentWindow.$('html').addClass('pikNoEvents')
-        else
-          f.contentWindow.$('html').removeClass('pikNoEvents')
+  $suppressEvents.change ->
+    app.options.set('suppressEvents', this.checked)
+  app.options.on 'suppressEvents', (state) ->
+    $suppressEvents.prop('checked', state)
   app.options.trigger('suppressEvents', app.options.get('suppressEvents'))
 
 

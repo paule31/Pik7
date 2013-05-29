@@ -5,11 +5,12 @@
 # manipulation to setup a document for use as a presentation in an iframe.
 
 define [
+  'lib/statefulEmitter'
   'lib/presentation',
   'lib/hash',
   'lib/forceAspectRatio',
   'jquery'],
-(Presentation, Hash, forceAspectRatio, $) -> return class Slides
+(StatefulEmitter, Presentation, Hash, forceAspectRatio, $) -> return class Slides
 
   # Index for the current, next and previous slide
   curr: 0
@@ -28,6 +29,7 @@ define [
     @presentation = new Presentation ->
       self.setupDom()
       self.setupSizes()
+      self.setupOptions()
       # Trigger local actions for events on `@presentation`
       @on('slide', self.goTo)
       @on('hidden', self.setHidden)
@@ -103,6 +105,16 @@ define [
       mql = window.matchMedia("(orientation: portrait)")
       mql.addListener(ratioEnforcer)
 
+
+  # Setup how the slides react to changes in the options
+  setupOptions: ->
+    options = new StatefulEmitter({}, 'pikOptions')
+    # Disable events when in presenter
+    $(window).load ->
+      if $('html').hasClass('pikInPresenter')
+        options.on 'suppressEvents', (state) ->
+          $('html').toggleClass('pikNoEvents', state)
+      $('html').toggleClass('pikNoEvents', options.get('suppressEvents'))
 
 
   # Pop up the print dialog if it looks like a good idea
