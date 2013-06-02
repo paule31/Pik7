@@ -113,7 +113,7 @@ define [
     if window.Pik.__app__.inPresenter
       options.on 'suppressEvents', (state) ->
         $('html').toggleClass('pikNoEvents', state)
-    $('html').toggleClass('pikNoEvents', options.get('suppressEvents'))
+      $('html').toggleClass('pikNoEvents', options.get('suppressEvents'))
 
 
   # Pop up the print dialog if it looks like a good idea
