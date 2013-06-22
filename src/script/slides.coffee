@@ -58,6 +58,8 @@ define [
   # Link the stylesheet, create the hide layer and store the slides in `@slides`
   setupDom: ->
     basePath = @getBasePath()
+    # Add pikInPresenter class if we are there
+    if window.Pik.__app__.inPresenter then $('html').addClass('pikInPresenter')
     # Slide storage
     @slides = $('.pikSlide')
     # Base style sheet
