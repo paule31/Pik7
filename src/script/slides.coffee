@@ -100,6 +100,7 @@ define [
     ratioEnforcer = forceAspectRatio(4 / 3, @wrapper)
     ratioEnforcer() # See the long comment in `@setupDom()` for why this is here
     $(window).bind('resize', ratioEnforcer)
+    $(window).bind('load', ratioEnforcer)
     # Opera Mobile (and Chrome Mobile?) doesn't fire resize events when the
     # device orientation changes, so we use media query listeners (this works at
     # least for Opera)
