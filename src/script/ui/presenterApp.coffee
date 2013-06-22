@@ -44,6 +44,7 @@ define ['lib/forceAspectRatio', 'jquery'], (forceAspectRatio, $) -> (app) ->
 
     # Slide select
     $slideSelect = $('#PikControlsSelect')
+    $slideSelect.html('')
     pik.slides.each (index, slide) ->
       text = $(slide).find('h1, h2, h3, h4, h5, h6, p').first().text() || index
       $('<option />').attr('value', index).text(text).appendTo($slideSelect)
