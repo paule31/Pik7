@@ -111,7 +111,7 @@ define [
 
   # Setup how the slides react to changes in the options
   setupOptions: ->
-    options = new StatefulEmitter({}, 'pikOptions')
+    options = new StatefulEmitter(null, 'pikOptions')
     # Disable events when in presenter
     if window.Pik.__app__.inPresenter
       options.on 'suppressEvents', (state) ->
