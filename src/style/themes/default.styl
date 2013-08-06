@@ -9,6 +9,9 @@
     font-size 0.5em
     display block
     color rgba(#444, 0.8)
+  s, .out
+    color rgba(#444, 0.8)
+    text-decoration line-through !important
   sub, sup
     font-size 0.65em
   input, output, button, keygen
@@ -179,6 +182,9 @@
       background #083
     &.imagelink
       border-bottom none
+    code
+      color inherit
+      background none
 
   mark
     background yellow
@@ -192,6 +198,10 @@
     display inline-block
     border 0.1em solid #666
     padding 0.2em
+  .yes
+    color green
+  .no
+    color #C00
 
   pre, code
     font-family Monaco, "Bitstream Vera Sans Mono", "DejaVu Sans Mono" "Lucida Console", Consolas, Terminal, monospace
