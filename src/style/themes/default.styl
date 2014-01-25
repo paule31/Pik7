@@ -14,7 +14,7 @@
     text-decoration line-through !important
   sub, sup
     font-size 0.65em
-  input, output, button, keygen
+  input, output, button, keygen, select
     font-size inherit
   .clear
     clear both
@@ -27,6 +27,14 @@
   p.footnotes
     text-align left
     font-size 0.5em
+  p.attribution
+    font-size 0.4em
+    padding 0.1em 0.3em
+    position absolute
+    bottom -0.5em
+    right 1em
+    background rgba(#FFF, 0.8)
+    color #000
   iframe
     display none
     border none
@@ -90,6 +98,9 @@
       > *
         margin 0 auto
         text-align center
+      >
+        pre, p
+          width 100% !important
     .left
       text-align left
     // Filling background image
