@@ -32,6 +32,7 @@ define ['lib/emitter', 'jquery'], (Emitter) -> return class Controls extends Emi
 
   filterTargets: (evt) ->
     if evt.target.nodeType != 1 then return true
+    if $(evt.target).attr('contenteditable') == 'true' then return false
     return evt.target.nodeName.toLowerCase() not in @nonTargets
 
 

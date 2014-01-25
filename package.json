@@ -14,15 +14,17 @@
   "dependencies": {
     "node-static": "0.6.x"
   },
-  "devDependencies" : {
+  "devDependencies": {
     "coffee-script": "1.6.x",
     "grunt": "0.4.x",
     "grunt-contrib": "0.6.x",
     "nib": "0.9.x",
     "stylus": "0.32.x"
   },
-  "licenses":[{
-    "type": "MIT",
-    "url": "https://github.com/SirPepe/Pik7/raw/master/LICENSE"
-  }]
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/SirPepe/Pik7/raw/master/LICENSE"
+    }
+  ]
 }
