@@ -23,7 +23,7 @@ define ['lib/emitter'], (Emitter) -> return class Syncer extends Emitter
   initEvents: ->
     @onStorage = (evt) =>
       values = evt.newValue
-      if values
+      if evt.key == 'pik' && values
         state = JSON.parse(values)
         @trigger('change', state, evt)
     window.addEventListener('storage', @onStorage, false)
