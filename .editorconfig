@@ -5,9 +5,8 @@ root = true
 end_of_line = LF
 
 [*.html]
-indent_style = tab
-indent_size = 4
-tab_width = 4
+indent_style = space
+tab_width = 2
 
 [*.js]
 indent_style = space
