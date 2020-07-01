@@ -1,0 +1,24 @@
+<!doctype html>
+<html id="PikApp">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<title></title>
+<link rel="stylesheet" href="core/pik7.css">
+<script src="core/pik7.js"></script>
+
+<iframe name="Slides" id="PikFrame" src="about:blank" allowfullscreen></iframe>
+
+<div id="PikControlsContainer">
+	<p id="PikControls">
+		<span class="iconMenu" id="PikControlsTitle"></span>
+		<span id="PikControlsLinks">
+			<a class="iconHome" href="core/welcome.html" target="Slides"></a>
+			<a class="iconFolder" href="presentations" target="Slides">Browse</a>
+			<a class="iconPresenter" href="presenter.html" target="_blank">Presenter</a>
+			<a class="iconClone" href="index.html" target="_blank">Clone</a>
+			<a class="iconReload reloadLink" href="#">Reload</a>
+			<a class="iconPrint printLink" href="#">Print</a>
+			<a class="iconGithub" href="https://github.com/SirPepe/Pik7" target="_blank">Bugs</a>
+		</span>
+	</p>
+</div>
